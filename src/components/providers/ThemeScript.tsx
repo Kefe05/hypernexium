@@ -25,12 +25,12 @@ export function ThemeScript() {
         }
       } catch (e) {}
     })();
-  `
+  `;
 
   return (
     <script
       dangerouslySetInnerHTML={{ __html: themeScript }}
       suppressHydrationWarning
     />
-  )
+  );
 }

@@ -1,43 +1,39 @@
-import React from 'react';
-import Nav from '@/components/Nav';
-import Hero from '@/components/Hero';
-import Service from '@/components/Service';
-import Stat from '@/components/Stat';
-import Logo from '@/components/Logo';
-import Timeline from '@/components/Timeline';
-import Newsletter from '@/components/Newsletter';
-import Contact from '@/components/Contact';
+import React from "react";
+import Hero from "@/components/Hero";
+import About from "@/components/About";
+import Team from "@/components/Team";
+import Newsletter from "@/components/Newsletter";
+import Services from "@/components/Services";
+import Partners from "@/components/Partners";
+import Users from "@/components/Users";
+import Footer from "@/components/Footer"
 
 export default function HyperNexiumLanding() {
   return (
-    <div className="min-h-screen bg-base text-primary">
-      {/* Navigation */}
-      <Nav />
-     
-
+    <main className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
       {/* Hero Section */}
-      <Hero  />    
+      <Hero />
 
       {/* Srevices Grid Section */}
-      <Service />
-     
+      <About />
 
       {/* Stats Section */}
-      <Stat />
+      <Services />
 
       {/* Logo Section */}
-      <Logo/>
+      <Partners />
 
-      {/* Timeline Section */}
-      <Timeline />
+      {/* Our Target users Section */}
+      <Users />
+
+      {/*The Team */}
+      <Team />
 
       {/* CTA Section */}
-      <Newsletter  />
-
-      {/* Contact Section */}
-      {/* <Contact /> */}
+      <Newsletter />
 
       {/* Footer */}
-    </div>
+      <Footer/>
+    </main>
   );
 }

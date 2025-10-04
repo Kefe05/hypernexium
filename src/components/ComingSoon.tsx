@@ -1,15 +1,15 @@
-"use client"
-import React, { useEffect, useRef, useState } from 'react';
-import { Clock, Bell, ArrowRight, Shield } from 'lucide-react';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import gsap from 'gsap';
+"use client";
+import React, { useEffect, useRef, useState } from "react";
+import { Clock, Bell, ArrowRight, Shield } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import gsap from "gsap";
 
 export default function ComingSoonCard() {
   const cardRef = useRef(null);
   const titleRef = useRef(null);
   const circleRefs = useRef([]);
   const shimmerRef = useRef(null);
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ export default function ComingSoonCard() {
       opacity: 0,
       y: 50,
       duration: 1,
-      ease: 'power3.out'
+      ease: "power3.out",
     });
 
     // Title reveal animation
@@ -27,7 +27,7 @@ export default function ComingSoonCard() {
       y: 20,
       duration: 0.8,
       delay: 0.3,
-      ease: 'power2.out'
+      ease: "power2.out",
     });
 
     // Animated circles
@@ -38,29 +38,29 @@ export default function ComingSoonCard() {
         duration: 2 + i * 0.5,
         repeat: -1,
         yoyo: true,
-        ease: 'sine.inOut',
-        delay: i * 0.3
+        ease: "sine.inOut",
+        delay: i * 0.3,
       });
     });
 
     // Shimmer effect
     gsap.to(shimmerRef.current, {
-      x: '200%',
+      x: "200%",
       duration: 3,
       repeat: -1,
-      ease: 'power1.inOut',
-      repeatDelay: 1
+      ease: "power1.inOut",
+      repeatDelay: 1,
     });
 
     // Countdown animation
-    const numbers = document.querySelectorAll('.countdown-number');
+    const numbers = document.querySelectorAll(".countdown-number");
     gsap.from(numbers, {
       opacity: 0,
       scale: 0.5,
       stagger: 0.1,
       duration: 0.6,
       delay: 0.5,
-      ease: 'back.out(1.7)'
+      ease: "back.out(1.7)",
     });
   }, []);
 
@@ -68,14 +68,14 @@ export default function ComingSoonCard() {
     e.preventDefault();
     if (email) {
       setSubscribed(true);
-      gsap.from('.success-alert', {
+      gsap.from(".success-alert", {
         opacity: 0,
         y: -20,
         duration: 0.5,
-        ease: 'back.out(1.7)'
+        ease: "back.out(1.7)",
       });
       setTimeout(() => {
-        setEmail('');
+        setEmail("");
       }, 2000);
     }
   };
@@ -87,15 +87,15 @@ export default function ComingSoonCard() {
         {[...Array(3)].map((_, i) => (
           <div
             key={i}
-            ref={el => circleRefs.current[i] = el}
+            ref={(el) => (circleRefs.current[i] = el)}
             className="absolute rounded-full border border-gray-800"
             style={{
               width: `${300 + i * 200}px`,
               height: `${300 + i * 200}px`,
-              left: '50%',
-              top: '50%',
-              transform: 'translate(-50%, -50%)',
-              opacity: 0.1
+              left: "50%",
+              top: "50%",
+              transform: "translate(-50%, -50%)",
+              opacity: 0.1,
             }}
           />
         ))}
@@ -109,10 +109,10 @@ export default function ComingSoonCard() {
         className="relative z-10 w-full max-w-2xl bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-2xl shadow-2xl overflow-hidden"
       >
         {/* Shimmer effect */}
-        <div 
+        <div
           ref={shimmerRef}
           className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full"
-          style={{ transform: 'skewX(-20deg)' }}
+          style={{ transform: "skewX(-20deg)" }}
         />
 
         <div className="relative p-8 md:p-12">
@@ -126,7 +126,9 @@ export default function ComingSoonCard() {
           {/* Title */}
           <div ref={titleRef} className="text-center mb-4">
             <div className="inline-block px-4 py-1 bg-gray-800 border border-gray-700 rounded-full mb-4">
-              <span className="text-gray-300 text-sm font-medium">Coming Soon</span>
+              <span className="text-gray-300 text-sm font-medium">
+                Coming Soon
+              </span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
               Something Exciting
@@ -134,23 +136,28 @@ export default function ComingSoonCard() {
               <span className="text-gray-400">Is On Its Way</span>
             </h1>
             <p className="text-gray-500 text-lg max-w-lg mx-auto">
-              We're working on something special. Stay tuned for our latest cybersecurity solution.
+              We're working on something special. Stay tuned for our latest
+              cybersecurity solution.
             </p>
           </div>
 
           {/* Countdown */}
           <div className="flex justify-center gap-4 my-8">
             {[
-              { value: '14', label: 'Days' },
-              { value: '08', label: 'Hours' },
-              { value: '32', label: 'Minutes' },
-              { value: '45', label: 'Seconds' }
+              { value: "14", label: "Days" },
+              { value: "08", label: "Hours" },
+              { value: "32", label: "Minutes" },
+              { value: "45", label: "Seconds" },
             ].map((item, index) => (
               <div key={index} className="text-center">
                 <div className="countdown-number bg-gray-900 border border-gray-800 rounded-lg px-4 py-3 mb-2">
-                  <span className="text-3xl font-bold text-white">{item.value}</span>
+                  <span className="text-3xl font-bold text-white">
+                    {item.value}
+                  </span>
                 </div>
-                <span className="text-xs text-gray-600 uppercase tracking-wider">{item.label}</span>
+                <span className="text-xs text-gray-600 uppercase tracking-wider">
+                  {item.label}
+                </span>
               </div>
             ))}
           </div>
@@ -186,7 +193,8 @@ export default function ComingSoonCard() {
               <Alert className="bg-gray-900 border-gray-700">
                 <Clock className="h-4 w-4 text-gray-300" />
                 <AlertDescription className="text-gray-300">
-                  <strong className="font-semibold text-white">Success!</strong> You'll be notified when we launch.
+                  <strong className="font-semibold text-white">Success!</strong>{" "}
+                  You'll be notified when we launch.
                 </AlertDescription>
               </Alert>
             </div>

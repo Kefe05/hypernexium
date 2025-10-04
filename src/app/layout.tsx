@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 // import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import {Inter} from 'next/font/google'
+import { Roboto } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { ThemeScript } from "@/components/providers/ThemeScript";
+import Nav from "@/components/Nav";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -15,7 +16,12 @@ import { ThemeScript } from "@/components/providers/ThemeScript";
 //   subsets: ["latin"],
 // });
 
-const inter = Inter({subsets: ['latin'], display: 'swap', variable: '--font-inter'})
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "700"],
+  display: "swap",
+  variable: "--font-roboto",
+});
 
 export const metadata: Metadata = {
   title: "Hyper Nexium Technologies",
@@ -28,15 +34,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={inter.variable}>
+    <html lang="en" suppressHydrationWarning className={roboto.variable}>
       <head>
-        <ThemeScript/>
+        <ThemeScript />
       </head>
-      <body
-        className='antialiased'
-      >
-        <ThemeProvider defaultTheme="system" enableSystem >
-        {children}
+      <body className="antialiased">
+        <ThemeProvider defaultTheme="system" enableSystem>
+          <Nav />
+          {children}
         </ThemeProvider>
       </body>
     </html>

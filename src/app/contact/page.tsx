@@ -1,7 +1,5 @@
-import ComingSoonCard from '@/components/ComingSoon'
+import ComingSoonCard from "@/components/ComingSoon";
 
 export default function Page() {
-  return (
-    <ComingSoonCard />
-  )
+  return <ComingSoonCard />;
 }

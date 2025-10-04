@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useRef, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import * as THREE from "three";
@@ -10,27 +10,45 @@ export default function HeroGlobe() {
   const [countries, setCountries] = useState({ features: [] });
 
   const arcs = [
-    { startLat: 37.77, startLng: -122.41, endLat: 51.51, endLng: -0.12, color: '#60a5fa' },
-    { startLat: 28.61, startLng: 77.20, endLat: -33.86, endLng: 151.20, color: '#ec4899' },
-    { startLat: 40.71, startLng: -74.00, endLat: 35.68, endLng: 139.65, color: '#fbbf24' }
+    {
+      startLat: 37.77,
+      startLng: -122.41,
+      endLat: 51.51,
+      endLng: -0.12,
+      color: "#60a5fa",
+    },
+    {
+      startLat: 28.61,
+      startLng: 77.2,
+      endLat: -33.86,
+      endLng: 151.2,
+      color: "#ec4899",
+    },
+    {
+      startLat: 40.71,
+      startLng: -74.0,
+      endLat: 35.68,
+      endLng: 139.65,
+      color: "#fbbf24",
+    },
   ];
 
   useEffect(() => {
     // Load country data
-    fetch('https://unpkg.com/world-atlas@2/countries-110m.json')
-      .then(res => res.json())
-      .then(data => {
+    fetch("https://unpkg.com/world-atlas@2/countries-110m.json")
+      .then((res) => res.json())
+      .then((data) => {
         setCountries(data);
       });
 
     if (globeRef.current) {
       // Add lighting to the scene
       const scene = globeRef.current.scene();
-      
+
       // Much stronger ambient light
       const ambientLight = new THREE.AmbientLight(0xffffff, 2.5);
       scene.add(ambientLight);
-      
+
       // Directional light
       const directionalLight = new THREE.DirectionalLight(0xffffff, 1.5);
       directionalLight.position.set(5, 3, 5);
@@ -58,18 +76,15 @@ export default function HeroGlobe() {
         showAtmosphere={true}
         atmosphereColor="#3b82f6"
         atmosphereAltitude={0.15}
-        
         // Use polygonsData instead of hexPolygons
         polygonsData={countries.features}
-        polygonCapColor={() => '#2563eb'}
-        polygonSideColor={() => '#1e40af'}
-        polygonStrokeColor={() => '#60a5fa'}
+        polygonCapColor={() => "#2563eb"}
+        polygonSideColor={() => "#1e40af"}
+        polygonStrokeColor={() => "#60a5fa"}
         polygonAltitude={0.01}
-        
         // Grid lines
         showGraticules={true}
         graticuleColor="rgba(100, 150, 200, 0.3)"
-        
         // Arcs
         arcsData={arcs}
         arcColor="color"
