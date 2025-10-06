@@ -1,4 +1,5 @@
-import React from "react";
+"use client"
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "./ui/button";
@@ -13,9 +14,31 @@ const navigationLinks = [
 ];
 
 export default function Nav() {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Get the height of the viewport (hero section is typically 100vh)
+      const heroHeight = window.innerHeight;
+      const scrollPosition = window.scrollY;
+      
+      // Change navbar background when scrolled past hero section
+      setIsScrolled(scrollPosition > heroHeight - 100); // 100px before reaching bottom
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <nav className="w-full fixed top-3 z-50">
-      <div className="rounded-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm shadow-lg border border-gray-200 dark:border-gray-700 w-[90%] mx-auto">
+    <nav className="w-full fixed z-50">
+      <div 
+        className={`w-full transition-all duration-300 mx-auto ${
+          isScrolled 
+            ? 'bg-brand-secondary/90 backdrop-blur-sm shadow-lg border-b border-brand-secondary' 
+            : 'bg-transparent'
+        }`}
+      >
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}
@@ -35,7 +58,11 @@ export default function Nav() {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-sm text-gray-600 dark:text-gray-300 hover:text-brand-accent dark:hover:text-brand-accent transition-colors duration-200 hover:text-underline"
+                    className={` transition-colors  duration-200 hover:text-brand-accent ${
+                      isScrolled 
+                        ? 'text-white' 
+                        : 'text-white hover:text-brand-accent'
+                    }`}
                   >
                     {link.name}
                   </Link>
@@ -45,7 +72,13 @@ export default function Nav() {
 
             {/* CTA Button */}
             <div className="flex items-center gap-2">
-              <Button className="bg-brand-accent hover:bg-brand-primary text-white rounded-full px-6 text-sm">
+              <Button 
+                className={`rounded-full px-6 text-sm transition-all duration-300 ${
+                  isScrolled
+                    ? 'bg-white text-brand-primary hover:bg-gray-100'
+                    : 'bg-brand-accent hover:bg-brand-primary text-white'
+                }`}
+              >
                 Contact us
               </Button>
               <ThemeToggleSimple />

@@ -1,6 +1,7 @@
 "use client"
 import { Button } from '@/components/ui/button';
 import React, { useEffect, useRef } from 'react';
+import GridLines, { VerticalGridLines, SectionDivider } from '@/components/GridLines';
 
 export default function Hero() {
   const canvasRef = useRef(null);
@@ -65,7 +66,10 @@ export default function Hero() {
   }, []);
 
   return (
-    <div className="relative w-full h-screen bg-gradient-to-br  overflow-hidden">
+    <div className="relative w-full h-screen bg-gradient-to-br overflow-hidden">
+      {/* Stripe-style Grid Lines */}
+      <VerticalGridLines opacity={0.1} />
+      
       <canvas
         ref={canvasRef}
         className="absolute inset-0"
@@ -77,11 +81,13 @@ export default function Hero() {
         <h1 className="text-6xl font-bold mb-6">
           Hyper Nexium Technologies
         </h1>
-        <p className="text-xl  max-w-2xl mb-8">
+        <p className="text-xl max-w-2xl mb-8">
           Smooth, flowing animated lines that create a dynamic background effect
         </p>
-       
       </div>
+
+      {/* Section Divider at bottom */}
+      <SectionDivider className="absolute bottom-0 left-0 right-0 h-px" />
     </div>
   );
 }

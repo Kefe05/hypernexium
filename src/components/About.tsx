@@ -1,37 +1,193 @@
-import * as React from "react";
+"use client"
+import React, { useState, useEffect, useRef } from "react";
 import { Button } from "./ui/button";
 import Image from "next/image";
+import { SectionDivider, VerticalGridLines } from "./GridLines";
 
 export default function About() {
+  const [activeSection, setActiveSection] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+
+  const sections = [
+    {
+      id: 0,
+      title: "Cloud Infrastructure",
+      subtitle: "Scalable & Secure",
+      description: "Transform your business with enterprise-grade cloud solutions. We design and implement robust infrastructure that scales with your growth, ensuring 99.9% uptime and maximum security.",
+      image: "/one.jpg",
+      stats: { number: "50+", label: "Enterprise Clients" }
+    },
+    {
+      id: 1,
+      title: "Cybersecurity Solutions",
+      subtitle: "Advanced Protection",
+      description: "Protect your digital assets with our comprehensive cybersecurity framework. From threat detection to incident response, we safeguard your business against evolving cyber threats.",
+      image: "/two.jpg",
+      stats: { number: "99.9%", label: "System Uptime" }
+    },
+    {
+      id: 2,
+      title: "Digital Transformation",
+      subtitle: "Innovation Driven",
+      description: "Modernize your operations with cutting-edge technology solutions. We help organizations embrace digital innovation to improve efficiency, reduce costs, and accelerate growth.",
+      image: "/three.jpg",
+      stats: { number: "24/7", label: "Support Coverage" }
+    }
+  ];
+
+  // Auto-transition effect
+  useEffect(() => {
+    const startInterval = () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+
+      intervalRef.current = setInterval(() => {
+        if (!isPaused) {
+          setActiveSection((prev) => (prev + 1) % sections.length);
+        }
+      }, 4000); // Change every 4 seconds
+    };
+
+    startInterval();
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [isPaused, sections.length]);
+
+  // Handle mouse enter/leave on image
+  const handleImageMouseEnter = () => {
+    setIsPaused(true);
+  };
+
+  const handleImageMouseLeave = () => {
+    setIsPaused(false);
+  };
+
   return (
-    <section className="py-20 px-10 space-y-10 ">
-    <div className="space-y-5 w-[700px]">
-      <h2 className="text-4xl">Lorem ipsum lorem tote te</h2>
-      <p className="text-lg">
-        Lorem ipsum dolor sit amet consectetur. Mattis vel feugiat vitae at
-        turpis. Elementum tellus se n fringilla at sed varius id tristique.
-        Fusce nunc ut ut est semper amet a urna. Elementum leo malesuada.
-      </p>
-      <Button className="bg-brand-accent hover:bg-brand-primary text-white rounded-full px-6 text-sm">
-        Contact us
-      </Button>
-    </div>
-    <div className="flex ">
-      <div className="flex-1 h-full flex flex-col gap-5">
-       {[1, 2,3].map((number) => (
-         <div className="space-y-3" key={number}>
-          <span className="border-l dark:border-white border-black pl-5 text-2xl font-semibold">5+</span>
-          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Natus, sint ad delectus exercitationem quam excepturi.
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Natus, sint ad delectus exercitationem quam excepturi.
-          </p>
+    <section className="relative py-20 min-h-screen flex items-center">
+      <VerticalGridLines opacity={0.1} />
+
+      <div className="max-w-7xl mx-auto px-6 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+          {/* Left Content - Text */}
+          <div className="space-y-8">
+            <div className="space-y-4">
+              <span className="inline-block px-4 py-2 bg-brand-accent/10 text-brand-accent rounded-full text-sm font-medium">
+                {sections[activeSection].subtitle}
+              </span>
+
+              <h2 className="text-5xl font-bold transition-all duration-700 ease-out">
+                {sections[activeSection].title}
+              </h2>
+
+              <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed transition-all duration-700 ease-out">
+                {sections[activeSection].description}
+              </p>
+            </div>
+
+            {/* Stats */}
+            <div className="flex items-center space-x-8">
+              <div className="text-center">
+                <div className="text-4xl font-bold text-brand-primary dark:text-brand-accent transition-all duration-700">
+                  {sections[activeSection].stats.number}
+                </div>
+                <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                  {sections[activeSection].stats.label}
+                </div>
+              </div>
+
+              <div className="h-12 w-px bg-gray-300 dark:bg-gray-600"></div>
+
+              <Button className="bg-brand-accent hover:bg-brand-primary text-white rounded-full px-8 py-3">
+                Learn More
+              </Button>
+            </div>
+
+            {/* Progress Indicators */}
+            <div className="flex space-x-2">
+              {sections.map((_, index) => (
+                <div
+                  key={index}
+                  className={`h-1 rounded-full transition-all duration-500 ${index === activeSection
+                      ? 'w-12 bg-brand-accent'
+                      : 'w-4 bg-gray-300 dark:bg-gray-600'
+                    }`}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Right Content - Image */}
+          <div
+            ref={imageRef}
+            className="relative h-[600px] rounded-2xl overflow-hidden cursor-pointer"
+            onMouseEnter={handleImageMouseEnter}
+            onMouseLeave={handleImageMouseLeave}
+          >
+            {sections.map((section, index) => (
+              <div
+                key={section.id}
+                className={`absolute inset-0 transition-all duration-700 ease-out ${index === activeSection
+                    ? 'opacity-100 scale-100'
+                    : 'opacity-0 scale-105'
+                  }`}
+              >
+                <Image
+                  src={section.image}
+                  alt={section.title}
+                  fill
+                  className="object-cover"
+                />
+
+                {/* Image Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+
+                {/* Image Label */}
+                <div className="absolute bottom-6 left-6 text-white">
+                  <div className="text-sm opacity-80">{section.subtitle}</div>
+                  <div className="text-lg font-semibold">{section.title}</div>
+                </div>
+
+                {/* Pause Indicator */}
+                {isPaused && index === activeSection && (
+                  <div className="absolute top-6 right-6 bg-black/50 backdrop-blur-sm rounded-full px-3 py-1 text-white text-sm">
+                    Paused
+                  </div>
+                )}
+              </div>
+            ))}
+
+            {/* Progress Bar */}
+            <div className="absolute bottom-4 left-4 right-4">
+              <div className="flex space-x-1">
+                {sections.map((_, index) => (
+                  <div
+                    key={index}
+                    className="flex-1 h-1 bg-white/30 rounded-full overflow-hidden"
+                  >
+                    <div
+                      className={`h-full bg-white transition-all duration-300 ${index === activeSection ? 'w-full' : 'w-0'
+                        }`}
+                      style={{
+                        transitionDuration: index === activeSection && !isPaused ? '4000ms' : '300ms'
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
-       ))}
-     
       </div>
-      <div className="bg-brand-accent flex-1 h-full rounded-md">
-        <Image src={"/one.jpg"} width={300} height={200} className="w-full h-full rounded-md" alt={"hellow World"} />
-      </div>
-    </div>
+
+      <SectionDivider className="absolute bottom-0 left-0 right-0 h-px" />
     </section>
-  )
+  );
 }
