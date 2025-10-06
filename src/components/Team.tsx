@@ -115,8 +115,8 @@ export default function Team() {
                   key={index}
                   onClick={() => setCurrentTestimonial(index)}
                   className={`transition-all duration-300 ${index === currentTestimonial
-                      ? 'w-12 h-3 bg-brand-accent rounded-full'
-                      : 'w-3 h-3 bg-gray-300 dark:bg-gray-600 rounded-full hover:bg-gray-400 dark:hover:bg-gray-500'
+                    ? 'w-12 h-3 bg-brand-accent rounded-full'
+                    : 'w-3 h-3 bg-gray-300 dark:bg-gray-600 rounded-full hover:bg-gray-400 dark:hover:bg-gray-500'
                     }`}
                   aria-label={`Go to testimonial ${index + 1}`}
                 />
@@ -125,23 +125,6 @@ export default function Team() {
           </div>
         </div>
 
-        {/* Bottom Stats */}
-        <div className="mt-20 pt-16 border-t border-gray-200 dark:border-gray-700">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div className="space-y-2">
-              <div className="text-4xl font-bold text-brand-primary dark:text-brand-accent">50+</div>
-              <div className="text-gray-600 dark:text-gray-400">Happy Clients</div>
-            </div>
-            <div className="space-y-2">
-              <div className="text-4xl font-bold text-brand-primary dark:text-brand-accent">99.9%</div>
-              <div className="text-gray-600 dark:text-gray-400">Client Satisfaction</div>
-            </div>
-            <div className="space-y-2">
-              <div className="text-4xl font-bold text-brand-primary dark:text-brand-accent">24/7</div>
-              <div className="text-gray-600 dark:text-gray-400">Support Available</div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
   );
