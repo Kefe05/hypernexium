@@ -70,27 +70,27 @@ export default function HeroCarousel() {
   const slides = [
     {
       image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920&q=80",
-      label: "INNOVATION & EXCELLENCE",
-      title: "The best way to predict the secure",
-      titleAccent: "future",
-      titleEnd: " is to create it",
-      description: "Empowering enterprises with scalable IT solutions for smarter innovation and sustainable growth."
+      label: "HYPERNEXIUM TECHNOLOGIES",
+      title: "Empowering businesses with",
+      titleAccent: "intelligent",
+      titleEnd: " technology solutions",
+      description: "Your trusted technology partner delivering innovative, secure,and future ready IT solutions that drive smart enterprise growth across Africa and beyond."
     },
     {
       image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1920&q=80",
-      label: "STRATEGY & GROWTH",
-      title: "Smart and effective",
-      titleAccent: "business",
-      titleEnd: " solutions",
-      description: "Transform your business with cutting-edge technology and strategic consulting services."
+      label: "DIGITAL TRANSFORMATION",
+      title: "Building the",
+      titleAccent: "future",
+      titleEnd: " of enterprise technology",
+      description: "Partner with certified experts delivering world-class IT infrastructure, network modenization and seamless digital transforation across Africa and beyond."
     },
     {
       image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&q=80",
-      label: "PROFESSIONAL SERVICES",
-      title: "Work together to make",
-      titleAccent: "experience",
-      titleEnd: " exceptional",
-      description: "Professional and highly dedicated business services tailored to your unique needs."
+      label: "TRUSTED TECHNOLOGY PARTNER",
+      title: "Your success is our",
+      titleAccent: "mission",
+      titleEnd: " secure, scalable, reliable",
+      description: "From cybersecurity to disaster recovery, we deliver end-to-end IT solutions backed by industry-leading partners like Cisco, Microsoft, Dell, and Palo Alto Networks."
     }
   ];
 
