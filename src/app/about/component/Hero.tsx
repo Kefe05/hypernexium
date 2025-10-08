@@ -10,7 +10,7 @@ export default function AboutPage() {
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
         {/* Background Image with Overlay */}
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage: "url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&h=1080&fit=crop')"
@@ -34,15 +34,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Content Section Placeholder */}
-      <section className="bg-white py-20 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold text-slate-900 mb-6">Our Story</h2>
-          <p className="text-lg text-slate-600">
-            Content continues here...
-          </p>
-        </div>
-      </section>
+     
     </div>
   );
 }
