@@ -38,7 +38,7 @@ export default function RootLayout({
       <head>
         <ThemeScript />
       </head>
-      <body className="antialiased">
+      <body className="antialiased overflow-x-hidden">
         <ThemeProvider defaultTheme="system" enableSystem>
           <Nav />
           {children}
