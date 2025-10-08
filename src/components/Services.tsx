@@ -1,71 +1,153 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { VerticalGridLines } from './GridLines';
 import { Button } from './ui/button';
 import {
-  Cloud,
   Shield,
-  Zap,
+  Database,
+  Cloud,
+  Network,
+  Video,
   Users,
   ArrowRight,
-  CheckCircle,
-  Settings,
-  Database
+  CheckCircle
 } from 'lucide-react';
+import { gsap } from 'gsap'; // Ensure GSAP is installed: npm install gsap
 
 export default function Services() {
   const [activeService, setActiveService] = useState(0);
 
+  // Refs for animation targets
+  const iconRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const descRef = useRef<HTMLParagraphElement>(null);
+  const featuresRef = useRef<HTMLDivElement>(null);
+  const buttonsRef = useRef<HTMLDivElement>(null);
+
+  // Ref for auto-play interval
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Ref for the section to observe scroll
+  const sectionRef = useRef<HTMLElement>(null);
+
   const services = [
     {
       id: 0,
-      title: "Cloud Infrastructure Solutions",
-      description: "Modern businesses need scalable, secure cloud infrastructure. We help you migrate, optimize, and manage your cloud environment for maximum efficiency and cost-effectiveness.",
-      icon: Cloud,
-      features: ["AWS/Azure Migration", "Infrastructure Optimization", "Cost Management", "24/7 Monitoring"]
+      title: "Cybersecurity",
+      description: "Protect your digital assets with our proactive and multi-layered security frameworks. We defend against modern cyber threats with advanced solutions tailored to your enterprise needs.",
+      icon: Shield,
+      features: ["Threat Detection & Prevention", "Multi-Layered Security", "Incident Response", "Security Audits"]
     },
     {
       id: 1,
-      title: "Cybersecurity & Compliance",
-      description: "Protect your digital assets with comprehensive security solutions. From threat detection to compliance management, we ensure your business stays secure and compliant.",
-      icon: Shield,
-      features: ["Threat Detection", "Compliance Management", "Security Audits", "Incident Response"]
+      title: "Backup and Recovery",
+      description: "Ensure business continuity with our enterprise-grade data backup and disaster recovery solutions. We safeguard your data integrity with reliable and efficient recovery systems.",
+      icon: Database,
+      features: ["Data Backup Solutions", "Disaster Recovery Planning", "Data Integrity Assurance", "Automated Recovery Processes"]
     },
     {
       id: 2,
-      title: "Digital Transformation",
-      description: "Transform your business processes with cutting-edge technology. We help organizations modernize operations, improve efficiency, and accelerate growth through digital innovation.",
-      icon: Zap,
-      features: ["Process Automation", "Legacy System Modernization", "Digital Strategy", "Change Management"]
+      title: "Digital Infrastructure",
+      description: "Build scalable infrastructure to support your enterprise. We design, deploy, and manage cloud, hybrid, and on-premises environments for optimal performance and growth.",
+      icon: Cloud,
+      features: ["Cloud Deployment", "Hybrid Infrastructure", "Scalability Optimization", "Infrastructure Management"]
     },
     {
       id: 3,
-      title: "Enterprise Software Development",
-      description: "Custom software solutions tailored to your business needs. From web applications to enterprise systems, we build scalable, maintainable software that drives results.",
-      icon: Settings,
-      features: ["Custom Development", "API Integration", "Mobile Applications", "System Integration"]
+      title: "Network Modernization",
+      description: "Upgrade to smart, agile, and secure networks. Our solutions modernize traditional networks to meet current and future demands, ensuring connectivity and performance.",
+      icon: Network,
+      features: ["Smart Networking", "Secure Connectivity", "Network Optimization", "Future-Ready Solutions"]
     },
     {
       id: 4,
-      title: "Data Analytics & Intelligence",
-      description: "Turn your data into actionable insights. Our analytics solutions help you make informed decisions, identify opportunities, and optimize business performance.",
-      icon: Database,
-      features: ["Business Intelligence", "Data Visualization", "Predictive Analytics", "Real-time Reporting"]
+      title: "Surveillance Security Systems",
+      description: "Enhance enterprise security with advanced video surveillance. Our AI and IoT-integrated systems provide real-time monitoring and tailored security solutions.",
+      icon: Video,
+      features: ["AI-Powered Surveillance", "IoT Integration", "Real-Time Monitoring", "Customized Security Systems"]
     },
     {
       id: 5,
-      title: "IT Consulting & Strategy",
-      description: "Strategic IT guidance for business growth. Our consultants help you align technology with business objectives, optimize IT investments, and plan for future success.",
+      title: "IT Training",
+      description: "Empower your team with our capacity-building programs. We offer technical training to upskill employees in key IT domains, driving enterprise success.",
       icon: Users,
-      features: ["IT Strategy Planning", "Technology Roadmaps", "Vendor Management", "Digital Governance"]
+      features: ["Technical Skill Development", "Customized Training Programs", "IT Certification Prep", "Team Upskilling"]
     }
   ];
 
   const currentService = services[activeService];
   const CurrentIcon = currentService.icon;
 
+  // Function to start/reset auto-play
+  const startAutoPlay = () => {
+    if (intervalRef.current) clearInterval(intervalRef.current);
+    intervalRef.current = setInterval(() => {
+      setActiveService((prev) => (prev + 1) % services.length);
+    }, 4000); // Auto-advance every 4 seconds
+  };
+
+  // Initialize auto-play on mount
+  useEffect(() => {
+    startAutoPlay();
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, []);
+
+  // Intersection Observer to resume auto-play when section is scrolled past
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          // Section is out of view, resume auto-play
+          startAutoPlay();
+        }
+      },
+      { threshold: 0 } // Trigger when the section is completely out of view
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, []);
+
+  // Animation effect on service change
+  useEffect(() => {
+    const tl = gsap.timeline();
+    tl.fromTo(
+      [iconRef.current, titleRef.current, descRef.current, featuresRef.current, buttonsRef.current],
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.5, stagger: 0.1, ease: "power2.out" }
+    );
+  }, [activeService]);
+
+  // Handle service click with smooth sync and auto-play pause
+  const handleServiceClick = (index: number) => {
+    if (index !== activeService) {
+      // Optional: Add a subtle exit animation for the current content before changing
+      gsap.to([iconRef.current, titleRef.current, descRef.current, featuresRef.current, buttonsRef.current], {
+        opacity: 0,
+        y: -10,
+        duration: 0.3,
+        ease: "power2.in",
+        onComplete: () => setActiveService(index) // Change service after exit animation
+      });
+    }
+    // Pause auto-play on click
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+  };
+
   return (
-    <section className="relative py-24 bg-white dark:bg-gray-900">
+    <section ref={sectionRef} className="relative py-24 bg-light dark:bg-dark">
       <VerticalGridLines opacity={0.06} />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
@@ -75,7 +157,7 @@ export default function Services() {
           <div className="space-y-8">
             {/* Section Header */}
             <div className="space-y-4">
-              <h2 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+              <h2 className="text-sm font-semibold text-light-text-secondary dark:text-dark-text-secondary uppercase tracking-wider">
                 Choose the Right Solutions
               </h2>
             </div>
@@ -85,30 +167,30 @@ export default function Services() {
               {services.map((service, index) => (
                 <button
                   key={service.id}
-                  onClick={() => setActiveService(index)}
+                  onClick={() => handleServiceClick(index)}
                   className={`w-full text-left p-4 rounded-lg transition-all duration-300 group ${index === activeService
-                      ? 'bg-gray-50 dark:bg-gray-800 border-l-4 border-brand-accent'
-                      : 'hover:bg-gray-50 dark:hover:bg-gray-800/50 border-l-4 border-transparent'
+                      ? 'bg-light-surface dark:bg-dark-surface border-l-4 border-brand-accent'
+                      : 'hover:bg-light-surface dark:hover:bg-dark-surface/50 border-l-4 border-transparent'
                     }`}
                 >
                   <div className="flex items-center space-x-4">
                     <div className={`p-2 rounded-lg transition-colors ${index === activeService
-                        ? 'bg-brand-accent text-white'
-                        : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-400 group-hover:bg-brand-accent/10 group-hover:text-brand-accent'
+                        ? 'bg-brand-accent text-light'
+                        : 'bg-light-surface dark:bg-dark-surface text-light-text-secondary dark:text-dark-text-secondary group-hover:bg-brand-accent/10 group-hover:text-brand-accent'
                       }`}>
                       <service.icon className="w-5 h-5" />
                     </div>
                     <div className="flex-1">
                       <h3 className={`font-semibold transition-colors ${index === activeService
-                          ? 'text-gray-900 dark:text-white'
-                          : 'text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white'
+                          ? 'text-light-text-primary dark:text-dark-text-primary'
+                          : 'text-light-text-secondary dark:text-dark-text-secondary group-hover:text-light-text-primary dark:group-hover:text-dark-text-primary'
                         }`}>
                         {service.title}
                       </h3>
                     </div>
                     <ArrowRight className={`w-4 h-4 transition-all ${index === activeService
                         ? 'text-brand-accent translate-x-1'
-                        : 'text-gray-400 group-hover:text-brand-accent group-hover:translate-x-1'
+                        : 'text-light-text-secondary dark:text-dark-text-secondary group-hover:text-brand-accent group-hover:translate-x-1'
                       }`} />
                   </div>
                 </button>
@@ -118,44 +200,48 @@ export default function Services() {
 
           {/* Right Side - Service Details */}
           <div className="lg:pl-8">
-            <div className="sticky top-8 space-y-8">
-              {/* Service Icon */}
-              <div className="w-16 h-16 bg-brand-accent/10 rounded-2xl flex items-center justify-center">
-                <CurrentIcon className="w-8 h-8 text-brand-accent" />
-              </div>
-
-              {/* Service Content */}
-              <div className="space-y-6">
-                <h3 className="text-3xl font-bold text-gray-900 dark:text-white">
-                  {currentService.title}
-                </h3>
-
-                <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-                  {currentService.description}
-                </p>
-
-                {/* Features List */}
-                <div className="space-y-3">
-                  {currentService.features.map((feature, index) => (
-                    <div key={index} className="flex items-center space-x-3">
-                      <CheckCircle className="w-5 h-5 text-brand-accent flex-shrink-0" />
-                      <span className="text-gray-700 dark:text-gray-300">{feature}</span>
-                    </div>
-                  ))}
+            <div className="sticky top-8">
+              {/* Card Wrapper */}
+              <div className="bg-light-surface dark:bg-dark-surface rounded-xl shadow-xl border border-light-border dark:border-dark-border p-8 space-y-8">
+                {/* Icon and Title on the same line */}
+                <div className="flex items-center space-x-4">
+                  <div ref={iconRef} className="w-16 h-16 bg-brand-accent/10 rounded-2xl flex items-center justify-center flex-shrink-0">
+                    <CurrentIcon className="w-8 h-8 text-brand-accent" />
+                  </div>
+                  <h3 ref={titleRef} className="text-3xl font-bold text-light-text-primary dark:text-dark-text-primary">
+                    {currentService.title}
+                  </h3>
                 </div>
 
-                {/* Action Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                  <Button className="bg-brand-accent hover:bg-brand-primary text-white rounded-full px-8 py-3">
-                    Get in touch
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="border-brand-accent text-brand-accent hover:bg-brand-accent hover:text-white rounded-full px-8 py-3"
-                  >
-                    Book a consultation
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Button>
+                {/* Service Content */}
+                <div className="space-y-6">
+                  <p ref={descRef} className="text-lg text-light-text-secondary dark:text-dark-text-secondary leading-relaxed">
+                    {currentService.description}
+                  </p>
+
+                  {/* Features List */}
+                  <div ref={featuresRef} className="space-y-3">
+                    {currentService.features.map((feature, index) => (
+                      <div key={index} className="flex items-center space-x-3">
+                        <CheckCircle className="w-5 h-5 text-brand-accent flex-shrink-0" />
+                        <span className="text-light-text-secondary dark:text-dark-text-secondary">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div ref={buttonsRef} className="flex flex-col sm:flex-row gap-4 pt-4">
+                    <Button className="bg-brand-accent hover:bg-brand-primary text-light rounded-full px-8 py-3">
+                      Get in touch
+                    </Button>
+                    <Button
+                      variant="outline"
+                      className="border-brand-accent text-brand-accent hover:bg-brand-accent hover:text-light rounded-full px-8 py-3"
+                    >
+                      Book a consultation
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>

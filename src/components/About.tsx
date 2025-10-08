@@ -13,27 +13,27 @@ export default function About() {
   const sections = [
     {
       id: 0,
-      title: "Cloud Infrastructure",
-      subtitle: "Scalable & Secure",
-      description: "Transform your business with enterprise-grade cloud solutions. We design and implement robust infrastructure that scales with your growth, ensuring 99.9% uptime and maximum security.",
-      image: "/one.jpg",
-      stats: { number: "50+", label: "Enterprise Clients" }
+      title: "Cybersecurity",
+      subtitle: "Proactive Defense",
+      description: "Safeguard your digital assets with our multi-layered cybersecurity frameworks. We provide advanced threat detection, prevention, and response to protect your business from modern cyber threats.",
+      image: "/cybersecurity.jpeg",
+      stats: { number: "99.9%", label: "Threat Detection Rate" }
     },
     {
       id: 1,
-      title: "Cybersecurity Solutions",
-      subtitle: "Advanced Protection",
-      description: "Protect your digital assets with our comprehensive cybersecurity framework. From threat detection to incident response, we safeguard your business against evolving cyber threats.",
-      image: "/two.jpg",
-      stats: { number: "99.9%", label: "System Uptime" }
+      title: "Digital Infrastructure",
+      subtitle: "Scalable Solutions",
+      description: "Build a future-ready enterprise with our scalable infrastructure solutions. We design and manage cloud, hybrid, and on-premises environments to ensure performance, reliability, and growth.",
+      image: "/infrastructure.jpeg",
+      stats: { number: "100+", label: "Deployed Solutions" }
     },
     {
       id: 2,
-      title: "Digital Transformation",
-      subtitle: "Innovation Driven",
-      description: "Modernize your operations with cutting-edge technology solutions. We help organizations embrace digital innovation to improve efficiency, reduce costs, and accelerate growth.",
-      image: "/three.jpg",
-      stats: { number: "24/7", label: "Support Coverage" }
+      title: "Surveillance Security Systems",
+      subtitle: "Intelligent Monitoring",
+      description: "Enhance enterprise security with AI and IoT-integrated surveillance systems. Our advanced video monitoring solutions provide real-time insights and robust protection tailored to your needs.",
+      image: "/surveillance.jpeg",
+      stats: { number: "24/7", label: "Monitoring Coverage" }
     }
   ];
 
@@ -77,17 +77,17 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
           {/* Left Content - Text */}
-          <div className="space-y-8">
+          <div className="h-[600px] flex flex-col justify-center space-y-8">
             <div className="space-y-4">
               <span className="inline-block px-4 py-2 bg-brand-accent/10 text-brand-accent rounded-full text-sm font-medium">
                 {sections[activeSection].subtitle}
               </span>
 
-              <h2 className="text-5xl font-bold transition-all duration-700 ease-out">
+              <h2 className="text-5xl font-bold text-primary transition-all duration-700 ease-out">
                 {sections[activeSection].title}
               </h2>
 
-              <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed transition-all duration-700 ease-out">
+              <p className="text-xl text-secondary leading-relaxed transition-all duration-700 ease-out">
                 {sections[activeSection].description}
               </p>
             </div>
@@ -98,12 +98,12 @@ export default function About() {
                 <div className="text-4xl font-bold text-brand-primary dark:text-brand-accent transition-all duration-700">
                   {sections[activeSection].stats.number}
                 </div>
-                <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                <div className="text-sm text-secondary mt-1">
                   {sections[activeSection].stats.label}
                 </div>
               </div>
 
-              <div className="h-12 w-px bg-gray-300 dark:bg-gray-600"></div>
+              <div className="h-12 w-px bg-base"></div>
 
               <Button className="bg-brand-accent hover:bg-brand-primary text-white rounded-full px-8 py-3">
                 Learn More
@@ -117,7 +117,7 @@ export default function About() {
                   key={index}
                   className={`h-1 rounded-full transition-all duration-500 ${index === activeSection
                       ? 'w-12 bg-brand-accent'
-                      : 'w-4 bg-gray-300 dark:bg-gray-600'
+                      : 'w-4 bg-base'
                     }`}
                 />
               ))}

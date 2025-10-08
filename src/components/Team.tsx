@@ -4,48 +4,45 @@ import Image from "next/image";
 import { VerticalGridLines } from "./GridLines";
 
 export default function Team() {
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [currentMember, setCurrentMember] = useState(0);
 
-  const testimonials = [
+  const boardMembers = [
     {
       id: 1,
-      quote: "Hyper Nexium is more than just a vendor; they are true partners. Their customer service is responsive, knowledgeable, and always focused on our company's needs. The cloud infrastructure has streamlined operations, allowing us to adapt quickly in a constantly evolving business environment.",
-      author: "Sarah Mitchell",
-      title: "CTO, TechFlow Solutions",
-      company: "TechFlow Solutions",
-      image: "/one.jpg",
-      logo: "/logo.png"
+      name: "Dr. Samson Okello",
+      title: "Chairperson",
+      bio: "Dr. Samson brings over 25 years of experience in technology leadership and strategic business development across Africa. As former CTO of a leading telecom provider, he has driven digital transformation initiatives that connected millions. His vision for Hyper Nexium focuses on bridging the digital divide through innovative, Africa-centric solutions.",
+      image: "/board-member-2.jpeg",
+      expertise: ["Digital Strategy", "African Markets", "Technology Policy", "Innovation Leadership"]
     },
     {
       id: 2,
-      quote: "The cybersecurity solutions provided by Hyper Nexium have been game-changing for our organization. Their proactive approach to threat detection and incident response has given us peace of mind and allowed us to focus on growing our business without security concerns.",
-      author: "Michael Chen",
-      title: "IT Director, SecureBank Corp",
-      company: "SecureBank Corp",
-      image: "/two.jpg",
-      logo: "/logo.png"
+      name: "Eng. Samuel Mwangi",
+      title: "Vice Chairperson",
+      bio: "Eng. Samuel Mwangi is a renowned engineer and entrepreneur with expertise in network infrastructure and cybersecurity. He founded Kenya's first indigenous cloud service provider and serves on multiple technology advisory boards. At Hyper Nexium, Samuel drives our commitment to scalable, secure infrastructure that powers African enterprises.",
+      image: "/board-member-2.jpeg",
+      expertise: ["Network Engineering", "Cybersecurity", "Cloud Infrastructure", "Entrepreneurship"]
     },
     {
       id: 3,
-      quote: "Working with Hyper Nexium on our digital transformation journey has exceeded all expectations. Their expertise in enterprise software development and strategic consulting has helped us modernize our operations and achieve unprecedented efficiency gains.",
-      author: "Emily Rodriguez",
-      title: "VP of Operations, InnovateCorp",
-      company: "InnovateCorp",
-      image: "/three.jpg",
-      logo: "/logo.png"
+      name: "Mr. James Bello",
+      title: "Board Member - Finance & Operations",
+      bio: "Mr. James Bello is a financial strategist and operations expert with a proven track record in scaling technology companies across West Africa. His experience in venture capital and corporate governance ensures Hyper Nexium's financial sustainability and operational excellence while maintaining our core values of integrity and customer focus.",
+      image: "/board-member-2.jpeg",
+      expertise: ["Financial Strategy", "Corporate Governance", "Operations Management", "Venture Capital"]
     }
   ];
 
-  // Auto-advance testimonials
+  // Auto-advance members
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+      setCurrentMember((prev) => (prev + 1) % boardMembers.length);
     }, 8000);
 
     return () => clearInterval(interval);
-  }, [testimonials.length]);
+  }, [boardMembers.length]);
 
-  const currentTest = testimonials[currentTestimonial];
+  const currentMemberData = boardMembers[currentMember];
 
   return (
     <section className="relative py-24 bg-gray-50 dark:bg-gray-900 overflow-hidden">
@@ -60,22 +57,17 @@ export default function Team() {
               {/* Main Image Container */}
               <div className="relative aspect-[4/5] rounded-3xl overflow-hidden bg-gradient-to-br from-brand-accent/20 to-brand-primary/20">
                 <Image
-                  src={currentTest.image}
-                  alt={currentTest.author}
+                  src={currentMemberData.image}
+                  alt={currentMemberData.name}
                   fill
                   className="object-cover transition-all duration-700 ease-out"
                 />
 
-                {/* Company Logo Badge */}
+                {/* Title Badge */}
                 <div className="absolute bottom-6 left-6 bg-white dark:bg-gray-800 rounded-2xl p-3 shadow-lg">
-                  <div className="w-12 h-12 relative">
-                    <Image
-                      src={currentTest.logo}
-                      alt={`${currentTest.company} logo`}
-                      fill
-                      className="object-contain"
-                    />
-                  </div>
+                  <span className="text-sm font-medium text-brand-accent uppercase tracking-wide">
+                    {currentMemberData.title}
+                  </span>
                 </div>
               </div>
 
@@ -85,46 +77,65 @@ export default function Team() {
             </div>
           </div>
 
-          {/* Right Side - Testimonial Content */}
+          {/* Right Side - Member Content */}
           <div className="space-y-8">
-            {/* Quote */}
+            {/* Introduction */}
             <div className="space-y-6">
-              <div className="text-6xl text-brand-accent/20 font-serif leading-none">"</div>
-              <blockquote className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 leading-relaxed font-light">
-                {currentTest.quote}
-              </blockquote>
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
+                Meet Our Board
+              </h2>
+              <div className="text-6xl text-brand-accent/20 font-serif leading-none">“</div>
+              <p className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 leading-relaxed font-light">
+                {currentMemberData.bio}
+              </p>
             </div>
 
-            {/* Author Info */}
+            {/* Expertise Areas */}
             <div className="space-y-2">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+                Areas of Expertise
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {currentMemberData.expertise.map((area, index) => (
+                  <span
+                    key={index}
+                    className="inline-block bg-brand-accent/10 text-brand-accent px-3 py-1 rounded-full text-sm font-medium"
+                  >
+                    {area}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Member Info */}
+            <div className="space-y-2 pt-4">
               <div className="flex items-center space-x-2">
                 <span className="text-gray-400">—</span>
-                <cite className="text-lg font-semibold text-gray-900 dark:text-white not-italic">
-                  {currentTest.author}
-                </cite>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                  {currentMemberData.name}
+                </h3>
               </div>
-              <p className="text-brand-accent font-medium">
-                {currentTest.title}
+              <p className="text-brand-accent font-medium text-lg">
+                {currentMemberData.title}
               </p>
             </div>
 
             {/* Navigation Dots */}
             <div className="flex space-x-3 pt-4">
-              {testimonials.map((_, index) => (
+              {boardMembers.map((_, index) => (
                 <button
                   key={index}
-                  onClick={() => setCurrentTestimonial(index)}
-                  className={`transition-all duration-300 ${index === currentTestimonial
+                  onClick={() => setCurrentMember(index)}
+                  className={`transition-all duration-300 ${index === currentMember
                     ? 'w-12 h-3 bg-brand-accent rounded-full'
                     : 'w-3 h-3 bg-gray-300 dark:bg-gray-600 rounded-full hover:bg-gray-400 dark:hover:bg-gray-500'
                     }`}
-                  aria-label={`Go to testimonial ${index + 1}`}
+                  aria-label={`View board member ${index + 1}`}
                 />
               ))}
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );

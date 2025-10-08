@@ -200,12 +200,12 @@ export default function HeroCarousel() {
           </h1>
 
           {/* Description */}
-          <p
+          {/* <p
             ref={descRef}
             className="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl"
           >
             {slides[currentSlide].description}
-          </p>
+          </p> */}
 
           {/* CTA Button */}
           <div ref={buttonRef} className="pt-4">
