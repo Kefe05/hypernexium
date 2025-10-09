@@ -83,7 +83,7 @@ export default function Team() {
             <div className="space-y-6">
               <div className="text-6xl text-brand-accent/20 font-serif leading-none">&ldquo;</div>
               <blockquote className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 leading-relaxed font-light">
-                {currentTest.quote}
+                {currentMemberData.bio}
               </blockquote>
             </div>
 
