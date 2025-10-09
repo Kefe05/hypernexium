@@ -107,8 +107,10 @@ export default function Partners() {
     <section className="py-20 px-10">
       <div className="max-w-7xl mx-auto">
         <div className="mb-12 space-y-6">
-          <h2 className="text-4xl text-primary">Our Partners</h2>
-          <p className="text-secondary">
+          <h2 className="text-5xl font-bold text-primary">
+            Our Partners
+          </h2>
+          <p className="text-xl text-secondary leading-relaxed">
             We collaborate with industry-leading technology partners to deliver
             cutting-edge solutions in cybersecurity, cloud computing, networking,
             and enterprise infrastructure. Our partnerships ensure access to the
