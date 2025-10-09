@@ -118,6 +118,16 @@ export function ThemeProvider({
 export function useTheme(): ThemeContextType {
   const context = useContext(ThemeContext);
   if (context === undefined) {
+    // During SSR or prerendering, return default values instead of throwing
+    if (typeof window === 'undefined') {
+      return {
+        theme: 'system',
+        systemTheme: 'light',
+        effectiveTheme: 'light',
+        setTheme: () => {},
+        toggleTheme: () => {},
+      };
+    }
     throw new Error("useTheme must be used within a ThemeProvider");
   }
   return context;

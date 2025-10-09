@@ -1,16 +1,14 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
-import { Clock, Bell, ArrowRight, Shield } from "lucide-react";
-import { Alert, AlertDescription } from "@/components/ui/alert";
+import { useEffect, useRef } from "react";
+import { Clock, ArrowRight, Shield } from "lucide-react";
+
 import gsap from "gsap";
 
 export default function ComingSoonCard() {
   const cardRef = useRef(null);
   const titleRef = useRef(null);
-  const circleRefs = useRef([]);
+  const circleRefs = useRef<(HTMLDivElement | null)[]>([]);
   const shimmerRef = useRef(null);
-  const [email, setEmail] = useState("");
-  const [subscribed, setSubscribed] = useState(false);
 
   useEffect(() => {
     // Card entrance animation
@@ -31,16 +29,18 @@ export default function ComingSoonCard() {
     });
 
     // Animated circles
-    circleRefs.current.forEach((circle, i) => {
-      gsap.to(circle, {
-        scale: 1.2,
-        opacity: 0.3,
-        duration: 2 + i * 0.5,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        delay: i * 0.3,
-      });
+    circleRefs.current.forEach((circle: HTMLDivElement | null, i: number) => {
+      if (circle) {
+        gsap.to(circle, {
+          scale: 1.2,
+          opacity: 0.3,
+          duration: 2 + i * 0.5,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+          delay: i * 0.3,
+        });
+      }
     });
 
     // Shimmer effect
@@ -64,21 +64,7 @@ export default function ComingSoonCard() {
     });
   }, []);
 
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    if (email) {
-      setSubscribed(true);
-      gsap.from(".success-alert", {
-        opacity: 0,
-        y: -20,
-        duration: 0.5,
-        ease: "back.out(1.7)",
-      });
-      setTimeout(() => {
-        setEmail("");
-      }, 2000);
-    }
-  };
+
 
   return (
     <div className="min-h-screen bg-black flex items-center justify-center p-4 relative overflow-hidden">
@@ -87,7 +73,11 @@ export default function ComingSoonCard() {
         {[...Array(3)].map((_, i) => (
           <div
             key={i}
-            ref={(el) => (circleRefs.current[i] = el)}
+            ref={(el) => {
+              if (circleRefs.current) {
+                circleRefs.current[i] = el;
+              }
+            }}
             className="absolute rounded-full border border-gray-800"
             style={{
               width: `${300 + i * 200}px`,
@@ -136,7 +126,7 @@ export default function ComingSoonCard() {
               <span className="text-gray-400">Is On Its Way</span>
             </h1>
             <p className="text-gray-500 text-lg max-w-lg mx-auto">
-              We're working on something special. Stay tuned for our latest
+              We&apos;re working on something special. Stay tuned for our latest
               cybersecurity solution.
             </p>
           </div>
@@ -162,43 +152,7 @@ export default function ComingSoonCard() {
             ))}
           </div>
 
-          {/* Subscription Form */}
-          {!subscribed ? (
-            <form onSubmit={handleSubscribe} className="mt-8 max-w-md mx-auto">
-              <div className="flex flex-col sm:flex-row gap-3">
-                <div className="flex-1 relative">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email"
-                    className="w-full bg-gray-900 border border-gray-800 text-white placeholder-gray-600 rounded-lg px-4 py-3 focus:outline-none focus:border-gray-600 transition-colors"
-                    required
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="bg-white hover:bg-gray-200 text-black font-medium px-6 py-3 rounded-lg flex items-center justify-center gap-2 transition-all duration-300 hover:scale-105"
-                >
-                  <Bell className="w-4 h-4" />
-                  Notify Me
-                </button>
-              </div>
-              <p className="text-gray-600 text-xs mt-3 text-center">
-                Be the first to know when we launch. No spam, ever.
-              </p>
-            </form>
-          ) : (
-            <div className="success-alert mt-8 max-w-md mx-auto">
-              <Alert className="bg-gray-900 border-gray-700">
-                <Clock className="h-4 w-4 text-gray-300" />
-                <AlertDescription className="text-gray-300">
-                  <strong className="font-semibold text-white">Success!</strong>{" "}
-                  You'll be notified when we launch.
-                </AlertDescription>
-              </Alert>
-            </div>
-          )}
+       
 
           {/* Features */}
           <div className="grid grid-cols-3 gap-4 mt-12 pt-8 border-t border-gray-800">

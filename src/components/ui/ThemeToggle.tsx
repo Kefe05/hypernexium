@@ -9,7 +9,7 @@ interface ThemeToggleProps {
   showLabel?: boolean;
 }
 
-export function ThemeToggle({
+function ThemeToggleInner({
   className = "",
   showLabel = false,
 }: ThemeToggleProps) {
@@ -17,8 +17,26 @@ export function ThemeToggle({
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  // Always call hooks at the top level
+  const { theme, setTheme } = useTheme();
+
+  // All useEffect calls must be at the top level
   useEffect(() => {
     setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   // Don't render anything until mounted to prevent hydration mismatch
@@ -34,22 +52,6 @@ export function ThemeToggle({
       </div>
     );
   }
-
-  const { theme, setTheme, effectiveTheme } = useTheme();
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setIsOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
 
   const themes = [
     { value: "light" as const, label: "Light", icon: Sun },
@@ -84,11 +86,10 @@ export function ThemeToggle({
                     setTheme(t.value);
                     setIsOpen(false);
                   }}
-                  className={`w-full flex items-center gap-3 px-3 py-2 rounded-md transition-colors ${
-                    theme === t.value
-                      ? "bg-brand-accent/10 text-brand-primary dark:text-brand-accent"
-                      : "hover:bg-light-surface dark:hover:bg-slate-700"
-                  }`}
+                  className={`w-full flex items-center gap-3 px-3 py-2 rounded-md transition-colors ${theme === t.value
+                    ? "bg-brand-accent/10 text-brand-primary dark:text-brand-accent"
+                    : "hover:bg-light-surface dark:hover:bg-slate-700"
+                    }`}
                 >
                   <Icon className="w-4 h-4" />
                   <span>{t.label}</span>
@@ -107,9 +108,50 @@ export function ThemeToggle({
   );
 }
 
-// Simple toggle version (no dropdown)
-export function ThemeToggleSimple({ className = "" }: ThemeToggleProps) {
+export function ThemeToggle({
+  className = "",
+  showLabel = false,
+}: ThemeToggleProps) {
   const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <div className={`relative ${className}`}>
+        <button
+          className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 transition-colors"
+          disabled
+        >
+          <Sun className="w-5 h-5" />
+        </button>
+      </div>
+    );
+  }
+
+  try {
+    return <ThemeToggleInner className={className} showLabel={showLabel} />;
+  } catch (error) {
+    // Fallback if ThemeProvider is not available
+    return (
+      <div className={`relative ${className}`}>
+        <button
+          className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 transition-colors"
+          disabled
+        >
+          <Sun className="w-5 h-5" />
+        </button>
+      </div>
+    );
+  }
+}
+
+// Simple toggle version (no dropdown)
+function ThemeToggleSimpleInner({ className = "" }: ThemeToggleProps) {
+  const [mounted, setMounted] = useState(false);
+  const { toggleTheme, effectiveTheme } = useTheme();
 
   useEffect(() => {
     setMounted(true);
@@ -126,8 +168,6 @@ export function ThemeToggleSimple({ className = "" }: ThemeToggleProps) {
       </button>
     );
   }
-
-  const { toggleTheme, effectiveTheme } = useTheme();
 
   return (
     <button
@@ -162,4 +202,37 @@ export function ThemeToggleSimple({ className = "" }: ThemeToggleProps) {
       </span>
     </button>
   );
+}
+
+export function ThemeToggleSimple({ className = "" }: ThemeToggleProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <button
+        className={`p-2 rounded-lg bg-gray-100 dark:bg-gray-800 transition-colors ${className}`}
+        disabled
+      >
+        <Sun className="w-5 h-5" />
+      </button>
+    );
+  }
+
+  try {
+    return <ThemeToggleSimpleInner className={className} />;
+  } catch (error) {
+    // Fallback if ThemeProvider is not available
+    return (
+      <button
+        className={`p-2 rounded-lg bg-gray-100 dark:bg-gray-800 transition-colors ${className}`}
+        disabled
+      >
+        <Sun className="w-5 h-5" />
+      </button>
+    );
+  }
 }

@@ -1,7 +1,5 @@
 "use client"
-import { useEffect, useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
-import gsap from 'gsap';
 
 export default function AnimatedButton() {
 

@@ -1,13 +1,19 @@
 "use client";
 import { useEffect, useRef } from "react";
 import { Box } from "lucide-react";
+import Image from "next/image";
 import gsap from "gsap";
 
-export default function Partners() {
-  const row1Ref = useRef(null);
-  const row2Ref = useRef(null);
+interface Partner {
+  name: string;
+  domain: string;
+}
 
-  const partners = [
+export default function Partners() {
+  const row1Ref = useRef<HTMLDivElement>(null);
+  const row2Ref = useRef<HTMLDivElement>(null);
+
+  const partners: Partner[] = [
     { name: "Kaspersky", domain: "kaspersky.com" },
     { name: "Dell Technologies", domain: "dell.com" },
     { name: "Cisco", domain: "cisco.com" },
@@ -70,19 +76,22 @@ export default function Partners() {
     }
   }, []);
 
-  const renderPartner = (partner, index) => (
+  const renderPartner = (partner: Partner, index: number | string) => (
     <div
       key={index}
-      className="bg-base rounded-lg p-4 flex items-center justify-center h-20  transition-colors border border-base flex-shrink-0 w-32"
+      className="bg-base rounded-lg p-4 flex items-center justify-center h-20 transition-colors border border-base flex-shrink-0 w-32"
     >
-      <img
+      <Image
         src={`https://logo.clearbit.com/${partner.domain}`}
         alt={`${partner.name} logo`}
+        width={48}
+        height={48}
         className="w-12 h-12 object-contain"
         onError={(e) => {
           // Fallback to a generic icon if logo fails to load
-          e.target.style.display = "none";
-          e.target.nextSibling.style.display = "flex";
+          e.currentTarget.style.display = "none";
+          const nextElement = e.currentTarget.nextElementSibling as HTMLElement;
+          if (nextElement) nextElement.style.display = "flex";
         }}
       />
       <div className="hidden items-center justify-center">
@@ -110,7 +119,7 @@ export default function Partners() {
         {/* Upper Row - Scrolls Left */}
         <div className="overflow-hidden mb-8">
           <div ref={row1Ref} className="flex space-x-4">
-            {row1Partners.map(renderPartner)}
+            {row1Partners.map((partner, index) => renderPartner(partner, index))}
             {row1Partners.map((partner, index) =>
               renderPartner(partner, `dup-${index}`)
             )}
@@ -120,7 +129,7 @@ export default function Partners() {
         {/* Lower Row - Scrolls Right */}
         <div className="overflow-hidden">
           <div ref={row2Ref} className="flex space-x-4">
-            {row2Partners.map(renderPartner)}
+            {row2Partners.map((partner, index) => renderPartner(partner, index))}
             {row2Partners.map((partner, index) =>
               renderPartner(partner, `dup-${index}`)
             )}

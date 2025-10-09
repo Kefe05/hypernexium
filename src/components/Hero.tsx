@@ -5,12 +5,14 @@ import gsap from 'gsap';
 
 // Animated Button Component
 function AnimatedButton() {
-  const btnRef = useRef(null);
-  const hoverBgRef = useRef(null);
+  const btnRef = useRef<HTMLButtonElement>(null);
+  const hoverBgRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const btn = btnRef.current;
     const hoverBg = hoverBgRef.current;
+
+    if (!btn || !hoverBg) return;
 
     const handleMouseEnter = () => {
       gsap.to(hoverBg, {
@@ -144,7 +146,7 @@ export default function HeroCarousel() {
     return () => clearInterval(interval);
   }, [slides.length]);
 
-  const goToSlide = (index) => {
+  const goToSlide = (index: number) => {
     setCurrentSlide(index);
   };
 
