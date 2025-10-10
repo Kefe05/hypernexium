@@ -82,7 +82,7 @@ export default function Team() {
             {/* Introduction */}
             <div className="space-y-6">
               <div className="text-6xl text-brand-accent/20 font-serif leading-none">&ldquo;</div>
-              <blockquote className="text-xl md:text-2xl text-gray-700 dark:text-gray-300 leading-relaxed font-light">
+              <blockquote className=" text-lg md:text-2xl text-gray-700 dark:text-gray-300 leading-relaxed font-light">
                 {currentMemberData.bio}
               </blockquote>
             </div>

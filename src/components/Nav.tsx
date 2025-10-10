@@ -5,6 +5,8 @@ import Image from "next/image";
 import { Button } from "./ui/button";
 
 import { ThemeToggleSimple } from "./ui/ThemeToggle";
+import Logo from "./Logo";
+import { MenuIcon } from "lucide-react";
 
 const navigationLinks = [
   { name: "Home", href: "/" },
@@ -44,13 +46,7 @@ export default function Nav() {
             {/* Logo */}
         
             <Link href="/">
-              <Image
-                src="/logo-fullwhite.png"
-                alt="Hyper Nexium Logo"
-                width={120}
-                height={40}
-                className="h-12 w-auto  "
-              />
+             <Logo/>
             </Link>
        
             {/* Navigation Links */}
@@ -72,7 +68,7 @@ export default function Nav() {
             </ul>
 
             {/* CTA Button */}
-            <div className="flex items-center gap-2">
+            <div className="hidden md:flex items-center gap-2">
               <Button 
                 className={`rounded-full px-6 text-sm transition-all duration-300 ${
                   isScrolled
@@ -84,6 +80,8 @@ export default function Nav() {
               </Button>
               <ThemeToggleSimple />
             </div>
+
+            <MenuIcon  className="block md:hidden"/>
           </div>
         </div>
       </div>

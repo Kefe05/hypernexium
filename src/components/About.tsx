@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import { SectionDivider, VerticalGridLines } from "./GridLines";
+import { AboutData as sections } from "../../public/constants";
 
 export default function About() {
   const [activeSection, setActiveSection] = useState(0);
@@ -10,33 +11,7 @@ export default function About() {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const imageRef = useRef<HTMLDivElement>(null);
 
-  const sections = [
-    {
-      id: 0,
-      title: "Cybersecurity",
-      subtitle: "Proactive Defense",
-      description: "Safeguard your digital assets with our multi-layered cybersecurity frameworks. We provide advanced threat detection, prevention, and response to protect your business from modern cyber threats.",
-      image: "/cybersecurity.jpeg",
-      stats: { number: "99.9%", label: "Threat Detection Rate" }
-    },
-    {
-      id: 1,
-      title: "Digital Infrastructure",
-      subtitle: "Scalable Solutions",
-      description: "Build a future-ready enterprise with our scalable infrastructure solutions. We design and manage cloud, hybrid, and on-premises environments to ensure performance, reliability, and growth.",
-      image: "/infrastructure.jpeg",
-      stats: { number: "100+", label: "Deployed Solutions" }
-    },
-    {
-      id: 2,
-      title: "Surveillance Security Systems",
-      subtitle: "Intelligent Monitoring",
-      description: "Enhance enterprise security with AI and IoT-integrated surveillance systems. Our advanced video monitoring solutions provide real-time insights and robust protection tailored to your needs.",
-      image: "/surveillance.jpeg",
-      stats: { number: "24/7", label: "Monitoring Coverage" }
-    }
-  ];
-
+ 
   // Auto-transition effect
   useEffect(() => {
     const startInterval = () => {
@@ -70,7 +45,7 @@ export default function About() {
   };
 
   return (
-    <section className="relative py-20 min-h-screen flex items-center">
+    <section className="relative py-5 md:py-20 min-h-screen flex items-center">
       <VerticalGridLines opacity={0.1} />
 
       <div className="max-w-7xl mx-auto px-6 w-full">
@@ -79,15 +54,15 @@ export default function About() {
           {/* Left Content - Text */}
           <div className="h-[600px] flex flex-col justify-center space-y-8">
             <div className="space-y-4">
-              <span className="inline-block px-4 py-2 bg-brand-accent/10 text-brand-accent rounded-full text-sm font-medium">
+              <span className="inline-block px-4 py-2 bg-brand-accent/10 text-brand-accent rounded-full text-xs md:text-sm font-medium">
                 {sections[activeSection].subtitle}
               </span>
 
-              <h2 className="text-5xl font-bold text-primary transition-all duration-700 ease-out">
+              <h2 className=" text-3xl md:text-5xl font-bold text-primary transition-all duration-700 ease-out">
                 {sections[activeSection].title}
               </h2>
 
-              <p className="text-xl text-secondary leading-relaxed transition-all duration-700 ease-out">
+              <p className=" text-base md:text-xl text-secondary leading-relaxed transition-all duration-700 ease-out">
                 {sections[activeSection].description}
               </p>
             </div>
@@ -95,10 +70,10 @@ export default function About() {
             {/* Stats */}
             <div className="flex items-center space-x-8">
               <div className="text-center">
-                <div className="text-4xl font-bold text-brand-primary dark:text-brand-accent transition-all duration-700">
+                <div className=" text-2xl md:text-4xl font-bold text-brand-primary dark:text-brand-accent transition-all duration-700">
                   {sections[activeSection].stats.number}
                 </div>
-                <div className="text-sm text-secondary mt-1">
+                <div className="text-xs md:text-sm text-secondary mt-1">
                   {sections[activeSection].stats.label}
                 </div>
               </div>
@@ -127,7 +102,7 @@ export default function About() {
           {/* Right Content - Image */}
           <div
             ref={imageRef}
-            className="relative h-[600px] rounded-2xl overflow-hidden cursor-pointer"
+            className="relative h-[600px] rounded-2xl overflow-hidden cursor-pointer hidden md:block"
             onMouseEnter={handleImageMouseEnter}
             onMouseLeave={handleImageMouseLeave}
           >
