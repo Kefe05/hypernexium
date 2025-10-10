@@ -20,17 +20,17 @@ export default function Newsletter() {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
           
           {/* Left Content */}
-          <div className="flex-1 space-y-4">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white">
+          <div className="flex-1 space-y-4 ">
+            <h2 className=" text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white">
               Stay In the Loop
             </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400 max-w-lg">
+            <p className=" text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-lg">
               Keep up-to-date with all things Hyper Nexium by signing up for our newsletter.
             </p>
           </div>
 
           {/* Right Content - Form */}
-          <div className="flex-1 max-w-lg">
+          <div className="flex-1 w-full md:max-w-lg">
             <form onSubmit={handleSubmit} className="flex gap-0">
               <input
                 type="email"
@@ -42,7 +42,7 @@ export default function Newsletter() {
               />
               <Button
                 type="submit"
-                className="px-8 py-4 bg-brand-primary hover:bg-brand-secondary text-white rounded-r-full font-medium border border-l-0 border-brand-primary h-20"
+                className="px-8 py-4 bg-brand-primary hover:bg-brand-secondary text-white rounded-r-full font-medium border border-l-0 border-brand-primary  h-15 md:h-20"
               >
                 Subscribe
               </Button>

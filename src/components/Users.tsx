@@ -88,17 +88,17 @@ export default function Users() {
   ];
 
   return (
-    <section className="relative py-24 bg-slate-900 text-white overflow-hidden">
+    <section className="relative py-24 bg-base text-primary overflow-hidden">
       <VerticalGridLines opacity={0.05} />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16 space-y-6">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold">
-            Tailored Software Solutions{" "}
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold">
+            We have a solution {" "}
             <span className="text-brand-accent">for Every Sector</span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-base md:text-xl text-secondary max-w-4xl mx-auto leading-relaxed">
             From healthcare to finance, we deliver cutting-edge technology solutions that drive innovation and
             efficiency across diverse industries.
           </p>
@@ -112,19 +112,19 @@ export default function Users() {
             return (
               <div
                 key={industry.id}
-                className={`group relative p-8 rounded-2xl border border-gray-700 bg-gray-800/50 backdrop-blur-sm transition-all duration-300 hover:border-gray-600 ${industry.hoverColor} hover:transform hover:-translate-y-2 cursor-pointer`}
+                className={`group relative p-8 rounded-2xl border  bg-light-surface backdrop-blur-sm transition-all duration-300  hover:bg-brand-accent/20 hover:transform hover:-translate-y-2 cursor-pointer`}
               >
                 {/* Icon */}
-                <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl ${industry.bgColor} mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                  <IconComponent className={`w-8 h-8 ${industry.color}`} />
+                <div className={`inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-6 group-hover:scale-110 transition-transform duration-300`}>
+                  <IconComponent className={`w-8 h-8 text-brand-accent-light`} />
                 </div>
 
                 {/* Content */}
                 <div className="space-y-3">
-                  <h3 className="text-2xl font-bold text-white group-hover:text-white transition-colors">
+                  <h3 className="text-lg md:text-2xl font-bold text-secondary  transition-colors">
                     {industry.title}
                   </h3>
-                  <p className="text-gray-400 group-hover:text-gray-300 transition-colors leading-relaxed">
+                  <p className="text-secondary transition-colors leading-relaxed md:text-base text-sm">
                     {industry.description}
                   </p>
                 </div>

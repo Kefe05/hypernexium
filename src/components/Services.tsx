@@ -3,17 +3,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import { VerticalGridLines } from './GridLines';
 import { Button } from './ui/button';
 import {
-  Shield,
-  Database,
-  Cloud,
-  Network,
-  Video,
-  Users,
   ArrowRight,
   CheckCircle
 } from 'lucide-react';
 import { gsap } from 'gsap'; // Ensure GSAP is installed: npm install gsap
-
+import { servicesData as services } from '../../public/constants';
 export default function Services() {
   const [activeService, setActiveService] = useState(0);
 
@@ -30,50 +24,7 @@ export default function Services() {
   // Ref for the section to observe scroll
   const sectionRef = useRef<HTMLElement>(null);
 
-  const services = [
-    {
-      id: 0,
-      title: "Cybersecurity",
-      description: "Protect your digital assets with our proactive and multi-layered security frameworks. We defend against modern cyber threats with advanced solutions tailored to your enterprise needs.",
-      icon: Shield,
-      features: ["Threat Detection & Prevention", "Multi-Layered Security", "Incident Response", "Security Audits"]
-    },
-    {
-      id: 1,
-      title: "Backup and Recovery",
-      description: "Ensure business continuity with our enterprise-grade data backup and disaster recovery solutions. We safeguard your data integrity with reliable and efficient recovery systems.",
-      icon: Database,
-      features: ["Data Backup Solutions", "Disaster Recovery Planning", "Data Integrity Assurance", "Automated Recovery Processes"]
-    },
-    {
-      id: 2,
-      title: "Digital Infrastructure",
-      description: "Build scalable infrastructure to support your enterprise. We design, deploy, and manage cloud, hybrid, and on-premises environments for optimal performance and growth.",
-      icon: Cloud,
-      features: ["Cloud Deployment", "Hybrid Infrastructure", "Scalability Optimization", "Infrastructure Management"]
-    },
-    {
-      id: 3,
-      title: "Network Modernization",
-      description: "Upgrade to smart, agile, and secure networks. Our solutions modernize traditional networks to meet current and future demands, ensuring connectivity and performance.",
-      icon: Network,
-      features: ["Smart Networking", "Secure Connectivity", "Network Optimization", "Future-Ready Solutions"]
-    },
-    {
-      id: 4,
-      title: "Surveillance Security Systems",
-      description: "Enhance enterprise security with advanced video surveillance. Our AI and IoT-integrated systems provide real-time monitoring and tailored security solutions.",
-      icon: Video,
-      features: ["AI-Powered Surveillance", "IoT Integration", "Real-Time Monitoring", "Customized Security Systems"]
-    },
-    {
-      id: 5,
-      title: "IT Training",
-      description: "Empower your team with our capacity-building programs. We offer technical training to upskill employees in key IT domains, driving enterprise success.",
-      icon: Users,
-      features: ["Technical Skill Development", "Customized Training Programs", "IT Certification Prep", "Team Upskilling"]
-    }
-  ];
+
 
   const currentService = services[activeService];
   const CurrentIcon = currentService.icon;
@@ -208,14 +159,14 @@ export default function Services() {
                   <div ref={iconRef} className="w-16 h-16 bg-brand-accent/10 rounded-2xl flex items-center justify-center flex-shrink-0">
                     <CurrentIcon className="w-8 h-8 text-brand-accent" />
                   </div>
-                  <h3 ref={titleRef} className="text-3xl font-bold text-light-text-primary dark:text-dark-text-primary">
+                  <h3 ref={titleRef} className=" text-xl md:text-3xl font-bold text-light-text-primary dark:text-dark-text-primary">
                     {currentService.title}
                   </h3>
                 </div>
 
                 {/* Service Content */}
                 <div className="space-y-6">
-                  <p ref={descRef} className="text-lg text-light-text-secondary dark:text-dark-text-secondary leading-relaxed">
+                  <p ref={descRef} className="text-sm md:text-lg text-light-text-secondary dark:text-dark-text-secondary leading-relaxed">
                     {currentService.description}
                   </p>
 
@@ -224,7 +175,7 @@ export default function Services() {
                     {currentService.features.map((feature, index) => (
                       <div key={index} className="flex items-center space-x-3">
                         <CheckCircle className="w-5 h-5 text-brand-accent flex-shrink-0" />
-                        <span className="text-light-text-secondary dark:text-dark-text-secondary">{feature}</span>
+                        <span className="text-light-text-secondary dark:text-dark-text-secondary text-sm md:text-base">{feature}</span>
                       </div>
                     ))}
                   </div>

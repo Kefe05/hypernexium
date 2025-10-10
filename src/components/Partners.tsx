@@ -3,40 +3,19 @@ import { useEffect, useRef } from "react";
 import { Box } from "lucide-react";
 import Image from "next/image";
 import gsap from "gsap";
+import { Partner } from "@/types/common";
+import { partners } from "../../public/constants";
 
-interface Partner {
-  name: string;
-  domain: string;
-}
 
 export default function Partners() {
   const row1Ref = useRef<HTMLDivElement>(null);
   const row2Ref = useRef<HTMLDivElement>(null);
 
-  const partners: Partner[] = [
-    { name: "Kaspersky", domain: "kaspersky.com" },
-    { name: "Dell Technologies", domain: "dell.com" },
-    { name: "Cisco", domain: "cisco.com" },
-    { name: "Huawei", domain: "huawei.com" },
-    { name: "Hikvision", domain: "hikvision.com" },
-    { name: "Microsoft", domain: "microsoft.com" },
-    { name: "VMware", domain: "vmware.com" },
-    { name: "Veeam", domain: "veeam.com" },
-    { name: "Veritas", domain: "veritas.com" },
-    { name: "Nutanix", domain: "nutanix.com" },
-    { name: "D-Link", domain: "dlink.com" },
-    { name: "Palo Alto Networks", domain: "paloaltonetworks.com" },
-    { name: "Symantec", domain: "symantec.com" },
-    { name: "Avaya", domain: "avaya.com" },
-    { name: "HP", domain: "hp.com" },
-    { name: "Fortinet", domain: "fortinet.com" },
-    { name: "Sophos", domain: "sophos.com" },
-    { name: "Lenovo", domain: "lenovo.com" },
-  ];
+  
 
   // Split into two rows of 9 each
-  const row1Partners = partners.slice(0, 9);
-  const row2Partners = partners.slice(9, 18);
+  const row1Partners = partners?.slice(0, 9);
+  const row2Partners = partners?.slice(9, 18);
 
   useEffect(() => {
     const row1 = row1Ref.current;
@@ -79,14 +58,14 @@ export default function Partners() {
   const renderPartner = (partner: Partner, index: number | string) => (
     <div
       key={index}
-      className="bg-base rounded-lg p-4 flex items-center justify-center h-20 transition-colors border border-base flex-shrink-0 w-32"
+      className="bg-base rounded-lg p-4 flex items-center justify-center h-20 transition-colors  flex-shrink-0 w-28"
     >
       <Image
         src={`https://logo.clearbit.com/${partner.domain}`}
         alt={`${partner.name} logo`}
         width={48}
         height={48}
-        className="w-12 h-12 object-contain"
+        className="w-10 h-10 sm:w-12 sm:h-12 object-contain"
         onError={(e) => {
           // Fallback to a generic icon if logo fails to load
           e.currentTarget.style.display = "none";
@@ -107,10 +86,10 @@ export default function Partners() {
     <section className="py-20 px-10">
       <div className="max-w-7xl mx-auto">
         <div className="mb-12 space-y-6">
-          <h2 className="text-5xl font-bold text-primary">
+          <h2 className="text-3xl md:text-5xl font-bold text-primary">
             Our Partners
           </h2>
-          <p className="text-xl text-secondary leading-relaxed">
+          <p className="text-base md:text-xl text-secondary leading-relaxed">
             We collaborate with industry-leading technology partners to deliver
             cutting-edge solutions in cybersecurity, cloud computing, networking,
             and enterprise infrastructure. Our partnerships ensure access to the
@@ -121,8 +100,8 @@ export default function Partners() {
         {/* Upper Row - Scrolls Left */}
         <div className="overflow-hidden mb-8">
           <div ref={row1Ref} className="flex space-x-4">
-            {row1Partners.map((partner, index) => renderPartner(partner, index))}
-            {row1Partners.map((partner, index) =>
+            {row1Partners?.map((partner, index) => renderPartner(partner, index))}
+            {row1Partners?.map((partner, index) =>
               renderPartner(partner, `dup-${index}`)
             )}
           </div>
@@ -131,8 +110,8 @@ export default function Partners() {
         {/* Lower Row - Scrolls Right */}
         <div className="overflow-hidden">
           <div ref={row2Ref} className="flex space-x-4">
-            {row2Partners.map((partner, index) => renderPartner(partner, index))}
-            {row2Partners.map((partner, index) =>
+            {row2Partners?.map((partner, index) => renderPartner(partner, index))}
+            {row2Partners?.map((partner, index) =>
               renderPartner(partner, `dup-${index}`)
             )}
           </div>
