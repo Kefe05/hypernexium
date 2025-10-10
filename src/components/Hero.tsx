@@ -1,6 +1,5 @@
 "use client"
 import { useEffect, useRef, useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import gsap from 'gsap';
 import { AnimatedButton } from './AnimateButton';
 import { slidesData as slides } from '../../public/constants';

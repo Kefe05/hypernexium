@@ -81,7 +81,7 @@ export default function Nav() {
               <ThemeToggleSimple />
             </div>
 
-            <MenuIcon  className="block md:hidden"/>
+            <MenuIcon  className="text-white block md:hidden"/>
           </div>
         </div>
       </div>
