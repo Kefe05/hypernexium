@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { Button } from "./ui/button";
 import Image from "next/image";
 import { SectionDivider, VerticalGridLines } from "./GridLines";
+import { AboutData as sections } from "../../public/constants";
 
 export default function About() {
   const [activeSection, setActiveSection] = useState(0);
@@ -10,33 +11,7 @@ export default function About() {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const imageRef = useRef<HTMLDivElement>(null);
 
-  const sections = [
-    {
-      id: 0,
-      title: "Cloud Infrastructure",
-      subtitle: "Scalable & Secure",
-      description: "Transform your business with enterprise-grade cloud solutions. We design and implement robust infrastructure that scales with your growth, ensuring 99.9% uptime and maximum security.",
-      image: "/one.jpg",
-      stats: { number: "50+", label: "Enterprise Clients" }
-    },
-    {
-      id: 1,
-      title: "Cybersecurity Solutions",
-      subtitle: "Advanced Protection",
-      description: "Protect your digital assets with our comprehensive cybersecurity framework. From threat detection to incident response, we safeguard your business against evolving cyber threats.",
-      image: "/two.jpg",
-      stats: { number: "99.9%", label: "System Uptime" }
-    },
-    {
-      id: 2,
-      title: "Digital Transformation",
-      subtitle: "Innovation Driven",
-      description: "Modernize your operations with cutting-edge technology solutions. We help organizations embrace digital innovation to improve efficiency, reduce costs, and accelerate growth.",
-      image: "/three.jpg",
-      stats: { number: "24/7", label: "Support Coverage" }
-    }
-  ];
-
+ 
   // Auto-transition effect
   useEffect(() => {
     const startInterval = () => {
@@ -70,24 +45,24 @@ export default function About() {
   };
 
   return (
-    <section className="relative py-20 min-h-screen flex items-center">
+    <section className="relative py-5 md:py-20 min-h-screen flex items-center">
       <VerticalGridLines opacity={0.1} />
 
       <div className="max-w-7xl mx-auto px-6 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
           {/* Left Content - Text */}
-          <div className="space-y-8">
+          <div className="h-[600px] flex flex-col justify-center space-y-8">
             <div className="space-y-4">
-              <span className="inline-block px-4 py-2 bg-brand-accent/10 text-brand-accent rounded-full text-sm font-medium">
+              <span className="inline-block px-4 py-2 bg-brand-accent/10 text-brand-accent rounded-full text-xs md:text-sm font-medium">
                 {sections[activeSection].subtitle}
               </span>
 
-              <h2 className="text-5xl font-bold transition-all duration-700 ease-out">
+              <h2 className=" text-3xl md:text-5xl font-bold text-primary transition-all duration-700 ease-out">
                 {sections[activeSection].title}
               </h2>
 
-              <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed transition-all duration-700 ease-out">
+              <p className=" text-base md:text-xl text-secondary leading-relaxed transition-all duration-700 ease-out">
                 {sections[activeSection].description}
               </p>
             </div>
@@ -95,15 +70,15 @@ export default function About() {
             {/* Stats */}
             <div className="flex items-center space-x-8">
               <div className="text-center">
-                <div className="text-4xl font-bold text-brand-primary dark:text-brand-accent transition-all duration-700">
+                <div className=" text-2xl md:text-4xl font-bold text-brand-primary dark:text-brand-accent transition-all duration-700">
                   {sections[activeSection].stats.number}
                 </div>
-                <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                <div className="text-xs md:text-sm text-secondary mt-1">
                   {sections[activeSection].stats.label}
                 </div>
               </div>
 
-              <div className="h-12 w-px bg-gray-300 dark:bg-gray-600"></div>
+              <div className="h-12 w-px bg-base"></div>
 
               <Button className="bg-brand-accent hover:bg-brand-primary text-white rounded-full px-8 py-3">
                 Learn More
@@ -117,7 +92,7 @@ export default function About() {
                   key={index}
                   className={`h-1 rounded-full transition-all duration-500 ${index === activeSection
                       ? 'w-12 bg-brand-accent'
-                      : 'w-4 bg-gray-300 dark:bg-gray-600'
+                      : 'w-4 bg-base'
                     }`}
                 />
               ))}
@@ -127,7 +102,7 @@ export default function About() {
           {/* Right Content - Image */}
           <div
             ref={imageRef}
-            className="relative h-[600px] rounded-2xl overflow-hidden cursor-pointer"
+            className="relative h-[600px] rounded-2xl overflow-hidden cursor-pointer hidden md:block"
             onMouseEnter={handleImageMouseEnter}
             onMouseLeave={handleImageMouseLeave}
           >

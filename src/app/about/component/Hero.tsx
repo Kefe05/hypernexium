@@ -1,93 +1,40 @@
-"use client"
-import { Button } from '@/components/ui/button';
-import React, { useEffect, useRef } from 'react';
-import GridLines, { VerticalGridLines, SectionDivider } from '@/components/GridLines';
+import React from 'react';
+import { ChevronDown } from 'lucide-react';
 
-export default function Hero() {
-  const canvasRef = useRef(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    let animationFrameId;
-    let time = 0;
-
-    // Set canvas size
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
-
-    // Line configuration
-    const lines = [
-      { y: 0.2, speed: 0.3, amplitude: 50, color: 'rgba(0, 0, 0,)' },
-      { y: 0.35, speed: 0.25, amplitude: 70, color: 'rgba(0, 0, 0, 0.3)' },
-      { y: 0.5, speed: 0.35, amplitude: 60, color: 'rgba(0, 0, 0, 0.35)' },
-      { y: 0.65, speed: 0.28, amplitude: 80, color: 'rgba(0, 0, 0, 0.25)' },
-      { y: 0.8, speed: 0.32, amplitude: 65, color: 'rgba(0, 0, 0, 0.3)' },
-    ];
-
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      time += 0.01;
-
-      lines.forEach((line) => {
-        ctx.beginPath();
-        ctx.strokeStyle = line.color;
-        ctx.lineWidth = 2;
-
-        for (let x = 0; x <= canvas.width; x += 5) {
-          const y = 
-            canvas.height * line.y +
-            Math.sin((x * 0.005) + (time * line.speed)) * line.amplitude +
-            Math.cos((x * 0.003) + (time * line.speed * 0.5)) * (line.amplitude * 0.5);
-
-          if (x === 0) {
-            ctx.moveTo(x, y);
-          } else {
-            ctx.lineTo(x, y);
-          }
-        }
-
-        ctx.stroke();
-      });
-
-      animationFrameId = requestAnimationFrame(animate);
-    };
-
-    animate();
-
-    return () => {
-      window.removeEventListener('resize', resizeCanvas);
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, []);
-
+export default function AboutPage() {
   return (
-    <div className="relative w-full h-screen bg-gradient-to-br overflow-hidden">
-      {/* Stripe-style Grid Lines */}
-      <VerticalGridLines opacity={0.1} />
-      
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0"
-      />
-      
-      {/* Content overlay */}
-      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6">
-         <Button className="bg-slate-200 dark:bg-slate-600 rounded-full">About Us</Button>
-        <h1 className="text-6xl font-bold mb-6">
-          Hyper Nexium Technologies
-        </h1>
-        <p className="text-xl max-w-2xl mb-8">
-          Smooth, flowing animated lines that create a dynamic background effect
-        </p>
-      </div>
+    <div className="min-h-screen bg-slate-900">
+      {/* Navbar */}
 
-      {/* Section Divider at bottom */}
-      <SectionDivider className="absolute bottom-0 left-0 right-0 h-px" />
+
+      {/* Hero Section */}
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        {/* Background Image with Overlay */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: "url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&h=1080&fit=crop')"
+          }}
+        >
+          <div className="absolute inset-0 bg-slate-900/70"></div>
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 text-center px-4">
+          <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-white tracking-tight">
+            About—Us
+          </h1>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 z-10">
+          <div className="animate-bounce">
+            <ChevronDown className="w-8 h-8 text-white/70" />
+          </div>
+        </div>
+      </section>
+
+     
     </div>
   );
 }

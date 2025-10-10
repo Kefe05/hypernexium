@@ -14,7 +14,7 @@ import gsap from "gsap";
 export default function NotFoundPage() {
   const titleRef = useRef(null);
   const glitchRef = useRef(null);
-  const cardsRef = useRef([]);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const particlesRef = useRef<HTMLDivElement>(null);
   const [showAlert, setShowAlert] = useState(false);
 
@@ -147,8 +147,8 @@ export default function NotFoundPage() {
             Page Not Found
           </h2>
           <p className="text-blue-200 text-lg max-w-2xl mx-auto">
-            The page you're looking for seems to have been moved or doesn't
-            exist. But don't worry, our security protocols are keeping
+            The page you&apos;re looking for seems to have been moved or doesn&apos;t
+            exist. But don&apos;t worry, our security protocols are keeping
             everything else safe!
           </p>
         </div>
@@ -174,7 +174,9 @@ export default function NotFoundPage() {
             return (
               <div
                 key={index}
-                ref={(el) => (cardsRef.current[index] = el)}
+                ref={(el) => {
+                  cardsRef.current[index] = el;
+                }}
                 className="group bg-slate-800/50 backdrop-blur-sm border border-blue-400/20 rounded-xl p-6 hover:bg-slate-800/70 hover:border-blue-400/40 transition-all duration-300 cursor-pointer hover:scale-105"
               >
                 <div className="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center mb-4 group-hover:bg-blue-500/30 transition-colors">
