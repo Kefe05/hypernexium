@@ -62,7 +62,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-slate-900" ref={containerRef}>
       {/* Hero Section */}
-      <section className="relative h-screen flex items-center overflow-hidden" aria-labelledby="about-title">
+      <section className="relative h-screen flex items-center overflow-hidden pt-16 md:pt-0" aria-labelledby="about-title">
         {/* Background Image */}
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000"
