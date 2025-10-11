@@ -1,6 +1,4 @@
-import React from 'react'
 import Hero from './component/Hero'
-import About from './component/About'
 import ServiceSection from './component/Services'
 import Newsletter from '@/components/Newsletter'
 import Footer from '@/components/Footer'
@@ -8,21 +6,28 @@ import Footer from '@/components/Footer'
 export default function Services() {
   return (
     <section>
-        {/* service hero */}
-        <Hero />
+      {/* service hero */}
+      <Hero />
 
-        {/* services about section */}
-        <About      />
+      {/* services */}
+      <ServiceSection />
+      {/* services */}
+      <ServiceSection />
+      {/* services */}
+      <ServiceSection />
+      {/* services */}
+      <ServiceSection />
+      {/* services */}
+      <ServiceSection />
+      {/* services */}
+      <ServiceSection />
 
-        {/* services */}
-        <ServiceSection />
-
-        {/* newsletter */}
-        <Newsletter />
+      {/* newsletter */}
+      <Newsletter />
 
 
-        {/* footer */}
-        <Footer />
+      {/* footer */}
+      <Footer />
 
 
 

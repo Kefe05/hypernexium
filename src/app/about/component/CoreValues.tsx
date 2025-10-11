@@ -31,14 +31,13 @@ const coreValues = [
 
 export default function CoreValues() {
   return (
-    <section className="py-20 px-6 bg-opacity-100 inset-0 bg-cover bg-center bg-no-repeat" style={{
-      backgroundImage: "url('about-bg.jpg')"
-    }}>
+    <section className="py-20 px-6 b" 
+    >
       <div className="max-w-7xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           {/* Left side - Title */}
           <div>
-            <h2 className="text-5xl lg:text-6xl font-bold text-blue-800">
+            <h2 className="text-5xl lg:text-6xl font-bold text-brand-accent">
               Our Values
             </h2>
           </div>
@@ -48,10 +47,10 @@ export default function CoreValues() {
             {coreValues.map((value) => (
               <div key={value.id} className="flex gap-4">
                 <div className="flex-shrink-0 mt-1">
-                  <CheckCircle2 className="w-6 h-6 text-blue-800" />
+                  <CheckCircle2 className="w-6 h-6 text-brand-accent" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-semibold text-blue-800 mb-2">
+                  <h3 className="text-2xl font-semibold text-brand-accent mb-2">
                     {value.title}
                   </h3>
                   <p className="text-lg text-gray-600 leading-relaxed">

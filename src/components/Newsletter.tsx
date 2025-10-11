@@ -21,8 +21,8 @@ export default function Newsletter() {
           
           {/* Left Content */}
           <div className="flex-1 space-y-4 ">
-            <h2 className=" text-2xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white">
-              Stay In the Loop
+            <h2 className=" text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white">
+             Subscribe to our newsletter
             </h2>
             <p className=" text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-lg">
               Keep up-to-date with all things Hyper Nexium by signing up for our newsletter.
@@ -42,14 +42,14 @@ export default function Newsletter() {
               />
               <Button
                 type="submit"
-                className="px-8 py-4 bg-brand-primary hover:bg-brand-secondary text-white rounded-r-full font-medium border border-l-0 border-brand-primary  h-15 md:h-20"
+                className="px-8 py-4  bg-brand-secondary bg-brand-secondary/90 hover:shadow-md text-white rounded-r-full font-medium border border-l-0 border-brand-primary  h-15 md:h-20"
               >
                 Subscribe
               </Button>
             </form>
             
             {/* Privacy Notice */}
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-3">
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-3 ml-5">
               By submitting this form, you agree to our{" "}
               <a 
                 href="/privacy" 
