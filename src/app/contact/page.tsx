@@ -1,6 +1,6 @@
 export default function Contacts() {
   return (
-    <section className="min-h-screen bg-gray-50 dark:bg-gray-900 py-20 px-6" style={{
+    <section className="bg-gray-50 dark:bg-gray-900 py-20 px-6" style={{
             backgroundImage: "url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&h=1080&fit=crop')"
           }}>
            

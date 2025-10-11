@@ -7,7 +7,7 @@ export function AnimatedButton() {
 
   return (
     <Button
-      className="relative overflow-hidden bg-brand-accent text-white rounded-full px-6 py-4 text-sm md:text-base lg:text-lg w-[150px] sm:w-[200px] md:w-[250px] flex justify-between items-center cursor-pointer border-0 shadow-lg transition-shadow hover:shadow-xl h-15 md:h-20"
+      className="relative overflow-hidden bg-brand-accent-light hover:bg-brand-accent text-white rounded-full px-6 py-4 text-sm md:text-base lg:text-lg w-[150px] sm:w-[200px] md:w-[250px] flex justify-between items-center cursor-pointer border-0 shadow-lg transition-shadow hover:shadow-xl h-15 md:h-20"
     >
       <div
         
