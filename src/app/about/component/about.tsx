@@ -1,4 +1,5 @@
 "use client"
+import { AnimatedButton } from '@/components/AnimateButton';
 import { Button } from '@/components/ui/button';
 import { Play, ArrowRight, XIcon } from 'lucide-react';
 import Image from 'next/image';
@@ -14,7 +15,7 @@ export default function AboutPage() {
   };
 
   return (
-    <section className="relative min-h-screen bg-gray-50 dark:bg-gray-900 overflow-hidden">
+    <section className="relative min-h-screen  dark:bg-gray-900 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center min-h-[80vh]">
           
@@ -56,21 +57,21 @@ export default function AboutPage() {
           {/* Right Side - Content */}
           <div className="space-y-5 order-1 lg:order-2">
             {/* Badge */}
-            <div className="inline-flex items-center px-4 py-2 bg-brand-accent/10 text-brand-accent rounded-full text-sm font-medium">
+            <div className="inline-flex items-center px-4 py-2 bg-brand-accent/10 text-brand-accent rounded-full md:stext-sm font-medium text-xs">
               ABOUT COMPANY
             </div>
 
             {/* Main Heading */}
             <div className="space-y-6">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
                 Provide advanced
                 <br />
-                <span className="text-brand-primary dark:text-brand-accent">business solutions.</span>
+                <span className="text-brand-accent dark:text-brand-accent">business solutions.</span>
               </h1>
             </div>
 
             {/* Description */}
-            <div className="space-y-6 text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+            <div className="space-y-6 text-base md:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
               <p>
                 At Hyper Nexium Technologies, we transform businesses through innovative IT solutions 
                 and strategic consulting. Our expertise spans cloud infrastructure, cybersecurity, 
@@ -82,10 +83,7 @@ export default function AboutPage() {
             {/* CTA Button */}
             <div className="pt-4">
               <Link href="/services">
-                <Button className="group bg-brand-accent hover:bg-brand-primary  text-white rounded-full px-8 py-4 font-medium transition-all duration-200 hover:scale-105 h-15">
-                  OUR SERVICES
-                  <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                </Button>
+               <AnimatedButton />
               </Link>
             </div>
           </div>

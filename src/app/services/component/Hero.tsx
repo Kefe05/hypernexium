@@ -3,14 +3,16 @@ import { VerticalGridLines } from '@/components/GridLines';
 
 export default function Hero() {
   return (
-    <section className="relative py-24 bg-gray-50 dark:bg-gray-900 overflow-hidden">
-      <VerticalGridLines opacity={0.06} />
-      
+    <section className="relative py-24 overflow-hidden"  style={{
+            backgroundImage: "url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&h=1080&fit=crop')"
+          }}>
+      <VerticalGridLines opacity={0.06}  />
+      <div className="absolute inset-0 bg-slate-900/70"></div>
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <div className="max-w-4xl">
           {/* Badge */}
           <div className="flex items-center mb-8">
-            <span className="text-sm font-medium text-brand-accent uppercase tracking-wider">
+            <span className="text-sm font-medium text-brand-accent uppercase tracking-wider ">
               OUR TAILOR-MADE SERVICES
             </span>
             
@@ -23,13 +25,13 @@ export default function Hero() {
           </div>
 
           {/* Main Heading */}
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-8 leading-tight">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold  mb-8 leading-tight text-white">
             OUR SERVICES
           </h1>
 
           {/* Description */}
           <div className="max-w-3xl">
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+            <p className="text-lg md:text-xl leading-relaxed text-white">
               Discover how Hyper Nexium supports enterprises in their digital success with concrete, 
               accessible solutions tailored to your goals. From creating an effective cloud infrastructure 
               to high-performance cybersecurity, from a striking digital transformation to a tailor-made 
@@ -40,7 +42,7 @@ export default function Hero() {
 
           {/* Bottom Decorative Element */}
           <div className="mt-16 flex items-center">
-            <div className="w-12 h-12 bg-gray-900 dark:bg-white rounded-full flex items-center justify-center">
+            <div className="w-12 h-12 bg-gray-900 dark:bg-white rounded-full flex items-center justify-center dark:border-white border">
               <svg 
                 className="w-6 h-6 text-white dark:text-gray-900" 
                 fill="none" 
