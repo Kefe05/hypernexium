@@ -1,6 +1,7 @@
 "use client"
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "./ui/button";
 import { ThemeToggleSimple } from "./ui/ThemeToggle";
 import Logo from "./Logo";
@@ -209,10 +210,11 @@ export default function Nav() {
                           {servicesData.description}
                         </p>
                         <div className="w-full h-32 rounded-lg overflow-hidden">
-                          <img
+                          <Image
                             src={hoveredImage || servicesData.defaultImage}
                             alt="Service preview"
-                            className="w-full h-full object-cover transition-all duration-300 ease-in-out"
+                            fill
+                            className="object-cover transition-all duration-300 ease-in-out"
                           />
                         </div>
                       </div>
@@ -272,10 +274,11 @@ export default function Nav() {
                           {industryData.description}
                         </p>
                         <div className="w-full h-32 rounded-lg overflow-hidden">
-                          <img
+                          <Image
                             src={hoveredImage || industryData.defaultImage}
                             alt="Industry preview"
-                            className="w-full h-full object-cover transition-all duration-300 ease-in-out"
+                            fill
+                            className="object-cover transition-all duration-300 ease-in-out"
                           />
                         </div>
                       </div>

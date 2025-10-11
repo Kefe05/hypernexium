@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 export default function Contacts() {
   return (
     <section className="bg-gray-50 dark:bg-gray-900 py-20 px-6" style={{
@@ -17,10 +19,11 @@ export default function Contacts() {
             <div className="bg-white dark:bg-gray-800 rounded-lg p-8 shadow-lg">
               <div className="space-y-6">
                 <div className="w-full h-48 bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden">
-                  <img
+                  <Image
                     src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&h=1080&fit=crop"
                     alt="Office location"
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
                   />
                 </div>
 

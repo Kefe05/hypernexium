@@ -33,7 +33,7 @@ export default function About() {
         clearInterval(intervalRef.current);
       }
     };
-  }, [isPaused, sections.length]);
+  }, [isPaused]);
 
   // Handle mouse enter/leave on image
   const handleImageMouseEnter = () => {
