@@ -1,67 +1,140 @@
-import React from 'react'
+"use client"
+import React, { useEffect, useRef, useState } from 'react'
 import { CheckCircle2 } from 'lucide-react'
 
 const coreValues = [
   {
     id: 1,
-    title: "Customer Success",
-    description: "Our impact is defined by the success of our healthcare partners and the well-being of their patients."
+    title: 'Innovation',
+    description: 'We continuously explore new technologies to provide cutting-edge solutions.',
   },
   {
     id: 2,
-    title: "Relentless Innovation",
-    description: "We relentlessly pursue cutting-edge solutions to advance cardiac care."
+    title: 'Integrity',
+    description: 'We uphold honesty, transparency, and strong ethical principles in every engagement.',
   },
   {
     id: 3,
-    title: "Bold Integrity",
-    description: "We build trust through transparency and ethical practices."
+    title: 'Customer Focus',
+    description: 'We prioritize our clients\' needs and deliver personalized experiences that exceed expectations.',
   },
   {
     id: 4,
-    title: "Patient-Centricity",
-    description: "We design solutions that prioritize patient outcomes."
+    title: 'Excellence',
+    description: 'We strive for superior quality in everything we do.',
   },
   {
     id: 5,
-    title: "Collaborative Spirit",
-    description: "We believe in the power of people to create impactful change."
-  }
+    title: 'Agility',
+    description: 'We adapt quickly to changes, delivering flexible and scalable solutions.',
+  },
+  {
+    id: 6,
+    title: 'Collaboration',
+    description: 'We foster partnerships and teamwork to drive collective success.',
+  },
 ]
 
-export default function CoreValues() {
+export default function CoreValuesComponent() {
+  const [isVisible, setIsVisible] = useState({})
+  const sectionRefs = useRef({})
+
+  useEffect(() => {
+    const observers = {}
+    
+    Object.keys(sectionRefs.current).forEach(key => {
+      if (sectionRefs.current[key]) {
+        observers[key] = new IntersectionObserver(
+          (entries) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                setIsVisible(prev => ({ ...prev, [key]: true }))
+              }
+            })
+          },
+          { threshold: 0.1 }
+        )
+        observers[key].observe(sectionRefs.current[key])
+      }
+    })
+
+    return () => {
+      Object.values(observers).forEach(observer => observer.disconnect())
+    }
+  }, [])
+
   return (
-    <section className="py-20 px-6 b" 
-    >
-      <div className="max-w-7xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
-          {/* Left side - Title */}
-          <div>
-            <h2 className="text-5xl lg:text-6xl font-bold text-brand-accent">
-              Our Values
+    <div>
+      {/* Core Values Section */}
+      <section className="py-20 px-6 bg-white dark:bg-dark">
+        <div className="max-w-7xl mx-auto">
+          <div 
+            ref={el => sectionRefs.current['values-header'] = el}
+            className={`text-center mb-16 transition-all duration-1000 ${
+              isVisible['values-header'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            }`}
+          >
+            <h2 className="text-4xl md:text-5xl font-bold text-light-text-primary dark:text-dark-text-primary mb-4">
+              Our Core Values
             </h2>
+            <p className="text-lg text-light-text-secondary dark:text-dark-text-secondary max-w-2xl mx-auto">
+              The principles that guide everything we do at Hyper Nexium Technologies
+            </p>
           </div>
 
-          {/* Right side - Values list */}
-          <div className="space-y-10">
-            {coreValues.map((value) => (
-              <div key={value.id} className="flex gap-4">
-                <div className="flex-shrink-0 mt-1">
-                  <CheckCircle2 className="w-6 h-6 text-brand-accent" />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-semibold text-brand-accent mb-2">
-                    {value.title}
-                  </h3>
-                  <p className="text-lg text-gray-600 leading-relaxed">
-                    {value.description}
-                  </p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {coreValues.map((value, index) => (
+              <div
+                key={value.id}
+                ref={el => sectionRefs.current[`value-${value.id}`] = el}
+                className={`group bg-light dark:bg-dark-surface rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-2 ${
+                  isVisible[`value-${value.id}`] 
+                    ? 'opacity-100 translate-y-0' 
+                    : 'opacity-0 translate-y-10'
+                }`}
+                style={{ transitionDelay: `${index * 100}ms` }}
+              >
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 mt-1">
+                    <div className="w-12 h-12 bg-gradient-to-br from-brand-primary to-brand-secondary rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <CheckCircle2 className="w-6 h-6 text-light" />
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-light-text-primary dark:text-dark-text-primary mb-3">
+                      {value.title}
+                    </h3>
+                    <p className="text-light-text-secondary dark:text-dark-text-secondary leading-relaxed">
+                      {value.description}
+                    </p>
+                  </div>
                 </div>
               </div>
             ))}
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Closing Statement */}
+      <section className="py-16 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <div 
+            ref={el => sectionRefs.current['closing'] = el}
+            className={`transition-all duration-1000 ${
+              isVisible['closing'] ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+            }`}
+          >
+            <div className="bg-gradient-to-r from-brand-primary to-brand-secondary rounded-3xl p-12 text-light">
+              <h3 className="text-3xl md:text-4xl font-bold mb-4">
+                Powering Smart Enterprises Beyond Limits
+              </h3>
+              <p className="text-xl text-brand-accent-light leading-relaxed">
+                Together, let's transform your vision into reality with technology that works for you.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   )
 }
