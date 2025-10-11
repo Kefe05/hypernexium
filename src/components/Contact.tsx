@@ -32,6 +32,7 @@ export default function Contact() {
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               Suspendisse varius enim in ero.
             </p>
+            
             <a
               href="mailto:email@example.com"
               className="text-cyan-400 hover:text-cyan-300 text-sm underline"
