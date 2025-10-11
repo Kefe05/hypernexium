@@ -1,24 +1,23 @@
 "use client"
 import { AnimatedButton } from '@/components/AnimateButton';
 import { Button } from '@/components/ui/button';
-import { Play, ArrowRight, XIcon } from 'lucide-react';
+import { Play, XIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default function AboutPage() {
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
   const handlePlayVideo = () => {
     setIsVideoPlaying(true);
-    // Add video play logic here
   };
 
   return (
     <section className="relative min-h-screen  dark:bg-gray-900 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center min-h-[80vh]">
-          
+
           {/* Left Side - Image with Play Button */}
           <div className="relative order-2 lg:order-1">
             <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
@@ -30,10 +29,10 @@ export default function AboutPage() {
                 className="object-cover"
                 priority
               />
-              
+
               {/* Dark Overlay */}
               <div className="absolute inset-0 bg-black/20"></div>
-              
+
               {/* Play Button */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <Button
@@ -42,7 +41,7 @@ export default function AboutPage() {
                   aria-label="Play video"
                 >
                   <Play className="w-8 h-8 text-brand-primary ml-1 group-hover:text-brand-accent transition-colors" />
-                  
+
                   {/* Ripple Effect */}
                   <div className="absolute inset-0 rounded-full bg-white animate-ping opacity-20"></div>
                 </Button>
@@ -73,17 +72,17 @@ export default function AboutPage() {
             {/* Description */}
             <div className="space-y-6 text-base md:text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
               <p>
-                At Hyper Nexium Technologies, we transform businesses through innovative IT solutions 
-                and strategic consulting. Our expertise spans cloud infrastructure, cybersecurity, 
+                At Hyper Nexium Technologies, we transform businesses through innovative IT solutions
+                and strategic consulting. Our expertise spans cloud infrastructure, cybersecurity,
                 digital transformation, and enterprise software development.
               </p>
-             
+
             </div>
 
             {/* CTA Button */}
             <div className="pt-4">
               <Link href="/services">
-               <AnimatedButton />
+                <AnimatedButton />
               </Link>
             </div>
           </div>
@@ -108,20 +107,31 @@ export default function AboutPage() {
         </div> */}
       </div>
 
-      {/* Video Modal (if needed) */}
+      {/* Video Modal */}
       {isVideoPlaying && (
-        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-6">
-          <div className="relative w-full max-w-4xl aspect-video bg-black rounded-lg overflow-hidden">
+        <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-6">
+          <div className="relative w-full max-w-5xl aspect-video bg-black rounded-lg overflow-hidden">
             <Button
               onClick={() => setIsVideoPlaying(false)}
-              className="absolute top-4 right-4 z-10 w-10 h-10 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white transition-colors"
+              className="absolute top-4 right-4 z-10 w-12 h-12 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white transition-colors"
             >
-              <XIcon />
+              <XIcon className="w-6 h-6" />
             </Button>
-            {/* Add your video component here */}
-            <div className="w-full h-full flex items-center justify-center text-white">
-              <p>Video player would go here</p>
-            </div>
+
+            {/* Cloudinary Video */}
+            <video
+              className="w-full h-full object-cover"
+              controls
+              autoPlay
+              playsInline
+              poster="https://res.cloudinary.com/dyzanjli6/video/upload/v1760191533/xghbge2wwcuwec0m4xjz.jpg"
+            >
+              <source
+                src="https://res.cloudinary.com/dyzanjli6/video/upload/v1760191533/xghbge2wwcuwec0m4xjz.mp4"
+                type="video/mp4"
+              />
+              Your browser does not support the video tag.
+            </video>
           </div>
         </div>
       )}
