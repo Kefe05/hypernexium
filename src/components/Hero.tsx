@@ -65,18 +65,10 @@ export default function HeroCarousel() {
     }, 6000);
 
     return () => clearInterval(interval);
-  }, [slides.length]);
+  }, []);
 
   const goToSlide = (index: number) => {
     setCurrentSlide(index);
-  };
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
   return (

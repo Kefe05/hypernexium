@@ -133,7 +133,7 @@ export function ThemeToggle({
 
   try {
     return <ThemeToggleInner className={className} showLabel={showLabel} />;
-  } catch (error) {
+  } catch {
     // Fallback if ThemeProvider is not available
     return (
       <div className={`relative ${className}`}>
@@ -224,7 +224,7 @@ export function ThemeToggleSimple({ className = "" }: ThemeToggleProps) {
 
   try {
     return <ThemeToggleSimpleInner className={className} />;
-  } catch (error) {
+  } catch {
     // Fallback if ThemeProvider is not available
     return (
       <button

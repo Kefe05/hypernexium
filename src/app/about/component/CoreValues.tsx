@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { CheckCircle2 } from 'lucide-react'
 
 const coreValues = [
@@ -16,7 +16,7 @@ const coreValues = [
   {
     id: 3,
     title: 'Customer Focus',
-    description: 'We prioritize our clients\' needs and deliver personalized experiences that exceed expectations.',
+    description: 'We prioritize our clients&apos; needs and deliver personalized experiences that exceed expectations.',
   },
   {
     id: 4,
@@ -36,14 +36,15 @@ const coreValues = [
 ]
 
 export default function CoreValuesComponent() {
-  const [isVisible, setIsVisible] = useState({})
-  const sectionRefs = useRef({})
+  const [isVisible, setIsVisible] = useState<Record<string, boolean>>({})
+  const sectionRefs = useRef<Record<string, HTMLDivElement | null>>({})
 
   useEffect(() => {
-    const observers = {}
-    
+    const observers: Record<string, IntersectionObserver> = {}
+
     Object.keys(sectionRefs.current).forEach(key => {
-      if (sectionRefs.current[key]) {
+      const element = sectionRefs.current[key]
+      if (element) {
         observers[key] = new IntersectionObserver(
           (entries) => {
             entries.forEach(entry => {
@@ -54,7 +55,7 @@ export default function CoreValuesComponent() {
           },
           { threshold: 0.1 }
         )
-        observers[key].observe(sectionRefs.current[key])
+        observers[key].observe(element)
       }
     })
 
@@ -68,11 +69,10 @@ export default function CoreValuesComponent() {
       {/* Core Values Section */}
       <section className="py-20 px-6 bg-white dark:bg-dark">
         <div className="max-w-7xl mx-auto">
-          <div 
-            ref={el => sectionRefs.current['values-header'] = el}
-            className={`text-center mb-16 transition-all duration-1000 ${
-              isVisible['values-header'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
+          <div
+            ref={el => { sectionRefs.current['values-header'] = el }}
+            className={`text-center mb-16 transition-all duration-1000 ${isVisible['values-header'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}
           >
             <h2 className="text-4xl md:text-5xl font-bold text-light-text-primary dark:text-dark-text-primary mb-4">
               Our Core Values
@@ -86,12 +86,11 @@ export default function CoreValuesComponent() {
             {coreValues.map((value, index) => (
               <div
                 key={value.id}
-                ref={el => sectionRefs.current[`value-${value.id}`] = el}
-                className={`group bg-light dark:bg-dark-surface rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-2 ${
-                  isVisible[`value-${value.id}`] 
-                    ? 'opacity-100 translate-y-0' 
-                    : 'opacity-0 translate-y-10'
-                }`}
+                ref={el => { sectionRefs.current[`value-${value.id}`] = el }}
+                className={`group bg-light dark:bg-dark-surface rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-500 hover:-translate-y-2 ${isVisible[`value-${value.id}`]
+                  ? 'opacity-100 translate-y-0'
+                  : 'opacity-0 translate-y-10'
+                  }`}
                 style={{ transitionDelay: `${index * 100}ms` }}
               >
                 <div className="flex items-start gap-4">
@@ -118,18 +117,17 @@ export default function CoreValuesComponent() {
       {/* Closing Statement */}
       <section className="py-16 px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <div 
-            ref={el => sectionRefs.current['closing'] = el}
-            className={`transition-all duration-1000 ${
-              isVisible['closing'] ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-            }`}
+          <div
+            ref={el => { sectionRefs.current['closing'] = el }}
+            className={`transition-all duration-1000 ${isVisible['closing'] ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+              }`}
           >
             <div className="bg-gradient-to-r from-brand-primary to-brand-secondary rounded-3xl p-12 text-light">
               <h3 className="text-3xl md:text-4xl font-bold mb-4">
                 Powering Smart Enterprises Beyond Limits
               </h3>
               <p className="text-xl text-brand-accent-light leading-relaxed">
-                Together, let's transform your vision into reality with technology that works for you.
+                Together, let&apos;s transform your vision into reality with technology that works for you.
               </p>
             </div>
           </div>
