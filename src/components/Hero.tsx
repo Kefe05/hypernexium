@@ -103,8 +103,8 @@ export default function HeroCarousel() {
       />
 
       {/* Content Container */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-16 w-full">
-        <div className="max-w-3xl space-y-8">
+      <div className="relative z-10  max-w-7xl mx-auto px-3 md:px-12 lg:px-16 w-full">
+        <div className="  max-w-[370px] md:max-w-3xl space-y-8">
           {/* Label */}
           <div ref={labelRef}>
             <span className="inline-block px-5 py-2 bg-brand-accent/20 backdrop-blur-sm border border-brand-secondary rounded-full text-brand-accent text-xs md:text-sm font-medium tracking-wide">
@@ -115,7 +115,7 @@ export default function HeroCarousel() {
           {/* Main Title */}
           <h1
             ref={titleRef}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight"
+            className="text-3xl md:text-6xl lg:text-7xl font-bold text-white leading-tight"
           >
             {slides[currentSlide].title}{' '}
             <span className="text-brand-accent">{slides[currentSlide].titleAccent}</span>
@@ -125,7 +125,7 @@ export default function HeroCarousel() {
          
 
           {/* CTA Button */}
-          <div ref={buttonRef} className="pt-4">
+          <div ref={buttonRef} className="pt-4 ">
             <AnimatedButton />
           </div>
         </div>
