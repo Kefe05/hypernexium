@@ -5,7 +5,8 @@ import Image from "next/image";
 import { Button } from "./ui/button";
 import { ThemeToggleSimple } from "./ui/ThemeToggle";
 import Logo from "./Logo";
-import { MenuIcon, ChevronDown, X, ArrowRight } from "lucide-react";
+import { MenuIcon, ChevronDown, X } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 const navigationLinks = [
   { name: "Home", href: "/" },
@@ -96,6 +97,10 @@ export default function Nav() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mobileActiveDropdown, setMobileActiveDropdown] = useState<string | null>(null);
 
+
+  const pathname = usePathname()
+
+
   const handleMouseEnter = (dropdown: string) => {
     if (hoverTimeout) {
       clearTimeout(hoverTimeout);
@@ -141,7 +146,7 @@ export default function Nav() {
   return (
     <nav className="w-full fixed z-50">
       <div
-        className={`w-full transition-all duration-300 mx-auto ${isScrolled
+        className={`w-full transition-all duration-300 mx-auto ${isScrolled || pathname.startsWith("/contact")
           ? 'bg-brand-secondary/90 backdrop-blur-sm shadow-lg border-b border-brand-secondary'
           : 'bg-transparent'
           }`}
@@ -227,8 +232,8 @@ export default function Nav() {
                         <Image
                             src={hoveredImage || servicesData.defaultImage}
                             alt="Service preview"
-                            width={300}
-                            height={300}
+                            width={600}
+                            height={600}
                             className="object-cover transition-all duration-300 ease-in-out w-full h-full"
                           />
                       </div>
@@ -293,8 +298,8 @@ export default function Nav() {
                        <Image
                             src={hoveredImage || industryData.defaultImage}
                             alt="Industry preview"
-                            width={300}
-                            height={300}
+                            width={600}
+                            height={600}
                             className="object-cover transition-all duration-300 ease-in-out w-full h-full"
                           />
                       </div>

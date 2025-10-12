@@ -1,11 +1,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { Linkedin, Twitter, Github, Mail } from 'lucide-react'
+import { LinkedinIcon, TwitterIcon, GithubIcon, Mail } from 'lucide-react'
 
 export default function Footer() {
+    // Get current year dynamically
+    const currentYear = new Date().getFullYear();
     return (
         <footer className='relative bg-slate-900 text-white'>
-            
+
 
             <div className='relative z-10 max-w-7xl mx-auto px-6 py-16'>
                 {/* Main Footer Content */}
@@ -29,13 +31,13 @@ export default function Footer() {
                         {/* Social Links */}
                         <div className='flex space-x-4'>
                             <Link href="#" className='text-gray-400 hover:text-brand-accent transition-colors'>
-                                <Linkedin className='w-5 h-5' />
+                                <LinkedinIcon className='w-5 h-5' />
                             </Link>
                             <Link href="#" className='text-gray-400 hover:text-brand-accent transition-colors'>
-                                <Twitter className='w-5 h-5' />
+                                <TwitterIcon className='w-5 h-5' />
                             </Link>
                             <Link href="#" className='text-gray-400 hover:text-brand-accent transition-colors'>
-                                <Github className='w-5 h-5' />
+                                <GithubIcon className='w-5 h-5' />
                             </Link>
                             <Link href="#" className='text-gray-400 hover:text-brand-accent transition-colors'>
                                 <Mail className='w-5 h-5' />
@@ -84,8 +86,8 @@ export default function Footer() {
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/careers" className='text-gray-400 hover:text-white transition-colors text-sm'>
-                                    Careers
+                                <Link href="/industries" className='text-gray-400 hover:text-white transition-colors text-sm'>
+                                    Industries
                                 </Link>
                             </li>
                             <li>
@@ -94,8 +96,8 @@ export default function Footer() {
                                 </Link>
                             </li>
                             <li>
-                                <Link href="/blog" className='text-gray-400 hover:text-white transition-colors text-sm'>
-                                    Blog
+                                <Link href="/services" className='text-gray-400 hover:text-white transition-colors text-sm'>
+                                    Services
                                 </Link>
                             </li>
                         </ul>
@@ -122,7 +124,7 @@ export default function Footer() {
                 <div className='border-t border-gray-700 pt-8'>
                     <div className='flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0'>
                         <div className='text-gray-500 text-sm'>
-                            © 2025 Hyper Nexium Technologies. All Rights Reserved.
+                            © {currentYear} Hyper Nexium Technologies. All Rights Reserved.
                         </div>
 
                         <div className='flex items-center space-x-6'>
@@ -132,7 +134,7 @@ export default function Footer() {
                             <Link href="/terms" className='text-gray-500 hover:text-gray-300 text-sm transition-colors'>
                                 Terms of Service
                             </Link>
-                            
+
                         </div>
                     </div>
                 </div>
