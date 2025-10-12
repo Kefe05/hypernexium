@@ -105,8 +105,7 @@ export default function HyperNexiumLanding() {
         <Newsletter />
       </div>
 
-      {/* Footer */}
-      <Footer />
+      
     </main>
   );
 }
