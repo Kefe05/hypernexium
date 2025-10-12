@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Hero from './component/Hero'
 import ServiceSection from './component/Services'
 import Newsletter from '@/components/Newsletter'
-import Footer from '@/components/Footer'
 
 <<<<<<< HEAD
 export const metadata: Metadata = {
@@ -203,25 +202,28 @@ const services = [
 
 export default function Services() {
   return (
-    <section>
-      {/* service hero */}
+    <main className="bg-white dark:bg-gray-900">
+      {/* Service Hero */}
       <Hero />
 
-      {/* services */}
+      {/* Services Sections */}
       {services.map((data, index) => (
-        <ServiceSection key={index}
-          title={data.serviceName}
-          p1={data.p1}
-          p2={data.p2}
-          industryData={data.industry}
-        />
-
+        <div key={index} className="py-16 md:py-20 lg:py-24">
+          <ServiceSection
+            title={data.serviceName}
+            p1={data.p1}
+            p2={data.p2}
+            industryData={data.industry}
+          />
+        </div>
       ))}
-      {/* newsletter */}
-      <Newsletter />
 
-      {/* footer */}
-      <Footer />
-    </section>
+      {/* Newsletter */}
+      <div className="py-16 md:py-20 lg:py-24">
+        <Newsletter />
+      </div>
+
+     
+    </main>
   )
 }

@@ -5,6 +5,7 @@ import { Assistant } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { ThemeScript } from "@/components/providers/ThemeScript";
 import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
 
 
 const roboto_condensed = Assistant({
@@ -34,10 +35,11 @@ export default function RootLayout({
       <head>
         <ThemeScript />
       </head>
-      <body className="antialiased   w-screen ">
+      <body className="antialiased   w-screen overflow-x-hidden ">
         <ThemeProvider defaultTheme="system" enableSystem>
           <Nav />
           {children}
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

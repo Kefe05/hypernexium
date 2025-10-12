@@ -4,7 +4,6 @@ import Hero from './component/Hero';
 import Values from './component/Values';
 import CoreValues from './component/CoreValues';
 import Newsletter from '@/components/Newsletter';
-import Footer from '@/components/Footer';
 import AboutPage from './component/about';
 
 export const metadata: Metadata = {
@@ -14,27 +13,36 @@ export const metadata: Metadata = {
 
 export default function About() {
   return (
-   <main>
+   <main className="bg-white dark:bg-gray-900">
     {/* About Hero */}
-    <Hero    />
+    <Hero />
 
-   <AboutPage/>
+    {/* About Section */}
+    <div className="py-16 md:py-20 lg:py-24">
+      <AboutPage />
+    </div>
 
-   
     {/* Core Values and Mission Statement */}
-    <Values />
+    <div className="py-16 md:py-20 lg:py-24">
+      <Values />
+    </div>
 
     {/* Core Values */}
-    <CoreValues />
+    <div className="py-16 md:py-20 lg:py-24">
+      <CoreValues />
+    </div>
 
-    <Team />
+    {/* Team Section */}
+    <div className="py-16 md:py-20 lg:py-24">
+      <Team />
+    </div>
 
-    {/*Newsletter */}
-    <Newsletter />
+    {/* Newsletter */}
+    <div className="py-16 md:py-20 lg:py-24">
+      <Newsletter />
+    </div>
 
-
-    {/* Footer */}
-    <Footer />
+   
    </main>
   )
 }

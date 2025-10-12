@@ -67,7 +67,7 @@ export default function CoreValuesComponent() {
   return (
     <div>
       {/* Core Values Section */}
-      <section className="py-20 px-6 bg-white dark:bg-dark">
+      <section className="px-6 md:px-8 lg:px-12 bg-white dark:bg-gray-900">
         <div className="max-w-7xl mx-auto">
           <div
             ref={el => { sectionRefs.current['values-header'] = el }}
@@ -115,7 +115,7 @@ export default function CoreValuesComponent() {
       </section>
 
       {/* Closing Statement */}
-      <section className="py-16 px-6">
+      <section className="py-16 md:py-20 lg:py-24 px-6 md:px-8 lg:px-12">
         <div className="max-w-4xl mx-auto text-center">
           <div
             ref={el => { sectionRefs.current['closing'] = el }}
