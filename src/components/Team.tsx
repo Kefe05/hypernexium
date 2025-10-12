@@ -46,7 +46,6 @@ export default function Team() {
 
   return (
     <section className="relative py-24 bg-base overflow-hidden">
-      <VerticalGridLines opacity={0.06} />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
