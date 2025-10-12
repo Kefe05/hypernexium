@@ -1,12 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Linkedin, Twitter, Github, Mail } from 'lucide-react'
-import { VerticalGridLines } from './GridLines'
 
 export default function Footer() {
     return (
         <footer className='relative bg-slate-900 text-white'>
-            <VerticalGridLines opacity={0.05} />
+            
 
             <div className='relative z-10 max-w-7xl mx-auto px-6 py-16'>
                 {/* Main Footer Content */}
