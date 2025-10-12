@@ -67,7 +67,6 @@ export default function Users() {
 
   return (
     <section className="relative py-24 bg-base text-primary overflow-hidden">
-      <VerticalGridLines opacity={0.05} />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         {/* Header */}
