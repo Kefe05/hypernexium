@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Button } from "./ui/button";
 import Image from "next/image";
-import { SectionDivider, VerticalGridLines } from "./GridLines";
+import { SectionDivider } from "./GridLines";
 import { AboutData as sections } from "../../public/constants";
 
 export default function About() {
