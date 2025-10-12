@@ -1,11 +1,18 @@
-
 "use client"
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Mail, Phone, MapPin } from 'lucide-react'
+import Image from 'next/image'
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contact Us - Hyper Nexium Technologies",
+  description: "Get in touch with Hyper Nexium Technologies for advanced IT solutions.",
+};
 
 gsap.registerPlugin(ScrollTrigger)
+
 
 export default function Contacts() {
   const containerRef = useRef<HTMLElement>(null)
