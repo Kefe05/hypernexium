@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { AccordionDemo, IndustryItem } from "./ServiceAccordion"
 
 interface ServiceProps {
@@ -5,11 +6,10 @@ interface ServiceProps {
   p1: string;
   p2: string;
   industryData: IndustryItem[];
+  slug: string;
 }
 
-
-
-export default function ServiceSection({ title, p1, p2, industryData }: ServiceProps) {
+export default function ServiceSection({ title, p1, p2, industryData, slug }: ServiceProps) {
   return (
     <section className="px-6 md:px-8 lg:px-12">
       <div className="max-w-7xl mx-auto">
@@ -31,9 +31,9 @@ export default function ServiceSection({ title, p1, p2, industryData }: ServiceP
             </div>
 
             <div className="pt-4">
-              <button className="px-8 py-3 border border-gray-400 dark:border-gray-600 rounded-full text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200">
-                Start your project
-              </button>
+              <Link href={`/industries/${slug}`} className="px-8 py-3 border border-gray-400 dark:border-gray-600 rounded-full text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200">
+                Learn more
+              </Link>
             </div>
           </div>
 

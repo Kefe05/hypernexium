@@ -2,217 +2,283 @@ import type { Metadata } from "next";
 import Hero from './component/Hero'
 import ServiceSection from './component/Services'
 import Newsletter from '@/components/Newsletter'
-import Footer from '@/components/Footer'
 
 export const metadata: Metadata = {
-  title: "Services - Hyper Nexium Technologies",
-  description: "Explore our comprehensive IT services including cybersecurity, backup and recovery, and digital infrastructure.",
+  title: "Industries - Hyper Nexium Technologies",
+  description: "Discover how Hyper Nexium Technologies empowers various industries across Africa with smart, secure, and reliable technology solutions.",
 };
 
-// Comprehensive services data based on Nav.tsx structure
-const services = [
+// Industry sectors data based on sector.txt content
+const industries = [
   {
-    serviceName: "Cybersecurity",
-    p1: "Protect your business from evolving cyber threats with our comprehensive security solutions. We provide advanced threat detection, vulnerability assessments, and 24/7 monitoring to safeguard your critical assets and ensure compliance with industry standards.",
-    p2: "Our cybersecurity experts implement multi-layered defense strategies, including endpoint protection, network security, and incident response protocols. With over 18 years of experience, we've successfully protected businesses across various sectors from sophisticated cyber attacks.",
+    serviceName: "Healthcare",
+    slug: "healthcare",
+    p1: "At Hyper Nexium Technologies Ltd, we understand that healthcare organizations across Africa operate in an environment where data accuracy, system uptime, and security can directly impact patient outcomes. Hospitals, laboratories, and clinics depend on reliable digital infrastructure, secure communication systems, and robust data protection to deliver high-quality care efficiently.",
+    p2: "We recognize the unique challenges facing healthcare providers — from safeguarding patient data and ensuring compliance with data protection laws, to maintaining real-time access to critical medical records and imaging systems. In a sector where every second counts, downtime or data loss is not an option.",
     industry: [
       {
-        name: "Healthcare",
-        description: "HIPAA-compliant security solutions protecting patient data and medical systems from cyber threats and ensuring regulatory compliance."
+        name: "Proven Expertise in Healthcare IT",
+        description: "We bring deep technical expertise in digital infrastructure, cybersecurity, and cloud-based solutions tailored to the healthcare environment."
       },
       {
-        name: "Finance",
-        description: "Advanced financial cybersecurity with fraud detection, secure transactions, and compliance with banking regulations and standards."
+        name: "Data Protection You Can Trust",
+        description: "Through partnerships with global leaders like Veeam, Veritas, and Dell Technologies, we deliver world-class backup and recovery systems that ensure critical health data is never lost."
       },
       {
-        name: "Education",
-        description: "Comprehensive security for educational institutions protecting student data, research, and academic systems from cyber threats."
+        name: "Secure Network & Surveillance",
+        description: "Our advanced network modernization and surveillance systems safeguard sensitive areas and patient information from physical and cyber threats."
       },
       {
-        name: "Real Estate",
-        description: "Secure property management systems and client data protection for real estate agencies and property developers."
+        name: "Scalable and Future-Ready Solutions",
+        description: "We design systems that grow with your healthcare facility — from small clinics to large hospital networks."
       },
       {
-        name: "Manufacturing",
-        description: "Industrial cybersecurity solutions protecting operational technology, supply chains, and intellectual property from cyber attacks."
-      },
-      {
-        name: "Transportation",
-        description: "Secure logistics and transportation systems with fleet protection and supply chain security measures."
+        name: "Training & Support",
+        description: "Our IT training programs empower your team to manage and maximize technology for improved patient care and operational efficiency."
       }
     ]
   },
   {
-    serviceName: "Backup and Recovery",
-    p1: "Ensure business continuity with our comprehensive data backup and disaster recovery solutions. We provide automated backup systems, cloud-based recovery options, and rapid restoration services to minimize downtime and protect against data loss.",
-    p2: "Our disaster recovery specialists design customized backup strategies that include real-time data replication, offsite storage, and tested recovery procedures. We guarantee rapid data restoration with minimal business disruption, backed by our proven track record of successful recoveries.",
+    serviceName: "Education",
+    slug: "education",
+    p1: "At Hyper Nexium Technologies Ltd, we understand that the education sector across Africa is evolving rapidly — driven by digital transformation, hybrid learning, and the need for secure, connected, and scalable IT environments. From primary institutions to universities, schools today require reliable digital infrastructure, robust cybersecurity, and data management systems that support virtual learning, student data protection, and administrative efficiency.",
+    p2: "We recognize that educators face challenges such as limited IT resources, cyber risks, inadequate network coverage, and the need to integrate multiple digital learning tools. Our goal is to empower educational institutions to create innovative, technology-enabled learning environments that inspire growth and inclusivity.",
     industry: [
       {
-        name: "Healthcare",
-        description: "Critical patient data backup and recovery solutions ensuring medical records are always accessible and compliant with healthcare regulations."
+        name: "Specialized Education Technology Expertise",
+        description: "We understand the unique technological demands of academic environments — from e-learning infrastructure to secure data management systems."
       },
       {
-        name: "Finance",
-        description: "Secure financial data backup with instant recovery capabilities for trading systems, customer records, and regulatory compliance data."
+        name: "Robust Digital Infrastructure",
+        description: "Through partnerships with Cisco, Huawei, Dell Technologies, and Microsoft, we deliver high-performance networks and cloud solutions that keep classrooms connected and resources accessible anytime, anywhere."
       },
       {
-        name: "Education",
-        description: "Academic data protection including student records, research data, and institutional systems with automated backup and recovery."
+        name: "Cybersecurity for Education",
+        description: "Protecting student data and academic systems is our top priority. Our cybersecurity solutions safeguard against threats while ensuring compliance with international data protection standards."
       },
       {
-        name: "Real Estate",
-        description: "Property data and transaction record backup solutions ensuring client information and deal documentation are always protected."
+        name: "Reliable Backup & Recovery",
+        description: "Using solutions from Veeam, Veritas, and VMware, we ensure that vital academic data — from research materials to student records — is always secure and recoverable."
       },
       {
-        name: "Manufacturing",
-        description: "Industrial data backup protecting production data, supply chain information, and operational systems from data loss."
+        name: "Smart Campus Surveillance",
+        description: "Our AI-powered surveillance systems from Hikvision enhance safety and operational visibility across educational facilities."
       },
       {
-        name: "Transportation",
-        description: "Logistics data backup and recovery for fleet management, shipping records, and transportation coordination systems."
+        name: "Empowering Through IT Training",
+        description: "We don't just deliver technology — we empower educators, administrators, and IT teams with practical training to maximize productivity and efficiency."
       }
     ]
   },
   {
-    serviceName: "Digital Infrastructure",
-    p1: "Transform your business with modern IT infrastructure solutions that form the backbone of your digital operations. We provide cloud migration, server virtualization, network architecture design, and scalable systems that grow with your business needs.",
-    p2: "Our infrastructure specialists design and implement robust, scalable technology foundations that support your business growth. From hybrid cloud solutions to network optimization, we ensure your infrastructure is reliable, secure, and future-ready.",
+    serviceName: "Corporate",
+    slug: "corporate",
+    p1: "At Hyper Nexium Technologies Ltd, we understand that corporate organizations across Africa are constantly striving to improve efficiency, collaboration, and competitiveness in a fast-changing digital world. Today's enterprises rely on secure networks, data protection, and digital agility to operate effectively — from managing large-scale business operations to supporting remote teams and ensuring uninterrupted service delivery.",
+    p2: "We recognize the challenges faced by corporate institutions, including cybersecurity threats, system downtime, data loss, and the complexity of digital transformation. Our role is to bridge these gaps with smart, innovative technology solutions that help organizations work smarter, faster, and more securely.",
     industry: [
       {
-        name: "Healthcare",
-        description: "HIPAA-compliant infrastructure supporting telemedicine, electronic health records, and medical device integration."
+        name: "Comprehensive IT Solutions",
+        description: "From cybersecurity to network modernization, we provide integrated solutions that cover every layer of your IT environment."
       },
       {
-        name: "Finance",
-        description: "High-performance financial infrastructure with low-latency trading systems, secure data centers, and regulatory compliance."
+        name: "Trusted Technology Partnerships",
+        description: "Our alliances with global technology leaders such as Cisco, Huawei, Dell Technologies, Microsoft, HP, and Fortinet enable us to deliver enterprise-grade solutions with proven performance."
       },
       {
-        name: "Education",
-        description: "Educational technology infrastructure supporting online learning, campus networks, and research computing systems."
+        name: "Unmatched Data Protection",
+        description: "Using industry-leading backup and recovery systems from Veeam, Veritas, and VMware, we ensure your business-critical data is always safe, accessible, and recoverable."
       },
       {
-        name: "Real Estate",
-        description: "Property management infrastructure with CRM systems, virtual tour platforms, and market analysis tools."
+        name: "Robust Cybersecurity Frameworks",
+        description: "We safeguard your digital assets with cutting-edge solutions from Kaspersky, Sophos, Palo Alto, and Symantec, defending your business from evolving threats."
       },
       {
-        name: "Manufacturing",
-        description: "Industrial IoT infrastructure connecting production systems, supply chain management, and quality control systems."
+        name: "Smart Surveillance Systems",
+        description: "Our AI-driven surveillance solutions from Hikvision and D-Link ensure physical and digital security for corporate environments."
       },
       {
-        name: "Transportation",
-        description: "Transportation infrastructure supporting fleet management, route optimization, and logistics coordination systems."
+        name: "Capacity Building & Training",
+        description: "We equip your IT teams with practical technical and cybersecurity training, helping you build in-house capabilities for long-term resilience."
       }
     ]
   },
   {
-    serviceName: "IT Training",
-    p1: "Empower your workforce with cutting-edge technology skills through our comprehensive IT training programs. We offer customized training modules, certification preparation, and hands-on workshops designed to keep your team ahead of technological advances.",
-    p2: "Our expert trainers deliver practical, industry-relevant education that translates directly into improved productivity and innovation. With flexible learning options and ongoing support, we ensure your team masters the latest technologies and best practices.",
+    serviceName: "Retail",
+    slug: "retail",
+    p1: "At Hyper Nexium Technologies Ltd, we understand that today's retail businesses in Africa are evolving rapidly — driven by digital transformation, customer experience, and data intelligence. Retailers are no longer just selling products; they're delivering seamless, technology-driven experiences across physical stores, online platforms, and mobile apps.",
+    p2: "This shift requires robust digital infrastructure, secure payment systems, network reliability, and real-time data insights to meet changing consumer expectations and market dynamics. We recognize the key challenges in the retail environment — from protecting sensitive customer data to managing multi-branch operations, ensuring system uptime, and integrating digital sales channels.",
     industry: [
       {
-        name: "Healthcare",
-        description: "Medical technology training including EHR systems, telemedicine platforms, and healthcare IT security protocols."
+        name: "End-to-End Retail Technology Solutions",
+        description: "From network modernization to data backup, we deliver integrated systems that ensure seamless business continuity and operational excellence."
       },
       {
-        name: "Finance",
-        description: "Financial technology training covering fintech platforms, blockchain, cybersecurity, and regulatory compliance systems."
+        name: "Cybersecurity for Retail",
+        description: "With solutions from Kaspersky, Fortinet, Palo Alto, and Sophos, we safeguard retail operations against cyber threats, protecting customer data and transactions."
       },
       {
-        name: "Education",
-        description: "Educational technology training for faculty and staff on learning management systems, digital tools, and online teaching."
+        name: "Smart Store Surveillance",
+        description: "Our advanced AI-powered surveillance systems from Hikvision and D-Link help retailers monitor store activities, enhance security, and improve loss prevention."
       },
       {
-        name: "Real Estate",
-        description: "Real estate technology training including CRM systems, virtual tour creation, and property management software."
+        name: "Reliable Backup & Recovery",
+        description: "Partnering with Veeam, Veritas, and Dell Technologies, we ensure that your critical sales, inventory, and financial data remain secure and recoverable."
       },
       {
-        name: "Manufacturing",
-        description: "Industrial technology training covering IoT systems, automation tools, and digital manufacturing processes."
+        name: "Seamless Connectivity",
+        description: "Through Cisco, Huawei, and Microsoft solutions, we build robust digital infrastructure that supports POS systems, online platforms, and customer engagement tools."
       },
       {
-        name: "Transportation",
-        description: "Transportation technology training for fleet management systems, logistics software, and supply chain optimization."
+        name: "Scalable & Future-Ready",
+        description: "Our solutions are designed to grow with your business — whether you manage a single store or a multi-branch retail network."
       }
     ]
   },
   {
-    serviceName: "Network Modernization",
-    p1: "Upgrade and optimize your network infrastructure for enhanced performance, security, and scalability. Our network modernization services include assessment, redesign, implementation of modern technologies, and ongoing management support.",
-    p2: "Our network engineers transform legacy systems into high-performance, secure networks that support modern business requirements. We implement the latest networking technologies while ensuring seamless integration with existing systems.",
+    serviceName: "Real Estate",
+    slug: "real-estate",
+    p1: "At Hyper Nexium Technologies Ltd, we understand that the real estate industry in Africa is undergoing a digital transformation. Property developers, facility managers, and real estate investors are increasingly relying on technology to manage assets, automate operations, and enhance tenant experiences.",
+    p2: "From smart building infrastructure and surveillance systems to data management and secure communication networks, technology is at the heart of modern real estate success. We recognize the unique challenges that real estate businesses face — such as maintaining security across multiple sites, ensuring data protection, managing property systems remotely, and creating sustainable digital environments that attract clients and investors alike.",
     industry: [
       {
-        name: "Healthcare",
-        description: "Medical network modernization supporting telemedicine, medical devices, and secure patient data transmission."
+        name: "Smart Building Solutions",
+        description: "We deploy IoT-enabled systems for energy management, lighting control, and remote facility monitoring — ensuring smarter, greener buildings."
       },
       {
-        name: "Finance",
-        description: "High-speed financial networks with ultra-low latency for trading, secure transactions, and real-time data processing."
+        name: "Advanced Security & Surveillance",
+        description: "Our AI-powered CCTV and access control systems from Hikvision, D-Link, and TP-Link provide 24/7 property monitoring and enhanced safety."
       },
       {
-        name: "Education",
-        description: "Campus network modernization supporting online learning, research collaboration, and administrative systems."
+        name: "Reliable Network Infrastructure",
+        description: "We design and implement robust connectivity solutions using Cisco, Huawei, and Fortinet to ensure seamless communication across offices, apartments, and facilities."
       },
       {
-        name: "Real Estate",
-        description: "Property network infrastructure supporting smart buildings, IoT devices, and integrated property management systems."
+        name: "Data Protection & Backup",
+        description: "Partnering with Veeam, Veritas, and Dell Technologies, we safeguard your critical data, lease documents, and client records with world-class backup and disaster recovery solutions."
       },
       {
-        name: "Manufacturing",
-        description: "Industrial network modernization connecting production lines, IoT sensors, and supply chain management systems."
+        name: "Cloud Solutions & Collaboration",
+        description: "Our Microsoft and Google Cloud services enable efficient collaboration between real estate teams, agents, and clients — anytime, anywhere."
       },
       {
-        name: "Transportation",
-        description: "Transportation network infrastructure supporting fleet connectivity, GPS tracking, and logistics coordination."
+        name: "Digital Transformation for Real Estate",
+        description: "We guide your business through the adoption of new technologies that enhance efficiency, marketing, and customer engagement."
       }
     ]
   },
   {
-    serviceName: "Surveillance Security Systems",
-    p1: "Enhance your physical security with state-of-the-art surveillance and monitoring systems. We provide IP camera systems, access control solutions, intrusion detection, and integrated security management platforms for comprehensive protection.",
-    p2: "Our security specialists design and implement advanced surveillance systems that provide real-time monitoring, intelligent analytics, and seamless integration with existing security infrastructure. We ensure your premises are protected 24/7 with cutting-edge technology.",
+    serviceName: "Manufacturing",
+    slug: "manufacturing",
+    p1: "At Hyper Nexium Technologies Ltd, we understand that the manufacturing sector across Africa is under growing pressure to improve productivity, efficiency, and quality while minimizing downtime and operational costs. In today's competitive environment, manufacturers must embrace digital transformation — integrating advanced technologies such as automation, IoT, data analytics, and cloud systems to stay ahead.",
+    p2: "We know that your success depends on real-time visibility, secure communication, robust network infrastructure, and reliable data protection across production lines, warehouses, and offices. From factory floor connectivity to cybersecurity and IT system resilience, we provide end-to-end solutions that enable smart manufacturing for the digital era.",
     industry: [
       {
-        name: "Healthcare",
-        description: "Medical facility security systems protecting patients, staff, and sensitive areas with HIPAA-compliant surveillance solutions."
+        name: "Secure Industrial Networks",
+        description: "We build and modernize your IT and OT (Operational Technology) networks with Cisco, Huawei, and Fortinet technologies — ensuring seamless, high-speed, and secure factory connectivity."
       },
       {
-        name: "Finance",
-        description: "Bank and financial institution security with advanced surveillance, access control, and fraud prevention systems."
+        name: "Data Backup & Recovery",
+        description: "Using trusted partners like Veeam, Veritas, and Dell Technologies, we ensure that critical production data, ERP systems, and inventory records are fully protected and recoverable."
       },
       {
-        name: "Education",
-        description: "Campus security systems ensuring student and staff safety with comprehensive surveillance and emergency response integration."
+        name: "Cybersecurity for Industrial Systems",
+        description: "We deploy multi-layered security using Kaspersky, Sophos, and Palo Alto to protect your factory systems from ransomware, breaches, and downtime."
       },
       {
-        name: "Real Estate",
-        description: "Property security solutions including building surveillance, access control, and tenant safety management systems."
+        name: "Cloud & Digital Infrastructure",
+        description: "Our Microsoft and VMware solutions provide flexible cloud environments to manage operations, analytics, and collaboration across sites."
       },
       {
-        name: "Manufacturing",
-        description: "Industrial security systems protecting facilities, equipment, and personnel with integrated surveillance and access control."
+        name: "Surveillance & Facility Security",
+        description: "With Hikvision and D-Link, we provide advanced video monitoring and access control to safeguard your people, assets, and machinery."
       },
       {
-        name: "Transportation",
-        description: "Transportation security including depot surveillance, vehicle tracking, and cargo protection systems."
+        name: "Smart Factory Transformation",
+        description: "We help you adopt IoT and automation technologies that enable predictive maintenance, energy efficiency, and streamlined production processes."
+      }
+    ]
+  },
+  {
+    serviceName: "Financial Services",
+    slug: "financial-services",
+    p1: "At Hyper Nexium Technologies Ltd, we understand that financial institutions — from banks and insurance companies to fintech startups — rely heavily on security, reliability, and speed. In Africa's fast-evolving financial landscape, customer trust is built on one foundation: technology that performs flawlessly and securely.",
+    p2: "We recognize your need to manage sensitive data, ensure transaction integrity, meet regulatory standards, and provide seamless digital experiences for customers. From core banking systems and data centers to digital payment platforms and cybersecurity, we deliver technology solutions that strengthen your operations and drive innovation in the financial services sector.",
+    industry: [
+      {
+        name: "Uncompromised Cybersecurity",
+        description: "We safeguard your digital assets and customer data with advanced, multi-layered security from Fortinet, Palo Alto, Kaspersky, and Sophos, ensuring end-to-end protection against evolving cyber threats."
+      },
+      {
+        name: "Data Backup & Recovery",
+        description: "Our partnerships with Veeam, Veritas, and Dell Technologies guarantee business continuity and data resilience — minimizing downtime and preventing loss from system failures or cyber incidents."
+      },
+      {
+        name: "Digital Infrastructure for Financial Institutions",
+        description: "With Cisco, Huawei, and HP, we design and modernize robust, scalable, and high-speed IT infrastructures that support mission-critical financial operations."
+      },
+      {
+        name: "Cloud & Virtualization",
+        description: "We empower financial services with Microsoft Azure and VMware solutions to achieve scalability, agility, and efficiency in data management and service delivery."
+      },
+      {
+        name: "Surveillance & Branch Security",
+        description: "Using Hikvision and D-Link, we implement smart surveillance and monitoring systems to ensure physical and operational security across offices and branches."
+      },
+      {
+        name: "Compliance & Risk Management",
+        description: "Our solutions are designed to meet stringent regulatory and compliance requirements for data protection, privacy, and risk governance."
+      }
+    ]
+  },
+  {
+    serviceName: "Energy",
+    slug: "energy",
+    p1: "At Hyper Nexium Technologies Ltd, we understand that the energy sector is the backbone of economic development — powering industries, homes, and innovation across Africa. As the demand for reliable, sustainable, and digitally managed energy systems grows, energy providers are transforming their operations with technology to improve performance, ensure security, and meet regulatory standards.",
+    p2: "Whether in oil and gas, renewable energy, utilities, or power distribution, your organization faces challenges such as data management, cybersecurity threats, asset monitoring, grid modernization, and system uptime. We recognize that to achieve operational efficiency and sustainability, energy companies need robust IT infrastructures, real-time analytics, and secure digital ecosystems that support innovation and resilience.",
+    industry: [
+      {
+        name: "Advanced Cybersecurity Protection",
+        description: "With Fortinet, Palo Alto, Kaspersky, and Sophos, we safeguard your critical infrastructure from cyberattacks that could disrupt operations or compromise sensitive data."
+      },
+      {
+        name: "Network & Infrastructure Modernization",
+        description: "Through partnerships with Cisco, Huawei, and Dell Technologies, we build high-performance digital networks that connect your operations from control rooms to remote sites."
+      },
+      {
+        name: "Backup & Disaster Recovery",
+        description: "Using Veeam and Veritas, we ensure your critical operational and customer data remain protected and recoverable in the event of system failures or natural disasters."
+      },
+      {
+        name: "Cloud & Virtualization Solutions",
+        description: "Our Microsoft Azure and VMware offerings enable flexible, secure, and scalable IT environments for data management, analytics, and energy resource planning."
+      },
+      {
+        name: "Surveillance & Safety Systems",
+        description: "With Hikvision and D-Link, we enhance the security of your facilities, substations, and production sites with AI-powered surveillance and access control systems."
+      },
+      {
+        name: "Operational Visibility & IoT Integration",
+        description: "We help energy companies adopt smart monitoring systems for real-time asset tracking, predictive maintenance, and energy flow optimization."
       }
     ]
   }
 ]
 
-export default function Services() {
+export default function Industries() {
   return (
     <main className="bg-white dark:bg-gray-900">
-      {/* Service Hero */}
+      {/* Industries Hero */}
       <Hero />
 
-      {/* Services Sections */}
-      {services.map((data, index) => (
+      {/* Industry Sections */}
+      {industries.map((data, index) => (
         <div key={index} className="py-16 md:py-20 lg:py-24">
           <ServiceSection
             title={data.serviceName}
             p1={data.p1}
             p2={data.p2}
             industryData={data.industry}
+            slug={data.slug}
           />
         </div>
       ))}
@@ -221,8 +287,6 @@ export default function Services() {
       <div className="py-16 md:py-20 lg:py-24">
         <Newsletter />
       </div>
-
-      
     </main>
   )
 }

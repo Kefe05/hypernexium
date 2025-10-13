@@ -13,7 +13,7 @@ export default function Hero() {
           {/* Badge */}
           <div className="flex items-center mb-8">
             <span className="text-sm font-medium text-brand-accent uppercase tracking-wider ">
-              OUR TAILOR-MADE SERVICES
+              INDUSTRIES WE SERVE
             </span>
             
             {/* Decorative Dots */}
@@ -26,17 +26,17 @@ export default function Hero() {
 
           {/* Main Heading */}
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold  mb-8 leading-tight text-white">
-            OUR SERVICES
+            INDUSTRIES
           </h1>
 
           {/* Description */}
           <div className="max-w-3xl">
             <p className="text-lg md:text-xl leading-relaxed text-white">
-              Discover how Hyper Nexium supports enterprises in their digital success with concrete, 
-              accessible solutions tailored to your goals. From creating an effective cloud infrastructure 
-              to high-performance cybersecurity, from a striking digital transformation to a tailor-made 
-              strategy for your business networks, each service is designed to boost your growth. 
-              With us, technology becomes simple, human, and, above all, a source of opportunities for your business.
+              Empowering Africa&apos;s diverse sectors with smart, secure, and reliable technology solutions. 
+              From healthcare and education to manufacturing and financial services, we understand the unique 
+              challenges each industry faces. Our tailored approach combines cutting-edge technology with 
+              deep industry expertise to drive transformation, enhance security, and unlock growth potential 
+              across every sector we serve.
             </p>
           </div>
 
