@@ -57,34 +57,44 @@ const industryData = {
   defaultImage: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop&crop=center",
   items: [
     {
-      name: "Health",
-      href: "/industry/health",
+      name: "Healthcare",
+      href: "/industries/healthcare",
       image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?w=400&h=300&fit=crop&crop=center"
     },
     {
-      name: "Finance",
-      href: "/industry/finance",
-      image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=300&fit=crop&crop=center"
-    },
-    {
       name: "Education",
-      href: "/industry/education",
+      href: "/industries/education",
       image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=400&h=300&fit=crop&crop=center"
     },
     {
+      name: "Corporate",
+      href: "/industries/corporate",
+      image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop&crop=center"
+    },
+    {
+      name: "Retail",
+      href: "/industries/retail",
+      image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=400&h=300&fit=crop&crop=center"
+    },
+    {
       name: "Real Estate",
-      href: "/industry/real-estate",
+      href: "/industries/real-estate",
       image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=300&fit=crop&crop=center"
     },
     {
       name: "Manufacturing",
-      href: "/industry/manufacturing",
+      href: "/industries/manufacturing",
       image: "https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=400&h=300&fit=crop&crop=center"
     },
     {
-      name: "Transportation",
-      href: "/industry/transportation",
-      image: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&h=300&fit=crop&crop=center"
+      name: "Financial Services",
+      href: "/industries/financial-services",
+      image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=300&fit=crop&crop=center"
+    },
+    {
+      name: "Energy",
+      href: "/industries/energy",
+      image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=400&h=300&fit=crop&crop=center"
     }
   ]
 };

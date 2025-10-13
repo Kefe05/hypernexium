@@ -96,7 +96,7 @@ export default function Contacts() {
                   Contact Information
                 </h1>
                 <p className="text-xl text-light-text-secondary dark:text-dark-text-secondary">
-                  Get in touch with us. We're here to power your smart enterprise beyond limits.
+                  Get in touch with us. We&apos;re here to power your smart enterprise beyond limits.
                 </p>
               </div>
 

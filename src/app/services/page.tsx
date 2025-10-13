@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Hero from './component/Hero'
 import ServiceSection from './component/Services'
 import Newsletter from '@/components/Newsletter'
-import Footer from '@/components/Footer'
+
 
 export const metadata: Metadata = {
   title: "Services - Hyper Nexium Technologies",
