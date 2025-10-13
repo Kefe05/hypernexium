@@ -2,13 +2,13 @@ import type { Metadata } from "next";
 import Hero from './component/Hero'
 import ServiceSection from './component/Services'
 import Newsletter from '@/components/Newsletter'
+import Footer from '@/components/Footer'
 
-<<<<<<< HEAD
 export const metadata: Metadata = {
   title: "Services - Hyper Nexium Technologies",
   description: "Explore our comprehensive IT services including cybersecurity, backup and recovery, and digital infrastructure.",
 };
-=======
+
 // Comprehensive services data based on Nav.tsx structure
 const services = [
   {
@@ -198,7 +198,6 @@ const services = [
     ]
   }
 ]
->>>>>>> 9ee4b17dd24dcf8ab27e995b993cb8c3ef2a79a5
 
 export default function Services() {
   return (
@@ -223,7 +222,8 @@ export default function Services() {
         <Newsletter />
       </div>
 
-     
+      {/* Footer */}
+      <Footer />
     </main>
   )
 }
