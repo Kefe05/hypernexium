@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "./ui/button";
@@ -103,58 +103,115 @@ export default function Nav() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [hoveredImage, setHoveredImage] = useState<string | null>(null);
-  const [hoverTimeout, setHoverTimeout] = useState<NodeJS.Timeout | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mobileActiveDropdown, setMobileActiveDropdown] = useState<string | null>(null);
 
+  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const pathname = usePathname();
 
-  const pathname = usePathname()
-
-
-  const handleMouseEnter = (dropdown: string) => {
-    if (hoverTimeout) {
-      clearTimeout(hoverTimeout);
-      setHoverTimeout(null);
+  // Memoize handlers to prevent unnecessary re-renders
+  const handleMouseEnter = useCallback((dropdown: string) => {
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+      hoverTimeoutRef.current = null;
     }
     setActiveDropdown(dropdown);
-  };
+  }, []);
 
-  const handleMouseLeave = () => {
-    const timeout = setTimeout(() => {
+  const handleMouseLeave = useCallback(() => {
+    hoverTimeoutRef.current = setTimeout(() => {
       setActiveDropdown(null);
       setHoveredImage(null);
-    }, 150); // 150ms delay before closing
-    setHoverTimeout(timeout);
-  };
+    }, 150);
+  }, []);
 
-  const handleDropdownEnter = () => {
-    if (hoverTimeout) {
-      clearTimeout(hoverTimeout);
-      setHoverTimeout(null);
+  const handleDropdownEnter = useCallback(() => {
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+      hoverTimeoutRef.current = null;
     }
-  };
+  }, []);
 
-  const handleDropdownLeave = () => {
+  const handleDropdownLeave = useCallback(() => {
     setActiveDropdown(null);
     setHoveredImage(null);
-  };
+  }, []);
 
+  const closeMobileMenu = useCallback(() => {
+    setIsMobileMenuOpen(false);
+    setMobileActiveDropdown(null);
+  }, []);
+
+  const toggleMobileDropdown = useCallback((dropdown: string) => {
+    setMobileActiveDropdown(prev => prev === dropdown ? null : dropdown);
+  }, []);
+
+  // Optimize scroll handler with throttle
   useEffect(() => {
+    let ticking = false;
+    
     const handleScroll = () => {
-      // Get the height of the viewport (hero section is typically 100vh)
-      const heroHeight = window.innerHeight;
-      const scrollPosition = window.scrollY;
-
-      // Change navbar background when scrolled past hero section
-      setIsScrolled(scrollPosition > heroHeight - 100); // 100px before reaching bottom
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const heroHeight = window.innerHeight;
+          const scrollPosition = window.scrollY;
+          setIsScrolled(scrollPosition > heroHeight - 100);
+          ticking = false;
+        });
+        ticking = true;
+      }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (hoverTimeoutRef.current) {
+        clearTimeout(hoverTimeoutRef.current);
+      }
+    };
+  }, []);
+
+  // Close mobile menu on route change
+  useEffect(() => {
+    closeMobileMenu();
+  }, [pathname, closeMobileMenu]);
+
+  // Handle escape key to close menus
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        if (isMobileMenuOpen) {
+          closeMobileMenu();
+        }
+        if (activeDropdown) {
+          setActiveDropdown(null);
+          setHoveredImage(null);
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
+  }, [isMobileMenuOpen, activeDropdown, closeMobileMenu]);
+
   return (
-    <nav className="w-full fixed z-50">
+    <nav className="w-full fixed z-50" role="navigation" aria-label="Main navigation">
       <div
         className={`w-full transition-all duration-300 mx-auto ${isScrolled || pathname.startsWith("/contact")
           ? 'bg-brand-secondary/90 backdrop-blur-sm shadow-lg border-b border-brand-secondary'
@@ -164,17 +221,17 @@ export default function Nav() {
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}
-
-            <Link href="/">
+            <Link href="/" aria-label="Hypernexium home">
               <Logo />
             </Link>
 
             {/* Navigation Links */}
-            <ul className="hidden md:flex items-center space-x-8">
+            <ul className="hidden md:flex items-center space-x-8" role="menubar">
               {navigationLinks.map((link) => (
-                <li key={link.name}>
+                <li key={link.name} role="none">
                   <Link
                     href={link.href}
+                    role="menuitem"
                     className={`transition-colors duration-200 hover:text-brand-accent ${isScrolled
                       ? 'text-white'
                       : 'text-white hover:text-brand-accent'
@@ -188,6 +245,7 @@ export default function Nav() {
               {/* Services Mega Menu */}
               <li
                 className="relative"
+                role="none"
                 onMouseEnter={() => handleMouseEnter('services')}
                 onMouseLeave={handleMouseLeave}
               >
@@ -196,9 +254,12 @@ export default function Nav() {
                     ? 'text-white'
                     : 'text-white hover:text-brand-accent'
                     }`}
+                  aria-expanded={activeDropdown === 'services'}
+                  aria-haspopup="true"
+                  role="menuitem"
                 >
                   Services
-                  <ChevronDown className="w-4 h-4" />
+                  <ChevronDown className="w-4 h-4" aria-hidden="true" />
                 </button>
 
                 {activeDropdown === 'services' && (
@@ -206,6 +267,8 @@ export default function Nav() {
                     className="absolute top-full left-1/2 transform -translate-x-1/2 w-screen max-w-4xl mt-2 bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden"
                     onMouseEnter={handleDropdownEnter}
                     onMouseLeave={handleDropdownLeave}
+                    role="menu"
+                    aria-label="Services menu"
                   >
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
                       {/* Left Content */}
@@ -217,35 +280,39 @@ export default function Nav() {
                           {servicesData.description}
                         </p>
                       
-                        <div className="w-full  rounded-lg overflow-hidden">
-                           <div className="grid ">
-                          {servicesData.items.map((item) => (
-                            <Link
-                              key={item.name}
-                              href={item.href}
-                              className="block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
-                              onMouseEnter={() => setHoveredImage(item.image)}
-                              onMouseLeave={() => setHoveredImage(null)}
-                            >
-                              <span className="text-gray-900 dark:text-white ">
-                                {item.name}
-                              </span>
-                            </Link>
-                          ))}
-                        </div>
-                         
+                        <div className="w-full rounded-lg overflow-hidden">
+                          <div className="grid">
+                            {servicesData.items.map((item) => (
+                              <Link
+                                key={item.name}
+                                href={item.href}
+                                role="menuitem"
+                                className="block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
+                                onMouseEnter={() => setHoveredImage(item.image)}
+                                onMouseLeave={() => setHoveredImage(null)}
+                                onFocus={() => setHoveredImage(item.image)}
+                                onBlur={() => setHoveredImage(null)}
+                              >
+                                <span className="text-gray-900 dark:text-white">
+                                  {item.name}
+                                </span>
+                              </Link>
+                            ))}
+                          </div>
                         </div>
                       </div>
 
-                      {/* Right Content - Links */}
-                      <div className="">
+                      {/* Right Content - Image */}
+                      <div className="relative" aria-hidden="true">
                         <Image
-                            src={hoveredImage || servicesData.defaultImage}
-                            alt="Service preview"
-                            width={600}
-                            height={600}
-                            className="object-cover transition-all duration-300 ease-in-out w-full h-full"
-                          />
+                          src={hoveredImage || servicesData.defaultImage}
+                          alt=""
+                          width={600}
+                          height={600}
+                          className="object-cover transition-all duration-300 ease-in-out w-full h-full"
+                          loading="eager"
+                          priority
+                        />
                       </div>
                     </div>
                   </div>
@@ -255,6 +322,7 @@ export default function Nav() {
               {/* Industry Mega Menu */}
               <li
                 className="relative"
+                role="none"
                 onMouseEnter={() => handleMouseEnter('industry')}
                 onMouseLeave={handleMouseLeave}
               >
@@ -263,9 +331,12 @@ export default function Nav() {
                     ? 'text-white'
                     : 'text-white hover:text-brand-accent'
                     }`}
+                  aria-expanded={activeDropdown === 'industry'}
+                  aria-haspopup="true"
+                  role="menuitem"
                 >
                   Industry
-                  <ChevronDown className="w-4 h-4" />
+                  <ChevronDown className="w-4 h-4" aria-hidden="true" />
                 </button>
 
                 {activeDropdown === 'industry' && (
@@ -273,6 +344,8 @@ export default function Nav() {
                     className="absolute top-full left-1/2 transform -translate-x-1/2 w-screen max-w-4xl mt-2 bg-white dark:bg-gray-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden"
                     onMouseEnter={handleDropdownEnter}
                     onMouseLeave={handleDropdownLeave}
+                    role="menu"
+                    aria-label="Industry menu"
                   >
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
                       {/* Left Content */}
@@ -283,35 +356,39 @@ export default function Nav() {
                         <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
                           {industryData.description}
                         </p>
-                        <div className="w-full  rounded-lg overflow-hidden">
-                           <div className="space-y-3 grid grid-cols-2 items-center">
-                          {industryData.items.map((item) => (
-                            <Link
-                              key={item.name}
-                              href={item.href}
-                              className="block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
-                              onMouseEnter={() => setHoveredImage(item.image)}
-                              onMouseLeave={() => setHoveredImage(null)}
-                            >
-                              <span className="text-gray-900 dark:text-white font-medium">
-                                {item.name}
-                              </span>
-                            </Link>
-                          ))}
-                        </div>
-                          
+                        <div className="w-full rounded-lg overflow-hidden">
+                          <div className="space-y-3 grid grid-cols-2 items-center">
+                            {industryData.items.map((item) => (
+                              <Link
+                                key={item.name}
+                                href={item.href}
+                                role="menuitem"
+                                className="block p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
+                                onMouseEnter={() => setHoveredImage(item.image)}
+                                onMouseLeave={() => setHoveredImage(null)}
+                                onFocus={() => setHoveredImage(item.image)}
+                                onBlur={() => setHoveredImage(null)}
+                              >
+                                <span className="text-gray-900 dark:text-white font-medium">
+                                  {item.name}
+                                </span>
+                              </Link>
+                            ))}
+                          </div>
                         </div>
                       </div>
 
-                      {/* Right Content - Links */}
-                      <div className="">
-                       <Image
-                            src={hoveredImage || industryData.defaultImage}
-                            alt="Industry preview"
-                            width={600}
-                            height={600}
-                            className="object-cover transition-all duration-300 ease-in-out w-full h-full"
-                          />
+                      {/* Right Content - Image */}
+                      <div className="relative" aria-hidden="true">
+                        <Image
+                          src={hoveredImage || industryData.defaultImage}
+                          alt=""
+                          width={600}
+                          height={600}
+                          className="object-cover transition-all duration-300 ease-in-out w-full h-full"
+                          loading="eager"
+                          priority
+                        />
                       </div>
                     </div>
                   </div>
@@ -321,14 +398,16 @@ export default function Nav() {
 
             {/* CTA Button */}
             <div className="hidden md:flex items-center gap-2">
-              <Button
-                className={`rounded-full px-6 text-sm transition-all duration-300 ${isScrolled
-                  ? 'bg-white text-brand-primary hover:bg-gray-100'
-                  : 'bg-brand-accent hover:bg-brand-primary text-white'
-                  }`}
-              >
-                Contact us
-              </Button>
+              <Link href="/contact">
+                <Button
+                  className={`rounded-full px-6 text-sm transition-all duration-300 ${isScrolled
+                    ? 'bg-white text-brand-primary hover:bg-gray-100'
+                    : 'bg-brand-accent hover:bg-brand-primary text-white'
+                    }`}
+                >
+                  Contact us
+                </Button>
+              </Link>
               <ThemeToggleSimple />
             </div>
 
@@ -336,12 +415,14 @@ export default function Nav() {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="text-white block md:hidden p-2"
-              aria-label="Toggle mobile menu"
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMobileMenuOpen}
+              aria-controls="mobile-menu"
             >
               {isMobileMenuOpen ? (
-                <X className="w-6 h-6" />
+                <X className="w-6 h-6" aria-hidden="true" />
               ) : (
-                <MenuIcon className="w-6 h-6" />
+                <MenuIcon className="w-6 h-6" aria-hidden="true" />
               )}
             </button>
           </div>
@@ -350,11 +431,18 @@ export default function Nav() {
 
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-40 md:hidden">
+        <div 
+          className="fixed inset-0 z-40 md:hidden" 
+          id="mobile-menu"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile navigation menu"
+        >
           {/* Backdrop */}
           <div 
             className="fixed inset-0 bg-black/50 backdrop-blur-sm"
-            onClick={() => setIsMobileMenuOpen(false)}
+            onClick={closeMobileMenu}
+            aria-hidden="true"
           />
           
           {/* Mobile Menu */}
@@ -364,23 +452,24 @@ export default function Nav() {
               <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
                 <Logo />
                 <button
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={closeMobileMenu}
                   className="p-2 text-gray-600 dark:text-gray-300"
+                  aria-label="Close menu"
                 >
-                  <X className="w-6 h-6" />
+                  <X className="w-6 h-6" aria-hidden="true" />
                 </button>
               </div>
 
               {/* Navigation Links */}
-              <div className="flex-1 overflow-y-auto py-6">
-                <nav className="space-y-2 px-6">
+              <nav className="flex-1 overflow-y-auto py-6" aria-label="Mobile navigation">
+                <div className="space-y-2 px-6">
                   {/* Regular Navigation Links */}
                   {navigationLinks.map((link) => (
                     <Link
                       key={link.name}
                       href={link.href}
                       className="block py-3 text-xl font-medium text-gray-900 dark:text-white hover:text-brand-accent transition-colors"
-                      onClick={() => setIsMobileMenuOpen(false)}
+                      onClick={closeMobileMenu}
                     >
                       {link.name}
                     </Link>
@@ -389,23 +478,29 @@ export default function Nav() {
                   {/* Services Dropdown */}
                   <div className="py-2">
                     <button
-                      onClick={() => setMobileActiveDropdown(mobileActiveDropdown === 'services' ? null : 'services')}
+                      onClick={() => toggleMobileDropdown('services')}
                       className="flex items-center justify-between w-full py-3 text-xl font-medium text-gray-900 dark:text-white hover:text-brand-accent transition-colors"
+                      aria-expanded={mobileActiveDropdown === 'services'}
+                      aria-controls="mobile-services-menu"
                     >
                       Services
                       <ChevronDown 
                         className={`w-5 h-5 transition-transform duration-200 ${
                           mobileActiveDropdown === 'services' ? 'rotate-180' : ''
-                        }`} 
+                        }`}
+                        aria-hidden="true"
                       />
                     </button>
                     
                     {mobileActiveDropdown === 'services' && (
-                      <div className="mt-2 ml-4 space-y-2 border-l-2 border-brand-accent pl-4">
+                      <div 
+                        id="mobile-services-menu"
+                        className="mt-2 ml-4 space-y-2 border-l-2 border-brand-accent pl-4"
+                      >
                         <Link
                           href="/services"
                           className="block py-2 text-lg text-gray-700 dark:text-gray-300 hover:text-brand-accent transition-colors"
-                          onClick={() => setIsMobileMenuOpen(false)}
+                          onClick={closeMobileMenu}
                         >
                           All Services
                         </Link>
@@ -414,7 +509,7 @@ export default function Nav() {
                             key={service.name}
                             href={service.href}
                             className="block py-2 text-lg text-gray-700 dark:text-gray-300 hover:text-brand-accent transition-colors"
-                            onClick={() => setIsMobileMenuOpen(false)}
+                            onClick={closeMobileMenu}
                           >
                             {service.name}
                           </Link>
@@ -426,23 +521,29 @@ export default function Nav() {
                   {/* Industry Dropdown */}
                   <div className="py-2">
                     <button
-                      onClick={() => setMobileActiveDropdown(mobileActiveDropdown === 'industry' ? null : 'industry')}
+                      onClick={() => toggleMobileDropdown('industry')}
                       className="flex items-center justify-between w-full py-3 text-xl font-medium text-gray-900 dark:text-white hover:text-brand-accent transition-colors"
+                      aria-expanded={mobileActiveDropdown === 'industry'}
+                      aria-controls="mobile-industry-menu"
                     >
                       Industry
                       <ChevronDown 
                         className={`w-5 h-5 transition-transform duration-200 ${
                           mobileActiveDropdown === 'industry' ? 'rotate-180' : ''
-                        }`} 
+                        }`}
+                        aria-hidden="true"
                       />
                     </button>
                     
                     {mobileActiveDropdown === 'industry' && (
-                      <div className="mt-2 ml-4 space-y-2 border-l-2 border-brand-accent pl-4">
+                      <div 
+                        id="mobile-industry-menu"
+                        className="mt-2 ml-4 space-y-2 border-l-2 border-brand-accent pl-4"
+                      >
                         <Link
                           href="/industries"
                           className="block py-2 text-lg text-gray-700 dark:text-gray-300 hover:text-brand-accent transition-colors"
-                          onClick={() => setIsMobileMenuOpen(false)}
+                          onClick={closeMobileMenu}
                         >
                           All Industries
                         </Link>
@@ -451,7 +552,7 @@ export default function Nav() {
                             key={industry.name}
                             href={industry.href}
                             className="block py-2 text-lg text-gray-700 dark:text-gray-300 hover:text-brand-accent transition-colors"
-                            onClick={() => setIsMobileMenuOpen(false)}
+                            onClick={closeMobileMenu}
                           >
                             {industry.name}
                           </Link>
@@ -464,17 +565,15 @@ export default function Nav() {
                   <Link
                     href="/contact"
                     className="block py-3 text-xl font-medium text-gray-900 dark:text-white hover:text-brand-accent transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={closeMobileMenu}
                   >
                     Contact
                   </Link>
-                </nav>
-              </div>
+                </div>
+              </nav>
 
               {/* Footer */}
               <div className="p-6 border-t border-gray-200 dark:border-gray-700 space-y-4">
-            
-
                 {/* Theme Toggle */}
                 <div className="flex justify-center">
                   <ThemeToggleSimple />

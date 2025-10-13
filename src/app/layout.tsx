@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 // import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+
 import { Assistant } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { ThemeScript } from "@/components/providers/ThemeScript";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-
+import "./globals.css";
 
 const roboto_condensed = Assistant({
   subsets: ["latin"],
