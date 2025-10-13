@@ -82,7 +82,7 @@ export default function Contacts() {
 
     return () => ctx.revert()
   }, [])
-  
+
   return (
     <main ref={containerRef} className="">
       <section className="min-h-screen   py-20 md:py-24 lg:py-32 px-6">
@@ -165,7 +165,7 @@ export default function Contacts() {
                     <div className="flex items-center gap-2">
                       <span className="text-3xl">🇬🇭</span>
                       <h3 className="text-2xl font-semibold text-light-text-primary dark:text-dark-text-primary">
-                         Office
+                        Office
                       </h3>
                     </div>
                     <p className="text-lg text-light-text-secondary dark:text-dark-text-secondary">
@@ -174,7 +174,7 @@ export default function Contacts() {
                   </div>
                 </div>
 
-                
+
               </div>
 
               {/* Decorative Elements */}

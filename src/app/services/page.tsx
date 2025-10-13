@@ -13,6 +13,7 @@ export const metadata: Metadata = {
 const services = [
   {
     serviceName: "Cybersecurity",
+    slug: "cybersecurity",
     p1: "Protect your business from evolving cyber threats with our comprehensive security solutions. We provide advanced threat detection, vulnerability assessments, and 24/7 monitoring to safeguard your critical assets and ensure compliance with industry standards.",
     p2: "Our cybersecurity experts implement multi-layered defense strategies, including endpoint protection, network security, and incident response protocols. With over 18 years of experience, we've successfully protected businesses across various sectors from sophisticated cyber attacks.",
     industry: [
@@ -44,6 +45,7 @@ const services = [
   },
   {
     serviceName: "Backup and Recovery",
+    slug: "backup-recovery",
     p1: "Ensure business continuity with our comprehensive data backup and disaster recovery solutions. We provide automated backup systems, cloud-based recovery options, and rapid restoration services to minimize downtime and protect against data loss.",
     p2: "Our disaster recovery specialists design customized backup strategies that include real-time data replication, offsite storage, and tested recovery procedures. We guarantee rapid data restoration with minimal business disruption, backed by our proven track record of successful recoveries.",
     industry: [
@@ -75,6 +77,7 @@ const services = [
   },
   {
     serviceName: "Digital Infrastructure",
+    slug: "digital-infrastructure",
     p1: "Transform your business with modern IT infrastructure solutions that form the backbone of your digital operations. We provide cloud migration, server virtualization, network architecture design, and scalable systems that grow with your business needs.",
     p2: "Our infrastructure specialists design and implement robust, scalable technology foundations that support your business growth. From hybrid cloud solutions to network optimization, we ensure your infrastructure is reliable, secure, and future-ready.",
     industry: [
@@ -106,6 +109,7 @@ const services = [
   },
   {
     serviceName: "IT Training",
+    slug: "it-training",
     p1: "Empower your workforce with cutting-edge technology skills through our comprehensive IT training programs. We offer customized training modules, certification preparation, and hands-on workshops designed to keep your team ahead of technological advances.",
     p2: "Our expert trainers deliver practical, industry-relevant education that translates directly into improved productivity and innovation. With flexible learning options and ongoing support, we ensure your team masters the latest technologies and best practices.",
     industry: [
@@ -137,6 +141,7 @@ const services = [
   },
   {
     serviceName: "Network Modernization",
+    slug: "network-modernization",
     p1: "Upgrade and optimize your network infrastructure for enhanced performance, security, and scalability. Our network modernization services include assessment, redesign, implementation of modern technologies, and ongoing management support.",
     p2: "Our network engineers transform legacy systems into high-performance, secure networks that support modern business requirements. We implement the latest networking technologies while ensuring seamless integration with existing systems.",
     industry: [
@@ -168,6 +173,7 @@ const services = [
   },
   {
     serviceName: "Surveillance Security Systems",
+    slug: "surveillance-security",
     p1: "Enhance your physical security with state-of-the-art surveillance and monitoring systems. We provide IP camera systems, access control solutions, intrusion detection, and integrated security management platforms for comprehensive protection.",
     p2: "Our security specialists design and implement advanced surveillance systems that provide real-time monitoring, intelligent analytics, and seamless integration with existing security infrastructure. We ensure your premises are protected 24/7 with cutting-edge technology.",
     industry: [
@@ -213,6 +219,7 @@ export default function Services() {
             p1={data.p1}
             p2={data.p2}
             industryData={data.industry}
+            slug={data.slug}
           />
         </div>
       ))}
