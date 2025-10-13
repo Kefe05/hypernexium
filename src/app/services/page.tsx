@@ -222,8 +222,7 @@ export default function Services() {
         <Newsletter />
       </div>
 
-      {/* Footer */}
-      <Footer />
+      
     </main>
   )
 }

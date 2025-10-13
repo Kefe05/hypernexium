@@ -22,7 +22,7 @@ export default function HyperNexiumLanding() {
       // Animate sections on scroll
       const sections = gsap.utils.toArray(".animate-section");
 
-      sections.forEach((section) => {
+      sections.forEach((section)  => {
         gsap.fromTo(section as gsap.TweenTarget,
           {
             opacity: 0,
