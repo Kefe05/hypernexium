@@ -9,7 +9,7 @@ import Newsletter from "@/components/Newsletter";
 import Services from "@/components/Services";
 import Partners from "@/components/Partners";
 import Users from "@/components/Users";
-import Footer from "@/components/Footer";
+
 
 // Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -22,8 +22,8 @@ export default function HyperNexiumLanding() {
       // Animate sections on scroll
       const sections = gsap.utils.toArray(".animate-section");
 
-      sections.forEach((section: any, index) => {
-        gsap.fromTo(section,
+      sections.forEach((section)  => {
+        gsap.fromTo(section as gsap.TweenTarget,
           {
             opacity: 0,
             y: 100,
@@ -36,7 +36,7 @@ export default function HyperNexiumLanding() {
             duration: 1.2,
             ease: "power3.out",
             scrollTrigger: {
-              trigger: section,
+              trigger: section as Element,
               start: "top 85%",
               end: "bottom 15%",
               toggleActions: "play none none reverse",
@@ -104,8 +104,6 @@ export default function HyperNexiumLanding() {
       <div className="py-16 md:py-20 lg:py-24 animate-section">
         <Newsletter />
       </div>
-
-      
     </main>
   );
 }

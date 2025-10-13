@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Mail, Phone, MapPin } from 'lucide-react'
-
+import Image from 'next/image'
 
 gsap.registerPlugin(ScrollTrigger)
 
