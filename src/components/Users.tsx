@@ -7,7 +7,7 @@ import {
   Home,
   Factory,
   Landmark,
-  Truck,
+  Zap,
   ArrowRight
 } from "lucide-react";
 import { VerticalGridLines } from "./GridLines";
@@ -20,48 +20,56 @@ export default function Users() {
       title: "Healthcare",
       description: "Innovative solutions tailored for the healthcare sector.",
       icon: Heart,
+      slug: "healthcare"
     },
     {
       id: 2,
       title: "Education",
       description: "Innovative solutions tailored for the education sector.",
       icon: GraduationCap,
+      slug: "education"
     },
     {
       id: 3,
       title: "Corporate",
       description: "Innovative solutions tailored for the corporate sector.",
       icon: Building2,
+      slug: "corporate"
     },
     {
       id: 4,
       title: "Retail",
       description: "Innovative solutions tailored for the retail sector.",
       icon: ShoppingCart,
+      slug: "retail"
     },
     {
       id: 5,
       title: "Real Estate",
       description: "Innovative solutions tailored for the real estate sector.",
       icon: Home,
+      slug: "real-estate"
     },
     {
       id: 6,
       title: "Manufacturing",
       description: "Innovative solutions tailored for the manufacturing sector.",
       icon: Factory,
+      slug: "manufacturing"
     },
     {
       id: 7,
       title: "Finance",
       description: "Innovative solutions tailored for the finance sector.",
       icon: Landmark,
+      slug: "financial-services"
     },
     {
       id: 8,
-      title: "Transportation",
-      description: "Innovative solutions tailored for the transportation sector.",
-      icon: Truck,
+      title: "Energy",
+      description: "Innovative solutions tailored for the energy sector.",
+      icon: Zap,
+      slug: "energy"
     }
   ];
 
@@ -87,7 +95,7 @@ export default function Users() {
             const IconComponent = industry.icon;
 
             return (
-              <Link key={industry.id} href={`/sector/${industry.id}`}>
+              <Link key={industry.id} href={`/industries/${industry.slug}`}>
                 <div
                   className="group relative p-8 rounded-2xl border transition-all duration-300 cursor-pointer overflow-hidden
                   border-light-border dark:border-dark-border 
