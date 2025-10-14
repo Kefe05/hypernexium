@@ -45,9 +45,14 @@ export default function Team() {
   const currentMemberData = boardMembers[currentMember];
 
   return (
-    <section className="relative py-24 bg-base overflow-hidden">
+    <section className="relative  py-12 bg-base overflow-hidden">
 
       <div className="relative z-10 max-w-7xl mx-auto px-6">
+        {/* Title */}
+        <h2 className="text-3xl md:text-6xl md:mb-16 font-bold text-primary  text-center">
+          Meet our<span  className="text-brand-accent"> board </span> of directors
+        </h2>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
           {/* Left Side - Image */}
@@ -81,7 +86,7 @@ export default function Team() {
             {/* Introduction */}
             <div className="space-y-6">
               <div className="text-6xl text-brand-accent/20 font-serif leading-none">&ldquo;</div>
-              <blockquote className=" text-lg md:text-2xl text-gray-700 dark:text-gray-300 leading-relaxed font-light">
+              <blockquote className=" text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed font-light">
                 {currentMemberData.bio}
               </blockquote>
             </div>

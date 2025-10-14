@@ -213,7 +213,7 @@ export default function Nav() {
   return (
     <nav className="w-full fixed z-50" role="navigation" aria-label="Main navigation">
       <div
-        className={`w-full transition-all duration-300 mx-auto ${isScrolled || pathname.startsWith("/contact")
+        className={`w-full transition-all duration-300 mx-auto ${isScrolled || pathname.startsWith("/contact")|| pathname.startsWith("/services/") || pathname.startsWith("/industries/")
           ? 'bg-brand-secondary/90 backdrop-blur-sm shadow-lg border-b border-brand-secondary'
           : 'bg-transparent'
           }`}
