@@ -88,7 +88,7 @@ export default function Newsletter() {
         setMessage(data.error || 'Failed to subscribe');
         setIsError(true);
       }
-    } catch (error) {
+    } catch {
       setMessage('Network error. Please try again.');
       setIsError(true);
     } finally {

@@ -5,7 +5,9 @@ const apiInstance = new TransactionalEmailsApi();
 const contactsApi = new ContactsApi();
 
 // Configure API keys
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 (apiInstance as any).authentications.apiKey.apiKey = process.env.BREVO_API_KEY!;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 (contactsApi as any).authentications.apiKey.apiKey = process.env.BREVO_API_KEY!;
 
 export interface NewsletterSubscription {
@@ -28,17 +30,18 @@ export async function subscribeToNewsletter(data: NewsletterSubscription) {
 
     const result = await contactsApi.createContact(createContact);
     return { success: true, data: result };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Newsletter subscription error:', error);
+    const err = error as { status?: number; body?: { message?: string } };
     
     // Handle case where contact already exists
-    if (error.status === 400 && error.body?.message?.includes('Contact already exist')) {
+    if (err.status === 400 && err.body?.message?.includes('Contact already exist')) {
       return { success: true, message: 'Already subscribed' };
     }
     
     return { 
       success: false, 
-      error: error.body?.message || 'Failed to subscribe to newsletter' 
+      error: err.body?.message || 'Failed to subscribe to newsletter' 
     };
   }
 }
@@ -91,11 +94,12 @@ export async function sendContactEmail(data: ContactFormData) {
 
     const result = await apiInstance.sendTransacEmail(sendSmtpEmail);
     return { success: true, data: result };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Contact email error:', error);
+    const err = error as { body?: { message?: string } };
     return { 
       success: false, 
-      error: error.body?.message || 'Failed to send contact email' 
+      error: err.body?.message || 'Failed to send contact email' 
     };
   }
 }
@@ -152,11 +156,12 @@ export async function sendContactConfirmation(data: ContactFormData) {
 
     const result = await apiInstance.sendTransacEmail(sendSmtpEmail);
     return { success: true, data: result };
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error('Confirmation email error:', error);
+    const err = error as { body?: { message?: string } };
     return { 
       success: false, 
-      error: error.body?.message || 'Failed to send confirmation email' 
+      error: err.body?.message || 'Failed to send confirmation email' 
     };
   }
 }

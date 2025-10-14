@@ -124,7 +124,7 @@ export default function Contacts() {
         setStatusMessage(data.error || 'Failed to send message')
         setIsError(true)
       }
-    } catch (error) {
+    } catch {
       setStatusMessage('Network error. Please try again.')
       setIsError(true)
     } finally {
