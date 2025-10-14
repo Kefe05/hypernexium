@@ -8,6 +8,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function Newsletter() {
   const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState("");
+  const [isError, setIsError] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -58,12 +61,38 @@ export default function Newsletter() {
     return () => ctx.revert();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
-      // Handle newsletter subscription logic here
-      console.log("Subscribing email:", email);
-      setEmail("");
+    if (!email) return;
+
+    setIsLoading(true);
+    setMessage("");
+    setIsError(false);
+
+    try {
+      const response = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setMessage(data.message);
+        setEmail("");
+        setIsError(false);
+      } else {
+        setMessage(data.error || 'Failed to subscribe');
+        setIsError(true);
+      }
+    } catch (error) {
+      setMessage('Network error. Please try again.');
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -95,11 +124,23 @@ export default function Newsletter() {
               />
               <Button
                 type="submit"
-                className="px-8 py-4  bg-brand-secondary bg-brand-secondary/90 hover:shadow-md text-white rounded-r-full font-medium border border-l-0 border-brand-primary  h-15 md:h-20"
+                disabled={isLoading}
+                className="px-8 py-4 bg-brand-secondary bg-brand-secondary/90 hover:shadow-md text-white rounded-r-full font-medium border border-l-0 border-brand-primary h-15 md:h-20 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Subscribe
+                {isLoading ? 'Subscribing...' : 'Subscribe'}
               </Button>
             </form>
+            
+            {/* Status Message */}
+            {message && (
+              <div className={`mt-3 ml-5 text-sm ${
+                isError 
+                  ? 'text-red-600 dark:text-red-400' 
+                  : 'text-green-600 dark:text-green-400'
+              }`}>
+                {message}
+              </div>
+            )}
             
             {/* Privacy Notice */}
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-3 ml-5">

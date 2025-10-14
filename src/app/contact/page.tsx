@@ -1,15 +1,22 @@
 "use client"
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Mail, Phone, MapPin } from 'lucide-react'
-import Image from 'next/image'
 
 gsap.registerPlugin(ScrollTrigger)
 
 
 export default function Contacts() {
   const containerRef = useRef<HTMLElement>(null)
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    message: ''
+  })
+  const [isLoading, setIsLoading] = useState(false)
+  const [statusMessage, setStatusMessage] = useState('')
+  const [isError, setIsError] = useState(false)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -82,6 +89,48 @@ export default function Contacts() {
 
     return () => ctx.revert()
   }, [])
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    
+    setIsLoading(true)
+    setStatusMessage('')
+    setIsError(false)
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setStatusMessage(data.message)
+        setFormData({ fullName: '', email: '', message: '' })
+        setIsError(false)
+      } else {
+        setStatusMessage(data.error || 'Failed to send message')
+        setIsError(true)
+      }
+    } catch (error) {
+      setStatusMessage('Network error. Please try again.')
+      setIsError(true)
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   return (
     <main ref={containerRef} className="">
@@ -191,7 +240,19 @@ export default function Contacts() {
               <h2 className="text-2xl font-bold text-light-text-primary dark:text-dark-text-primary mb-6">
                 Send us a Message
               </h2>
-              <form className="space-y-6">
+              
+              {/* Status Message */}
+              {statusMessage && (
+                <div className={`p-4 rounded-lg mb-6 ${
+                  isError 
+                    ? 'bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800' 
+                    : 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800'
+                }`}>
+                  {statusMessage}
+                </div>
+              )}
+              
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label
                     htmlFor="fullName"
@@ -203,6 +264,8 @@ export default function Contacts() {
                     type="text"
                     id="fullName"
                     name="fullName"
+                    value={formData.fullName}
+                    onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 border border-light-border dark:border-dark-border rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-brand-accent bg-light dark:bg-dark text-light-text-primary dark:text-dark-text-primary transition-colors"
                     placeholder="Enter your full name"
@@ -220,6 +283,8 @@ export default function Contacts() {
                     type="email"
                     id="email"
                     name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 border border-light-border dark:border-dark-border rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-brand-accent bg-light dark:bg-dark text-light-text-primary dark:text-dark-text-primary transition-colors"
                     placeholder="Enter your email address"
@@ -237,6 +302,8 @@ export default function Contacts() {
                     id="message"
                     name="message"
                     rows={6}
+                    value={formData.message}
+                    onChange={handleInputChange}
                     required
                     className="w-full px-4 py-3 border border-light-border dark:border-dark-border rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-brand-accent bg-light dark:bg-dark text-light-text-primary dark:text-dark-text-primary transition-colors resize-vertical"
                     placeholder="Tell us how we can help you..."
@@ -245,9 +312,10 @@ export default function Contacts() {
 
                 <button
                   type="submit"
-                  className="w-full bg-brand-accent hover:bg-brand-primary text-light font-semibold py-3 px-6 rounded-lg transition-colors duration-200"
+                  disabled={isLoading}
+                  className="w-full bg-brand-accent hover:bg-brand-primary text-light font-semibold py-3 px-6 rounded-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Send Message
+                  {isLoading ? 'Sending...' : 'Send Message'}
                 </button>
               </form>
             </div>
