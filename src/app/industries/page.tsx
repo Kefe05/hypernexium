@@ -1,17 +1,15 @@
-export interface IndustryItem {
-  name: string;
-  description: string;
-}
+import type { Metadata } from "next";
+import Hero from './component/Hero'
+import ServiceSection from './component/Services'
+import Newsletter from '@/components/Newsletter'
 
-export interface IndustryData {
-  serviceName: string;
-  slug: string;
-  p1: string;
-  p2: string;
-  industry: IndustryItem[];
-}
+export const metadata: Metadata = {
+  title: "Industries - Hyper Nexium Technologies",
+  description: "Discover how Hyper Nexium Technologies empowers various industries across Africa with smart, secure, and reliable technology solutions.",
+};
 
-export const industries: IndustryData[] = [
+// Industry sectors data based on sector.txt content
+const industries = [
   {
     serviceName: "Healthcare",
     slug: "healthcare",
@@ -264,4 +262,31 @@ export const industries: IndustryData[] = [
       }
     ]
   }
-];
+]
+
+export default function Industries() {
+  return (
+    <main className="bg-white dark:bg-gray-900">
+      {/* Industries Hero */}
+      <Hero />
+
+      {/* Industry Sections */}
+      {industries.map((data, index) => (
+        <div key={index} className="py-16 md:py-20 lg:py-24">
+          <ServiceSection
+            title={data.serviceName}
+            p1={data.p1}
+            p2={data.p2}
+            industryData={data.industry}
+            slug={data.slug}
+          />
+        </div>
+      ))}
+
+      {/* Newsletter */}
+      <div className="py-16 md:py-20 lg:py-24">
+        <Newsletter />
+      </div>
+    </main>
+  )
+}
