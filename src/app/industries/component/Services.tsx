@@ -16,11 +16,11 @@ export default function ServiceSection({ title, p1, p2, industryData, slug }: Se
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
           {/* Left Content */}
           <div className="space-y-6">
-            <h2 className="text-4xl md:text-5xl font-normal text-black dark:text-white">
+            <h2 className="text-4xl md:text-5xl font-normal text-light-text-primary dark:text-dark-text-primary">
               {title}
             </h2>
 
-            <div className="space-y-4 text-gray-700 dark:text-gray-300">
+            <div className="space-y-4 text-light-text-secondary dark:text-dark-text-secondary">
               <p className="text-lg leading-relaxed">
                 {p1}
               </p>
@@ -31,7 +31,7 @@ export default function ServiceSection({ title, p1, p2, industryData, slug }: Se
             </div>
 
             <div className="pt-4">
-              <Link href={`/industries/${slug}`} className="px-8 py-3 border border-gray-400 dark:border-gray-600 rounded-full text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200">
+              <Link href={`/industries/${slug}`} className="px-8 py-3 border border-base rounded-full text-light  bg-brand-primary hover:bg-brand-secondary transition-colors duration-200">
                 Learn more
               </Link>
             </div>

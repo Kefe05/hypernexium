@@ -76,63 +76,63 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-slate-900 opacity-60" aria-hidden="true" />
 
         {/* Content Container */}
-        <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 lg:px-16 w-full">
-          <div className="max-w-3xl space-y-8">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-12 lg:px-16 w-full">
+          <div className="max-w-3xl space-y-6 sm:space-y-8">
             {/* Label */}
             <div>
-              <span ref={labelRef} className="inline-block px-5 py-2 bg-brand-accent/20 backdrop-blur-sm border border-brand-secondary rounded-full text-brand-accent text-xs md:text-sm font-medium tracking-wide">
+              <span ref={labelRef} className="inline-block px-4 py-2 sm:px-5 sm:py-2 bg-brand-accent/20 backdrop-blur-sm border border-brand-secondary rounded-full text-brand-accent text-xs sm:text-sm font-medium tracking-wide">
                 WHO WE ARE
               </span>
             </div>
 
             {/* Main Title */}
-            <h1 ref={titleRef} id="about-title" className="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
+            <h1 ref={titleRef} id="about-title" className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
               About{' '}
               <span className="text-brand-accent">Hyper Nexium</span>
             </h1>
 
             {/* Description */}
-            <p ref={descRef} className="text-lg md:text-xl text-white leading-relaxed max-w-2xl">
+            <p ref={descRef} className="text-base sm:text-lg md:text-xl text-white leading-relaxed max-w-2xl">
               A forward-thinking technology partner specializing in advanced IT solutions that empower enterprises across Africa and beyond.
             </p>
 
             {/* Stats Grid */}
-            <ul ref={statsRef} className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4" role="list">
+            <ul ref={statsRef} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 pt-4" role="list">
               {/* Services */}
-              <li className="bg-gradient-to-br from-brand-primary/20 to-brand-accent/20 backdrop-blur-sm rounded-xl p-6 border border-brand-accent/30 hover:border-brand-accent/50 transition-all duration-300 shadow-lg">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-brand-accent rounded-full flex items-center justify-center flex-shrink-0" role="img" aria-label="Briefcase icon">
-                    <Briefcase className="w-6 h-6 text-white" />
+              <li className="bg-gradient-to-br from-brand-primary/20 to-brand-accent/20 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-brand-accent/30 hover:border-brand-accent/50 transition-all duration-300 shadow-lg">
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-brand-accent rounded-full flex items-center justify-center flex-shrink-0" role="img" aria-label="Briefcase icon">
+                    <Briefcase className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                   </div>
                   <div>
-                    <div className="text-3xl font-bold text-white mb-1">6</div>
-                    <div className="text-base text-white/80">Core Solutions</div>
+                    <div className="text-2xl sm:text-3xl font-bold text-white mb-1">6</div>
+                    <div className="text-sm sm:text-base text-white/80">Core Solutions</div>
                   </div>
                 </div>
               </li>
 
               {/* Global Partners */}
-              <li className="bg-gradient-to-br from-brand-primary/20 to-brand-accent/20 backdrop-blur-sm rounded-xl p-6 border border-brand-accent/30 hover:border-brand-accent/50 transition-all duration-300 shadow-lg">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-brand-accent rounded-full flex items-center justify-center flex-shrink-0" role="img" aria-label="Globe icon">
-                    <Globe className="w-6 h-6 text-white" />
+              <li className="bg-gradient-to-br from-brand-primary/20 to-brand-accent/20 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-brand-accent/30 hover:border-brand-accent/50 transition-all duration-300 shadow-lg">
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-brand-accent rounded-full flex items-center justify-center flex-shrink-0" role="img" aria-label="Globe icon">
+                    <Globe className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                   </div>
                   <div>
-                    <div className="text-3xl font-bold text-white mb-1">18+</div>
-                    <div className="text-base text-white/80">Global Partners</div>
+                    <div className="text-2xl sm:text-3xl font-bold text-white mb-1">18+</div>
+                    <div className="text-sm sm:text-base text-white/80">Global Partners</div>
                   </div>
                 </div>
               </li>
 
               {/* Industries Served */}
-              <li className="bg-gradient-to-br from-brand-primary/20 to-brand-accent/20 backdrop-blur-sm rounded-xl p-6 border border-brand-accent/30 hover:border-brand-accent/50 transition-all duration-300 shadow-lg">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-brand-accent rounded-full flex items-center justify-center flex-shrink-0" role="img" aria-label="Building icon">
-                    <Building2 className="w-6 h-6 text-white" />
+              <li className="bg-gradient-to-br from-brand-primary/20 to-brand-accent/20 backdrop-blur-sm rounded-xl p-4 sm:p-6 border border-brand-accent/30 hover:border-brand-accent/50 transition-all duration-300 shadow-lg sm:col-span-2 md:col-span-1">
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-brand-accent rounded-full flex items-center justify-center flex-shrink-0" role="img" aria-label="Building icon">
+                    <Building2 className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                   </div>
                   <div>
-                    <div className="text-3xl font-bold text-white mb-1">8+</div>
-                    <div className="text-base text-white/80">Industries Served</div>
+                    <div className="text-2xl sm:text-3xl font-bold text-white mb-1">8+</div>
+                    <div className="text-sm sm:text-base text-white/80">Industries Served</div>
                   </div>
                 </div>
               </li>
@@ -143,14 +143,14 @@ export default function AboutPage() {
         {/* Scroll Indicator */}
         <button
           onClick={scrollToNextSection}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 w-12 h-12 flex items-center justify-center bg-white/10 backdrop-blur-sm hover:bg-white/20 rounded-full transition-all duration-300 text-white border border-white/20"
+          className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-20 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center bg-white/10 backdrop-blur-sm hover:bg-white/20 rounded-full transition-all duration-300 text-white border border-white/20"
           aria-label="Scroll to next section"
         >
-          <ChevronDown className="w-8 h-8" />
+          <ChevronDown className="w-6 h-6 sm:w-8 sm:h-8" />
         </button>
 
         {/* Decorative Elements */}
-        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-900/50 to-transparent pointer-events-none" aria-hidden="true" />
+        <div className="absolute bottom-0 left-0 right-0 h-24 sm:h-32 bg-gradient-to-t from-slate-900/50 to-transparent pointer-events-none" aria-hidden="true" />
       </section>
     </div>
   )
