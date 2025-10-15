@@ -4,7 +4,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
-import Team from "@/components/Team";
+// import Team from "@/components/Team";
 import Newsletter from "@/components/Newsletter";
 import Services from "@/components/Services";
 import Partners from "@/components/Partners";
@@ -76,32 +76,32 @@ export default function HyperNexiumLanding() {
       <Hero />
 
       {/* Services Grid Section */}
-      <div className="py-16 md:py-20 lg:py-24 animate-section">
+      <div className="pb-16 md:pb-20 lg:pb-24 animate-section">
         <About />
       </div>
 
       {/* Stats Section */}
-      <div className="py-16 md:py-20 lg:py-24 animate-section">
+      <div className="pb-16 md:pb-20 lg:pb-24 animate-section">
         <Services />
       </div>
 
       {/* Logo Section */}
-      <div className="py-16 md:py-20 lg:py-24 animate-section">
+      <div className="pb-16 md:pb-20 lg:pb-24 animate-section">
         <Partners />
       </div>
 
       {/* Our Target users Section */}
-      <div className="py-16 md:py-20 lg:py-24 animate-section">
+      <div className="pb-16 md:pb-20 lg:pb-24 animate-section">
         <Users />
       </div>
 
-      {/* The Team */}
-      <div className="py-16 md:py-20 lg:py-24 animate-section">
+      {/* The Team
+      <div className="pb-16 md:py-20 lg:py-24 animate-section">
         <Team />
-      </div>
+      </div> */}
 
       {/* CTA Section */}
-      <div className="py-16 md:py-20 lg:py-24 animate-section">
+      <div className="pb-16 md:pb-20 lg:pb-24 animate-section">
         <Newsletter />
       </div>
     </main>
