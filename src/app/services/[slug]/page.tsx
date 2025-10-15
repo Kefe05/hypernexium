@@ -4,180 +4,180 @@ import { ArrowLeft, CheckCircle, Clock, Shield } from 'lucide-react';
 import Link from 'next/link';
 import { VerticalGridLines } from '@/components/GridLines';
 
-// Service data (you can move this to a separate file later)
+// Service data matching the main services page
 const servicesData = {
-    'cloud-infrastructure': {
-        title: 'Cloud Infrastructure',
-        subtitle: 'Enterprise-Grade Cloud Solutions',
-        description: 'Transform your business with scalable, secure, and reliable cloud infrastructure that grows with your needs.',
-        longDescription: 'Our cloud infrastructure services help businesses migrate, optimize, and manage their cloud environments with confidence. We provide end-to-end solutions from strategy and planning to implementation and ongoing support.',
-        features: [
-            'AWS & Azure certified expertise',
-            'Scalable architecture design',
-            'Security-first approach',
-            '24/7 monitoring and support',
-            'Cost optimization strategies',
-            'Disaster recovery planning'
-        ],
-        benefits: [
-            'Reduced operational costs',
-            'Improved scalability',
-            'Enhanced security',
-            'Better performance',
-            'Increased reliability'
-        ],
-        process: [
-            'Assessment & Strategy',
-            'Architecture Design',
-            'Migration Planning',
-            'Implementation',
-            'Testing & Optimization',
-            'Ongoing Support'
-        ]
-    },
     'cybersecurity': {
-        title: 'Cybersecurity Solutions',
+        title: 'Cybersecurity',
         subtitle: 'Advanced Protection & Threat Management',
         description: 'Comprehensive cybersecurity services to protect your business from evolving threats and ensure compliance.',
-        longDescription: 'Our cybersecurity experts provide multi-layered protection strategies, from threat detection and prevention to incident response and recovery. We help organizations build resilient security postures.',
+        longDescription: 'Our cybersecurity experts implement multi-layered defense strategies, including endpoint protection, network security, and incident response protocols. With over 18 years of experience, we\'ve successfully protected businesses across various sectors from sophisticated cyber attacks.',
         features: [
-            'Threat detection & prevention',
-            'Security audits & assessments',
-            'Compliance management',
-            'Incident response planning',
-            'Employee security training',
-            'Continuous monitoring'
+            'Advanced threat detection and vulnerability assessments',
+            '24/7 monitoring and incident response protocols',
+            'Multi-layered defense strategies and endpoint protection',
+            'Network security and compliance management',
+            'Employee security training and awareness programs',
+            'Continuous monitoring and security updates'
         ],
         benefits: [
-            'Reduced security risks',
-            'Regulatory compliance',
-            'Business continuity',
-            'Customer trust',
-            'Data protection'
+            'Protection from evolving cyber threats',
+            'Compliance with industry standards',
+            'Reduced security risks and vulnerabilities',
+            'Enhanced business continuity',
+            'Customer trust and data protection'
         ],
         process: [
-            'Security Assessment',
-            'Risk Analysis',
-            'Strategy Development',
-            'Implementation',
-            'Monitoring Setup',
-            'Ongoing Management'
+            'Security Assessment & Risk Analysis',
+            'Strategy Development & Planning',
+            'Implementation of Security Measures',
+            'Monitoring Setup & Configuration',
+            'Ongoing Management & Support',
+            'Regular Updates & Improvements'
         ]
     },
-    'digital-transformation': {
-        title: 'Digital Transformation',
-        subtitle: 'Modernize Your Business Operations',
-        description: 'Drive innovation and efficiency through strategic digital transformation initiatives.',
-        longDescription: 'We help organizations embrace digital technologies to fundamentally change how they operate and deliver value to customers. Our approach focuses on people, processes, and technology.',
+    'backup-recovery': {
+        title: 'Backup and Recovery',
+        subtitle: 'Comprehensive Data Protection Solutions',
+        description: 'Ensure business continuity with our comprehensive data backup and disaster recovery solutions.',
+        longDescription: 'Our disaster recovery specialists design customized backup strategies that include real-time data replication, offsite storage, and tested recovery procedures. We guarantee rapid data restoration with minimal business disruption, backed by our proven track record of successful recoveries.',
         features: [
-            'Process automation',
-            'Legacy system modernization',
-            'Digital workflow design',
-            'Change management',
-            'Technology integration',
-            'Performance analytics'
+            'Automated backup systems and cloud-based recovery options',
+            'Real-time data replication and offsite storage',
+            'Rapid restoration services to minimize downtime',
+            'Tested recovery procedures and disaster planning',
+            'Customized backup strategies for different industries',
+            'Comprehensive data protection and compliance'
         ],
         benefits: [
-            'Increased efficiency',
-            'Better customer experience',
-            'Competitive advantage',
-            'Cost reduction',
-            'Innovation acceleration'
+            'Minimized downtime and data loss protection',
+            'Business continuity assurance',
+            'Rapid data restoration capabilities',
+            'Compliance with data protection regulations',
+            'Peace of mind with proven recovery track record'
         ],
         process: [
-            'Current State Analysis',
-            'Vision & Strategy',
-            'Roadmap Planning',
-            'Pilot Implementation',
-            'Full Deployment',
-            'Continuous Improvement'
+            'Data Assessment & Backup Strategy Design',
+            'Implementation of Backup Systems',
+            'Testing & Validation of Recovery Procedures',
+            'Monitoring & Maintenance',
+            'Regular Recovery Testing',
+            'Continuous Optimization & Updates'
         ]
     },
-    'enterprise-software': {
-        title: 'Enterprise Software',
-        subtitle: 'Custom Software Development',
-        description: 'Build powerful, scalable enterprise applications tailored to your specific business needs.',
-        longDescription: 'Our enterprise software development services deliver custom solutions that streamline operations, improve productivity, and drive business growth. We use modern technologies and best practices.',
+    'digital-infrastructure': {
+        title: 'Digital Infrastructure',
+        subtitle: 'Modern IT Infrastructure Solutions',
+        description: 'Transform your business with modern IT infrastructure solutions that form the backbone of your digital operations.',
+        longDescription: 'Our infrastructure specialists design and implement robust, scalable technology foundations that support your business growth. From hybrid cloud solutions to network optimization, we ensure your infrastructure is reliable, secure, and future-ready.',
         features: [
-            'Custom application development',
-            'System integration',
-            'API development',
-            'Database design',
-            'User experience design',
-            'Quality assurance'
+            'Cloud migration and server virtualization',
+            'Network architecture design and optimization',
+            'Scalable systems that grow with your business',
+            'Hybrid cloud solutions and infrastructure management',
+            'Security-first infrastructure approach',
+            'Performance monitoring and optimization'
         ],
         benefits: [
-            'Tailored functionality',
-            'Seamless integration',
-            'Improved productivity',
-            'Scalable architecture',
-            'Competitive advantage'
+            'Reliable and secure infrastructure foundation',
+            'Scalability to support business growth',
+            'Future-ready technology solutions',
+            'Improved performance and efficiency',
+            'Reduced operational costs'
         ],
         process: [
-            'Requirements Analysis',
-            'System Design',
-            'Development',
-            'Testing',
-            'Deployment',
-            'Maintenance'
+            'Infrastructure Assessment & Planning',
+            'Architecture Design & Strategy',
+            'Migration & Implementation',
+            'Testing & Optimization',
+            'Deployment & Integration',
+            'Ongoing Support & Maintenance'
         ]
     },
-    'it-consulting': {
-        title: 'IT Consulting',
-        subtitle: 'Strategic Technology Guidance',
-        description: 'Expert IT consulting services to align technology with your business objectives and drive growth.',
-        longDescription: 'Our IT consulting services provide strategic guidance to help organizations make informed technology decisions, optimize their IT investments, and achieve their business goals.',
+    'it-training': {
+        title: 'IT Training',
+        subtitle: 'Comprehensive Technology Skills Development',
+        description: 'Empower your workforce with cutting-edge technology skills through our comprehensive IT training programs.',
+        longDescription: 'Our expert trainers deliver practical, industry-relevant education that translates directly into improved productivity and innovation. With flexible learning options and ongoing support, we ensure your team masters the latest technologies and best practices.',
         features: [
-            'Technology strategy development',
-            'IT infrastructure assessment',
-            'Vendor selection & management',
-            'Project management',
-            'Risk assessment',
-            'Performance optimization'
+            'Customized training modules and certification preparation',
+            'Hands-on workshops and practical learning',
+            'Industry-relevant education and skill development',
+            'Flexible learning options and ongoing support',
+            'Latest technology training and best practices',
+            'Performance tracking and progress monitoring'
         ],
         benefits: [
-            'Strategic alignment',
-            'Cost optimization',
-            'Risk mitigation',
-            'Improved efficiency',
-            'Technology roadmap'
+            'Enhanced workforce technology skills',
+            'Improved productivity and innovation',
+            'Competitive advantage through skilled teams',
+            'Reduced training costs and time',
+            'Continuous learning and development'
         ],
         process: [
-            'Business Analysis',
-            'Technology Assessment',
-            'Strategy Development',
-            'Roadmap Creation',
-            'Implementation Planning',
-            'Ongoing Advisory'
+            'Skills Assessment & Training Needs Analysis',
+            'Customized Curriculum Development',
+            'Training Delivery & Hands-on Practice',
+            'Progress Monitoring & Evaluation',
+            'Certification & Skill Validation',
+            'Ongoing Support & Advanced Training'
         ]
     },
-    'support-maintenance': {
-        title: 'Support & Maintenance',
-        subtitle: '24/7 System Support & Optimization',
-        description: 'Comprehensive support services to ensure your systems run smoothly and efficiently around the clock.',
-        longDescription: 'Our support and maintenance services provide peace of mind with proactive monitoring, regular updates, and rapid issue resolution to keep your business running smoothly.',
+    'network-modernization': {
+        title: 'Network Modernization',
+        subtitle: 'Advanced Network Infrastructure Upgrade',
+        description: 'Upgrade and optimize your network infrastructure for enhanced performance, security, and scalability.',
+        longDescription: 'Our network engineers transform legacy systems into high-performance, secure networks that support modern business requirements. We implement the latest networking technologies while ensuring seamless integration with existing systems.',
         features: [
-            '24/7 system monitoring',
-            'Proactive maintenance',
-            'Issue resolution',
-            'Performance optimization',
-            'Security updates',
-            'Backup management'
+            'Network assessment and redesign services',
+            'Implementation of modern networking technologies',
+            'Performance optimization and security enhancement',
+            'Scalable network architecture design',
+            'Seamless integration with existing systems',
+            'Ongoing management and support services'
         ],
         benefits: [
-            'Maximum uptime',
-            'Reduced downtime costs',
-            'Improved performance',
-            'Enhanced security',
-            'Peace of mind'
+            'Enhanced network performance and reliability',
+            'Improved security and compliance',
+            'Scalability for future growth',
+            'Reduced network downtime and issues',
+            'Modern technology integration'
         ],
         process: [
-            'System Assessment',
-            'Monitoring Setup',
-            'Maintenance Planning',
-            'Proactive Support',
-            'Issue Resolution',
-            'Continuous Optimization'
+            'Network Assessment & Analysis',
+            'Modernization Strategy & Design',
+            'Technology Implementation & Integration',
+            'Testing & Performance Optimization',
+            'Deployment & Migration',
+            'Ongoing Management & Support'
+        ]
+    },
+    'surveillance-security': {
+        title: 'Surveillance Security Systems',
+        subtitle: 'Advanced Security & Monitoring Solutions',
+        description: 'Enhance your physical security with state-of-the-art surveillance and monitoring systems.',
+        longDescription: 'Our security specialists design and implement advanced surveillance systems that provide real-time monitoring, intelligent analytics, and seamless integration with existing security infrastructure. We ensure your premises are protected 24/7 with cutting-edge technology.',
+        features: [
+            'IP camera systems and access control solutions',
+            'Intrusion detection and monitoring systems',
+            'Integrated security management platforms',
+            'Real-time monitoring and intelligent analytics',
+            'Mobile access and remote monitoring capabilities',
+            '24/7 security monitoring and response'
+        ],
+        benefits: [
+            'Comprehensive physical security protection',
+            'Real-time threat detection and response',
+            'Reduced security incidents and losses',
+            'Enhanced safety for personnel and assets',
+            'Compliance with security regulations'
+        ],
+        process: [
+            'Security Assessment & Risk Analysis',
+            'System Design & Technology Selection',
+            'Installation & Integration',
+            'Testing & Commissioning',
+            'Training & Handover',
+            'Ongoing Monitoring & Maintenance'
         ]
     }
 };
@@ -318,4 +318,22 @@ export function generateStaticParams() {
     return Object.keys(servicesData).map((slug) => ({
         slug,
     }));
+}
+
+// Generate metadata for each service page
+export async function generateMetadata({ params }: ServicePageProps) {
+    const { slug } = await params;
+    const service = servicesData[slug as keyof typeof servicesData];
+    
+    if (!service) {
+        return {
+            title: 'Service Not Found - Hyper Nexium Technologies',
+            description: 'The requested service page could not be found.',
+        };
+    }
+
+    return {
+        title: `${service.title} - Hyper Nexium Technologies`,
+        description: service.description,
+    };
 }

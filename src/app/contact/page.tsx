@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Mail, Phone, MapPin } from 'lucide-react'
@@ -8,6 +8,14 @@ gsap.registerPlugin(ScrollTrigger)
 
 const Contacts = React.memo(() => {
   const containerRef = useRef<HTMLElement>(null)
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    message: ''
+  })
+  const [isLoading, setIsLoading] = useState(false)
+  const [statusMessage, setStatusMessage] = useState('')
+  const [isError, setIsError] = useState(false)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -80,7 +88,49 @@ const Contacts = React.memo(() => {
 
     return () => ctx.revert()
   }, [])
-  
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    
+    setIsLoading(true)
+    setStatusMessage('')
+    setIsError(false)
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        setStatusMessage(data.message)
+        setFormData({ fullName: '', email: '', message: '' })
+        setIsError(false)
+      } else {
+        setStatusMessage(data.error || 'Failed to send message')
+        setIsError(true)
+      }
+    } catch {
+      setStatusMessage('Network error. Please try again.')
+      setIsError(true)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   return (
     <main ref={containerRef} className="" role="main">
       <section className="min-h-screen py-20 md:py-24 lg:py-32 px-6" aria-labelledby="contact-heading">
@@ -154,8 +204,8 @@ const Contacts = React.memo(() => {
                   </div>
                   <div className="space-y-2">
                     <div className="flex items-center gap-2">
-                      <span className="text-3xl" aria-hidden="true">🇬🇭</span>
-                      <h3 className="text-lg md:text-2xl font-semibold text-light-text-primary dark:text-dark-text-primary">
+                      <span className="text-3xl">🇬🇭</span>
+                      <h3 className="text-2xl font-semibold text-light-text-primary dark:text-dark-text-primary">
                         Office
                       </h3>
                     </div>
@@ -164,6 +214,8 @@ const Contacts = React.memo(() => {
                     </p>
                   </div>
                 </div>
+
+
               </div>
 
               {/* Decorative Elements */}
@@ -180,7 +232,19 @@ const Contacts = React.memo(() => {
               <h2 className="text-lg md:text-2xl font-bold text-light-text-primary dark:text-dark-text-primary mb-6">
                 Send us a Message
               </h2>
-              <form className="space-y-6" noValidate>
+              
+              {/* Status Message */}
+              {statusMessage && (
+                <div className={`p-4 rounded-lg mb-6 ${
+                  isError 
+                    ? 'bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400 border border-red-200 dark:border-red-800' 
+                    : 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400 border border-green-200 dark:border-green-800'
+                }`}>
+                  {statusMessage}
+                </div>
+              )}
+              
+              <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label
                     htmlFor="fullName"
@@ -192,6 +256,8 @@ const Contacts = React.memo(() => {
                     type="text"
                     id="fullName"
                     name="fullName"
+                    value={formData.fullName}
+                    onChange={handleInputChange}
                     required
                     aria-required="true"
                     className="w-full px-4 py-3 border border-light-border dark:border-dark-border rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-brand-accent bg-light dark:bg-dark text-light-text-primary dark:text-dark-text-primary transition-colors"
@@ -210,6 +276,8 @@ const Contacts = React.memo(() => {
                     type="email"
                     id="email"
                     name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
                     required
                     aria-required="true"
                     className="w-full px-4 py-3 border border-light-border dark:border-dark-border rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-brand-accent bg-light dark:bg-dark text-light-text-primary dark:text-dark-text-primary transition-colors"
@@ -228,6 +296,8 @@ const Contacts = React.memo(() => {
                     id="message"
                     name="message"
                     rows={6}
+                    value={formData.message}
+                    onChange={handleInputChange}
                     required
                     aria-required="true"
                     className="w-full px-4 py-3 border border-light-border dark:border-dark-border rounded-lg focus:ring-2 focus:ring-brand-accent focus:border-brand-accent bg-light dark:bg-dark text-light-text-primary dark:text-dark-text-primary transition-colors resize-vertical"
@@ -237,9 +307,10 @@ const Contacts = React.memo(() => {
 
                 <button
                   type="submit"
-                  className="w-full bg-brand-accent hover:bg-brand-primary text-light font-semibold py-3 px-6 rounded-lg transition-colors duration-200"
+                  disabled={isLoading}
+                  className="w-full bg-brand-accent hover:bg-brand-primary text-light font-semibold py-3 px-6 rounded-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Send Message
+                  {isLoading ? 'Sending...' : 'Send Message'}
                 </button>
               </form>
             </div>
