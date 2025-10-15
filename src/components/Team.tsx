@@ -25,7 +25,7 @@ export default function Team() {
     },
     {
       id: 3,
-      name: "Mr. James Bello",
+      name: "Mr. James Bella",
       title: "Board Member - Finance & Operations",
       bio: "Mr. James Bello is a financial strategist and operations expert with a proven track record in scaling technology companies across West Africa. His experience in venture capital and corporate governance ensures Hyper Nexium's financial sustainability and operational excellence while maintaining our core values of integrity and customer focus.",
       image: "/board-member-2.jpeg",
