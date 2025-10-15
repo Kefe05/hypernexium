@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Team from "@/components/Team"
+// import Team from "@/components/Team"
 import Hero from './component/Hero';
 import Values from './component/Values';
 import CoreValues from './component/CoreValues';
@@ -18,27 +18,27 @@ export default function About() {
     <Hero />
 
     {/* About Section */}
-    <div className="py-16 md:py-20 lg:py-24">
+    <div className="pb-16 md:pb-20 lg:pb-24">
       <AboutPage />
     </div>
 
     {/* Core Values and Mission Statement */}
-    <div className="py-16 md:py-20 lg:py-24">
+    <div className="pb-16 md:pb-20 lg:pb-24">
       <Values />
     </div>
 
     {/* Core Values */}
-    <div className="py-16 md:py-20 lg:py-24">
+    <div className="pb-16 md:pb-20 lg:pb-24">
       <CoreValues />
     </div>
 
-    {/* Team Section */}
+    {/* Team Section
     <div className="py-16 md:py-20 lg:py-24">
       <Team />
-    </div>
+    </div> */}
 
     {/* Newsletter */}
-    <div className="py-16 md:py-20 lg:py-24">
+    <div className="pb-16 md:pb-20 lg:pb-24">
       <Newsletter />
     </div>
 

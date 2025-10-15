@@ -185,13 +185,7 @@ export default function Services() {
                     <Button className="bg-brand-accent hover:bg-brand-primary text-light rounded-full px-8 py-3">
                       Get in touch
                     </Button>
-                    <Button
-                      variant="outline"
-                      className="border-brand-accent text-brand-accent hover:bg-brand-accent hover:text-light rounded-full px-8 py-3"
-                    >
-                      Book a consultation
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </Button>
+                   
                   </div>
                 </div>
               </div>

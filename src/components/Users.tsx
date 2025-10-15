@@ -10,10 +10,10 @@ import {
   Zap,
   ArrowRight
 } from "lucide-react";
-import { VerticalGridLines } from "./GridLines";
+
 import Link from "next/link";
 
-export default function Users() {
+const Users = React.memo(() => {
   const industries = [
     {
       id: 1,
@@ -74,12 +74,11 @@ export default function Users() {
   ];
 
   return (
-    <section className="relative py-24 bg-base text-primary overflow-hidden">
-
+    <section className="relative py-24 bg-base text-primary overflow-hidden" role="region" aria-labelledby="industries-heading">
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-16 space-y-6">
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold">
+          <h2 id="industries-heading" className="text-3xl md:text-5xl lg:text-6xl font-bold">
             We have a solution{" "}
             <span className="text-brand-accent">for Every Sector</span>
           </h2>
@@ -96,14 +95,17 @@ export default function Users() {
 
             return (
               <Link key={industry.id} href={`/industries/${industry.slug}`}>
-                <div
+                <article
                   className="group relative p-8 rounded-2xl border transition-all duration-300 cursor-pointer overflow-hidden
                   border-light-border dark:border-dark-border 
                   bg-light-surface dark:bg-dark-surface
                   hover:border-brand-accent dark:hover:border-brand-accent
                   hover:shadow-2xl hover:shadow-brand-accent/10 dark:hover:shadow-brand-accent/20
                   hover:-translate-y-1 hover:scale-[1.02]
-                  backdrop-blur-sm"
+                  backdrop-blur-sm
+                  focus-within:ring-2 focus-within:ring-brand-accent focus-within:ring-offset-2"
+                  aria-labelledby={`industry-title-${industry.id}`}
+                  aria-describedby={`industry-desc-${industry.id}`}
                 >
                   {/* Gradient Overlay - Different for light and dark */}
                   <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none
@@ -118,9 +120,9 @@ export default function Users() {
                       bg-brand-accent/10 dark:bg-brand-accent/20
                       group-hover:bg-brand-accent/20 dark:group-hover:bg-brand-accent/30
                       group-hover:scale-110 group-hover:rotate-3">
-                        <IconComponent className="w-6 h-6 text-brand-accent transition-all duration-300 group-hover:scale-110" />
+                        <IconComponent className="w-6 h-6 text-brand-accent transition-all duration-300 group-hover:scale-110" aria-label={`${industry.title} icon`} />
                       </div>
-                      <h3 className="text-lg md:text-2xl font-bold transition-colors duration-300
+                      <h3 id={`industry-title-${industry.id}`} className="text-lg md:text-2xl font-bold transition-colors duration-300
                       text-light-text-primary dark:text-dark-text-primary
                       group-hover:text-brand-accent dark:group-hover:text-brand-accent-light">
                         {industry.title}
@@ -129,7 +131,7 @@ export default function Users() {
 
                     {/* Content */}
                     <div className="space-y-3 mb-4">
-                      <p className="transition-colors duration-300 leading-relaxed md:text-base text-sm
+                      <p id={`industry-desc-${industry.id}`} className="transition-colors duration-300 leading-relaxed md:text-base text-sm
                       text-light-text-secondary dark:text-dark-text-secondary
                       group-hover:text-light-text-primary dark:group-hover:text-dark-text-primary">
                         {industry.description}
@@ -142,14 +144,14 @@ export default function Users() {
                       <span className="text-sm font-medium text-brand-accent dark:text-brand-accent-light">
                         Learn More
                       </span>
-                      <ArrowRight className="w-4 h-4 text-brand-accent dark:text-brand-accent-light transition-transform duration-300 group-hover:translate-x-1" />
+                      <ArrowRight className="w-4 h-4 text-brand-accent dark:text-brand-accent-light transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
                     </div>
                   </div>
 
                   {/* Animated Border Glow */}
                   <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none
                   ring-1 ring-brand-accent/50 dark:ring-brand-accent-light/50"></div>
-                </div>
+                </article>
               </Link>
             );
           })}
@@ -157,4 +159,8 @@ export default function Users() {
       </div>
     </section>
   );
-}
+});
+
+Users.displayName = 'Users';
+
+export default Users;
