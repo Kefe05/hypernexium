@@ -29,7 +29,7 @@ export default function Team() {
       title: "Board Member - Finance & Operations",
       bio: "Mr. James Bello is a financial strategist and operations expert with a proven track record in scaling technology companies across West Africa. His experience in venture capital and corporate governance ensures Hyper Nexium's financial sustainability and operational excellence while maintaining our core values of integrity and customer focus.",
       image: "/board-member-2.jpeg",
-      expertise: ["Financial Strategy", "Corporate Governance", "Operations Management", "Venture Capital"]
+      expertise: ["Financial Strategy", "Corporate Governance", "Operations Management"]
     }
   ];
 
@@ -50,7 +50,7 @@ export default function Team() {
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         {/* Title */}
         <h2 className="text-3xl md:text-6xl md:mb-16 font-bold text-primary  text-center">
-          Meet our<span  className="text-brand-accent"> board </span> of directors
+          Meet our<span className="text-brand-accent"> board </span> of directors
         </h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
