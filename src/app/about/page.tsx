@@ -32,10 +32,7 @@ export default function About() {
       <CoreValues />
     </div>
 
-    {/* Team Section
-    <div className="py-16 md:py-20 lg:py-24">
-      <Team />
-    </div> */}
+    
 
     {/* Newsletter */}
     <div className="pb-16 md:pb-20 lg:pb-24">

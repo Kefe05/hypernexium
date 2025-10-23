@@ -1,7 +1,6 @@
 "use client"
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-// import { VerticalGridLines } from "./GridLines";
 
 export default function Team() {
   const [currentMember, setCurrentMember] = useState(0);

@@ -31,7 +31,7 @@ export default function ServiceSection({ title, p1, p2, industryData, slug }: Se
             </div>
 
             <div className="pt-4">
-              <Link href={`/services/${slug}`} className="px-8 py-3 border border-gray-400 dark:border-gray-600 rounded-full text-gray-800 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200">
+              <Link href={`/services/${slug}`} className="px-8 py-3 border border-base rounded-full text-light  bg-brand-primary hover:bg-brand-secondary transition-colors duration-200">
                 Learn more
               </Link>
             </div>

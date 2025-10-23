@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { LinkedinIcon, TwitterIcon, GithubIcon, Mail } from 'lucide-react'
 
 export default function Footer() {
     // Get current year dynamically
@@ -28,21 +27,7 @@ export default function Footer() {
                             Powering smart enterprises beyond limits with innovative IT solutions and strategic consulting.
                         </p>
 
-                        {/* Social Links */}
-                        <div className='flex space-x-4'>
-                            <Link href="#" className='text-gray-400 hover:text-brand-accent transition-colors'>
-                                <LinkedinIcon className='w-5 h-5' />
-                            </Link>
-                            <Link href="#" className='text-gray-400 hover:text-brand-accent transition-colors'>
-                                <TwitterIcon className='w-5 h-5' />
-                            </Link>
-                            <Link href="#" className='text-gray-400 hover:text-brand-accent transition-colors'>
-                                <GithubIcon className='w-5 h-5' />
-                            </Link>
-                            <Link href="#" className='text-gray-400 hover:text-brand-accent transition-colors'>
-                                <Mail className='w-5 h-5' />
-                            </Link>
-                        </div>
+                       
                     </div>
 
                     {/* Services */}
@@ -63,12 +48,22 @@ export default function Footer() {
                             </li>
                             <li>
                                 <Link href="/services" className='text-gray-400 hover:text-white transition-colors text-sm'>
-                                    Digital Transformation
+                                    Backup and Recovery
                                 </Link>
                             </li>
                             <li>
                                 <Link href="/services" className='text-gray-400 hover:text-white transition-colors text-sm'>
-                                    Enterprise Software
+                                    Digital Infrastructure
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="/services" className='text-gray-400 hover:text-white transition-colors text-sm'>
+                                   Network Modernization
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="/services" className='text-gray-400 hover:text-white transition-colors text-sm'>
+                                    IT Training
                                 </Link>
                             </li>
                         </ul>

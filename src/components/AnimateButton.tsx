@@ -1,13 +1,14 @@
 import { ArrowRight } from "lucide-react";
-import { Button } from "./ui/button";
+import Link from "next/link"
 
 
 export function AnimatedButton() {
  
 
   return (
-    <Button
-      className="relative overflow-hidden bg-brand-accent-light hover:bg-brand-primary text-white rounded-full px-6 py-4 text-sm md:text-base lg:text-lg w-[150px] sm:w-[200px] md:w-[250px] flex justify-between items-center cursor-pointer border-0 shadow-lg transition-shadow hover:shadow-xl h-15 md:h-20"
+    <Link
+     href="#about"
+      className="relative overflow-hidden bg-brand-accent-light hover:bg-brand-primary text-white rounded-full px-6 py-4 text-sm md:text-base lg:text-lg w-[170px] sm:w-[200px] md:w-[250px] flex justify-between items-center cursor-pointer border-0 shadow-lg transition-shadow hover:shadow-xl h-15 md:h-20"
     >
       <div
         
@@ -20,6 +21,6 @@ export function AnimatedButton() {
       <span className="rounded-full p-1.5 md:p-2.5 bg-white text-brand-accent shadow-md flex items-center justify-center relative z-10">
         <ArrowRight className="w-5 h-5" />
       </span>
-    </Button>
+    </Link>
   );
 }

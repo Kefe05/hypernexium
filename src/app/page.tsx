@@ -76,32 +76,28 @@ export default function HyperNexiumLanding() {
       <Hero />
 
       {/* Services Grid Section */}
-      <div className="pb-16 md:pb-20 lg:pb-24 animate-section">
+      <div className="pb-8 md:pb-20 lg:pb-24 animate-section ">
         <About />
       </div>
 
       {/* Stats Section */}
-      <div className="pb-16 md:pb-20 lg:pb-24 animate-section">
+      <div className="pb-8 md:pb-20 lg:pb-24 animate-section ">
         <Services />
       </div>
 
       {/* Logo Section */}
-      <div className="pb-16 md:pb-20 lg:pb-24 animate-section">
+      <div className="pb-8 md:pb-20 lg:pb-24 animate-section ">
         <Partners />
       </div>
 
       {/* Our Target users Section */}
-      <div className="pb-16 md:pb-20 lg:pb-24 animate-section">
+      <div className="pb-8 md:pb-20 lg:pb-24 animate-section ">
         <Users />
       </div>
 
-      {/* The Team
-      <div className="pb-16 md:py-20 lg:py-24 animate-section">
-        <Team />
-      </div> */}
 
       {/* CTA Section */}
-      <div className="pb-16 md:pb-20 lg:pb-24 animate-section">
+      <div className="pb-8 md:pb-20 lg:pb-24 animate-section ">
         <Newsletter />
       </div>
     </main>
