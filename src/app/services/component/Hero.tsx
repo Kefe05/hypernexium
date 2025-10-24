@@ -41,23 +41,7 @@ export default function Hero() {
           </div>
 
           {/* Bottom Decorative Element */}
-          <div className="mt-16 flex items-center">
-            <div className="w-12 h-12 bg-gray-900 dark:bg-white rounded-full flex items-center justify-center dark:border-white border">
-              <svg 
-                className="w-6 h-6 text-white dark:text-gray-900" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth={2} 
-                  d="M19 14l-7 7m0 0l-7-7m7 7V3" 
-                />
-              </svg>
-            </div>
-          </div>
+         
         </div>
       </div>
 

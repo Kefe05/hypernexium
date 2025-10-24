@@ -1,12 +1,13 @@
-import React from 'react';
-import { VerticalGridLines } from '@/components/GridLines';
+
 
 export default function Hero() {
+   
+
   return (
     <section className="relative py-24 overflow-hidden"  style={{
             backgroundImage: "url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&h=1080&fit=crop')"
           }}>
-      <VerticalGridLines opacity={0.06}  />
+      
       <div className="absolute inset-0 bg-slate-900/70"></div>
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         <div className="max-w-4xl">
@@ -41,29 +42,13 @@ export default function Hero() {
           </div>
 
           {/* Bottom Decorative Element */}
-          <div className="mt-16 flex items-center">
-            <div className="w-12 h-12 bg-gray-900 dark:bg-white rounded-full flex items-center justify-center dark:border-white border">
-              <svg 
-                className="w-6 h-6 text-white dark:text-gray-900" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-              >
-                <path 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                  strokeWidth={2} 
-                  d="M19 14l-7 7m0 0l-7-7m7 7V3" 
-                />
-              </svg>
-            </div>
-          </div>
+    
         </div>
       </div>
-
-      {/* Background Decorative Elements */}
+        {/* Background Decorative Elements */}
       <div className="absolute top-20 right-20 w-32 h-32 bg-brand-accent/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-20 left-20 w-40 h-40 bg-brand-primary/5 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-20 left-20 w-40 h-40 bg-brand-primary/5 rounded-full blur-3xl"></div>s
+     
     </section>
   );
 }
