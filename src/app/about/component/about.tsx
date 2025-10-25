@@ -16,7 +16,7 @@ export default function AboutPage() {
             <div className="relative aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl">
               {/* Background Image */}
               <Image
-                src="https://res.cloudinary.com/dyzanjli6/image/upload/v1761076239/vwt0wvek2tbdokdoey8y.jpg"
+                src="https://res.cloudinary.com/djmhfdvp5/image/upload/v1760481519/digital_x2yypf.jpg"
                 alt="Hyper Nexium Team"
                 fill
                 className="object-cover"
