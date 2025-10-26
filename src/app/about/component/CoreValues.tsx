@@ -16,7 +16,7 @@ const coreValues = [
   {
     id: 3,
     title: 'Customer Focus',
-    description: 'We prioritize our clients&apos; needs and deliver personalized experiences that exceed expectations.',
+    description: 'We prioritize our clients needs and deliver personalized experiences that exceed expectations.',
   },
   {
     id: 4,
