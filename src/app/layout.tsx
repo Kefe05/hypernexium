@@ -15,14 +15,31 @@ const roboto_condensed = Assistant({
   variable: "--font-roboto",
 });
 
-
-
-
-
-
 export const metadata: Metadata = {
   title: "Hyper Nexium Technologies",
   description: "Powering Smart Enterprises Beyond Limits",
+  openGraph: {
+    title: "Hyper Nexium Technologies",
+    description: "Powering Smart Enterprises Beyond Limits",
+    url: "https://hypernexium.com",
+    siteName: "Hyper Nexium Technologies",
+    images: [
+      {
+        url: "https://res.cloudinary.com/djmhfdvp5/image/upload/v1761361435/openGraph_pfkwg4.png",
+        width: 1200,
+        height: 630,
+        alt: "Hyper Nexium Technologies",
+      },
+    ],
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Hyper Nexium Technologies",
+    description: "Powering Smart Enterprises Beyond Limits",
+    images: ["https://res.cloudinary.com/djmhfdvp5/image/upload/v1761361435/openGraph_pfkwg4.png"],
+  },
 };
 
 export default function RootLayout({
