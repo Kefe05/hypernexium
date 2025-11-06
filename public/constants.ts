@@ -121,5 +121,6 @@ export const partners: Partner[] = [
     { name: "Fortinet", domain: "fortinet.com" },
     { name: "Sophos", domain: "sophos.com" },
     { name: "Lenovo", domain: "lenovo.com" },
-  ];  
-  
+    { name: "NetApp", domain: "netapp.com" },
+    { name: "Poly", domain: "poly.com" },
+  ];

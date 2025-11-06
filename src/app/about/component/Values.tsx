@@ -32,18 +32,18 @@ export default function MissionVisionComponent() {
   }, [])
 
   return (
-    <div className="bg-white dark:bg-gray-900">
+    <div className="bg-primary">
       {/* Hero Section */}
-      <section className="py-16 md:py-20 lg:py-24 px-6 md:px-8 lg:px-12">
+      <section className=" px-6 md:px-8 lg:px-12">
         <div className="max-w-7xl mx-auto text-center">
           <div
             ref={el => { sectionRefs.current['hero'] = el }}
             className={`transition-all duration-1000 ${isVisible['hero'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
               }`}
           >
-            <div className="inline-flex items-center gap-2 bg-brand-primary/10 text-brand-primary dark:bg-brand-primary/20 dark:text-brand-accent px-4 py-2 rounded-full text-sm font-medium mb-6">
+            {/* <div className="inline-flex items-center gap-2 bg-brand-primary/10 text-brand-primary dark:bg-brand-primary/20 dark:text-brand-accent px-4 py-2 rounded-full text-sm font-medium mb-6">
               <span>Our Foundation</span>
-            </div>
+            </div> */}
             <h1 className="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-6 tracking-tight">
               Mission, Vision & Values
             </h1>

@@ -14,8 +14,8 @@ export default function Partners() {
   
 
   // Split into two rows of 9 each
-  const row1Partners = partners?.slice(0, 9);
-  const row2Partners = partners?.slice(9, 18);
+  const row1Partners = partners?.slice(0, 10);
+  const row2Partners = partners?.slice(11, 20);
 
   useEffect(() => {
     const row1 = row1Ref.current;
