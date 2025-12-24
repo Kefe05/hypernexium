@@ -433,7 +433,7 @@ export default function Nav() {
           <div className="fixed top-0 right-0 h-full w-full max-w-sm bg-light dark:bg-dark shadow-xl">
             <div className="flex flex-col h-full">
               {/* Header */}
-              <div className="flex items-center justify-between p-6 border-b bg-brand-accent dark:bg-transparent border-light-border dark:border-dark-border">
+              <div className="flex items-center justify-between p-6 border-b bg-brand-secondary dark:bg-transparent border-light-border dark:border-dark-border">
                 <Logo />
                 <button
                   onClick={closeMobileMenu}
